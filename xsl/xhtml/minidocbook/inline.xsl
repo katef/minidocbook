@@ -86,43 +86,9 @@
 	</xsl:template>
 
 	<xsl:template match="filename">
-		<!-- TODO: simplify. maybe best to use a get-ext function -->
-		<xsl:choose>
-			<xsl:when test="substring-after(., '.') = ''">
-				<tt class="{name()}">
-					<xsl:apply-templates/>
-				</tt>
-			</xsl:when>
-
-			<xsl:when test="ancestor::refsection[title = 'Files']">
-				<a href="{$tendra.url.ext}#{substring-after(., '.')}">
-					<tt class="{name()}">
-						<xsl:apply-templates/>
-					</tt>
-				</a>
-			</xsl:when>
-
-			<xsl:when test="substring-before(., '.') and substring-before(., '.') != '*'">
-				<tt class="{name()}">
-					<xsl:apply-templates/>
-				</tt>
-			</xsl:when>
-
-			<!-- first occurance -->
-			<xsl:when test="not(preceding::filename[substring-after(., '.') = substring-after(current(), '.')])">
-				<a href="{$tendra.url.ext}#{substring-after(., '.')}">
-					<tt class="{name()}">
-						<xsl:apply-templates/>
-					</tt>
-				</a>
-			</xsl:when>
-
-			<xsl:otherwise>
-				<tt class="{name()}">
-					<xsl:apply-templates/>
-				</tt>
-			</xsl:otherwise>
-		</xsl:choose>
+		<tt class="{name()}">
+			<xsl:apply-templates/>
+		</tt>
 	</xsl:template>
 
 	<xsl:template match="replaceable|citetitle|firstterm">

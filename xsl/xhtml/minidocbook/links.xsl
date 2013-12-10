@@ -4,7 +4,7 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:mb="http://xml.tendra.org/minidocbook"
+	xmlns:mdb="http://xml.elide.org/minidocbook"
 	xmlns="http://www.w3.org/1999/xhtml">
 
 	<!--
@@ -33,9 +33,9 @@
 			|//appendix[@id = current()/@linkend]" mode="linkend">
 
 			<!-- TODO: multi-page links -->
-			<a href="#{mb:sectionnumber-link()}">
+			<a href="#{mdb:sectionnumber-link()}">
 				<xsl:text>&#167;</xsl:text>
-				<xsl:value-of select="mb:sectionnumber()"/>
+				<xsl:value-of select="mdb:sectionnumber()"/>
 			</a>
 
 			<xsl:if test="position() > 0">
@@ -58,25 +58,15 @@
 				</tt>
 			</xsl:when>
 
-			<xsl:when test="ancestor::refsection/title = 'See Also'">
-				<a href="{$tendra.url.man}/{refentrytitle}.{manvolnum}/">
-					<xsl:call-template name="reftitle"/>
-				</a>
-			</xsl:when>
-
-			<!-- first occurance -->
-			<!-- TODO: maybe make this first occurance per section instead -->
-			<xsl:when test="not(preceding::citerefentry
-					[refentrytitle = current()/refentrytitle]
-					[manvolnum     = current()/manvolnum])">
-				<a href="{$tendra.url.man}/{refentrytitle}.{manvolnum}/">
+			<xsl:when test="$mdb.url.man">
+				<a href="{$mdb.url.man}/{refentrytitle}.{manvolnum}/">
 					<xsl:call-template name="reftitle"/>
 				</a>
 			</xsl:when>
 
 			<xsl:otherwise>
 				<tt class="command">
-					<xsl:value-of select="refentrytitle"/>
+					<xsl:call-template name="reftitle"/>
 				</tt>
 			</xsl:otherwise>
 		</xsl:choose>
