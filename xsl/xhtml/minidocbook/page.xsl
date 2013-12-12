@@ -116,11 +116,8 @@
 		<xsl:call-template name="output">
 			<xsl:with-param name="filename"    select="$filename"/>
 			<xsl:with-param name="title"       select="$title"/>
-			<xsl:with-param name="bottomright">
-				<xsl:apply-templates select="/refentry/refmeta"/>
-			</xsl:with-param>
 
-			<xsl:with-param name="content">
+			<xsl:with-param name="body">
 				<xsl:if test="$chunklink">
 					<div class="navigation">
 						<a href="index.xhtml5">
@@ -167,7 +164,7 @@
 			<xsl:with-param name="filename" select="'index'"/>
 			<xsl:with-param name="title"    select="$title"/>
 
-			<xsl:with-param name="content">
+			<xsl:with-param name="body">
 				<div class="navigation">
 					<a href="single.xhtml">
 						<xsl:text>Single page</xsl:text>
@@ -204,7 +201,7 @@
 			<xsl:with-param name="filename" select="'frontmatter'"/>
 			<xsl:with-param name="title"    select="$title"/>
 
-			<xsl:with-param name="content">
+			<xsl:with-param name="body">
 				<div class="navigation">
 					<a href="single.xhtml">
 						<xsl:text>Single page</xsl:text>
@@ -236,7 +233,7 @@
 				<xsl:apply-templates select="title" mode="title"/>
 			</xsl:with-param>
 
-			<xsl:with-param name="content">
+			<xsl:with-param name="body">
 				<div class="navigation">
 					<a href="single.xhtml">
 						<xsl:text>Single page</xsl:text>

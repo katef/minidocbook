@@ -28,11 +28,10 @@
 	<xsl:template name="output">
 		<xsl:param name="filename"/>
 		<xsl:param name="title"/>
-		<xsl:param name="css" select="''"/>
-		<xsl:param name="js"  select="''"/>
-
-		<xsl:param name="content.head" select="/.."/>
-		<xsl:param name="content.body" select="/.."/>
+		<xsl:param name="css"  select="''"/>
+		<xsl:param name="js"   select="''"/>
+		<xsl:param name="head" select="/.."/>
+		<xsl:param name="body" select="/.."/>
 
 		<xsl:variable name="method">
 			<xsl:choose>
@@ -96,17 +95,23 @@
 			omit-xml-declaration="no"
 			cdata-section-elements="script"
 			media-type="{$media}"
+			standalone="yes">
+<!-- XXX: only for non-HTML5
 			doctype-public="{$doctype-public}"
 			doctype-system="{$doctype-system}"
-			standalone="yes">
+-->
+
+			<xsl:if test="$method = 'html'">
+				<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
+			</xsl:if>
 
 			<xsl:call-template name="output-content">
-				<xsl:with-param name="title"   select="$title"/>
-				<xsl:with-param name="method"  select="$method"/>
-				<xsl:with-param name="css"     select="$css"/>
-				<xsl:with-param name="js"      select="$js"/>
-				<xsl:with-param name="content.head" select="$content.head"/>
-				<xsl:with-param name="content.body" select="$content.body"/>
+				<xsl:with-param name="title"  select="$title"/>
+				<xsl:with-param name="method" select="$method"/>
+				<xsl:with-param name="css"    select="$css"/>
+				<xsl:with-param name="js"     select="$js"/>
+				<xsl:with-param name="head"   select="$head"/>
+				<xsl:with-param name="body"   select="$body"/>
 			</xsl:call-template>
 
 		</common:document>
@@ -121,10 +126,6 @@
 		<xsl:param name="title"  select="/.."/>
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
-
-		<xsl:if test="$method = 'html'">
-			<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
-		</xsl:if>
 
 		<html lang="en-gb">	<!-- XXX: pass as param -->
 			<head>
