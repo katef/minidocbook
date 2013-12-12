@@ -9,30 +9,30 @@
 	<xsl:template match="acronym">
 		<xsl:choose>
 			<xsl:when test="not(@role)">
-				<acronym>
+				<abbr>
 					<xsl:apply-templates/>
-				</acronym>
+				</abbr>
 			</xsl:when>
 
 			<xsl:when test="ancestor::refnamediv">
-				<acronym>
+				<abbr>
 					<xsl:apply-templates/>
-				</acronym>
+				</abbr>
 			</xsl:when>
 
 			<!-- first (non-refnamediv) occurance -->
 			<xsl:when test="not(preceding::acronym
 					[not(ancestor::refnamediv)]
 					[. = current()])">
-				<acronym class="title" title="{@role}">
+				<abbr class="title" title="{@role}">
 					<xsl:apply-templates/>
-				</acronym>
+				</abbr>
 			</xsl:when>
 
 			<xsl:otherwise>
-				<acronym title="{@role}">
+				<abbr title="{@role}">
 					<xsl:apply-templates/>
-				</acronym>
+				</abbr>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

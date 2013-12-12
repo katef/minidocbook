@@ -294,3 +294,8 @@ svg.figure text.big {
 	font-size: 1.5em;
 }
 
+abbr[title] {
+	border-bottom: dotted 1px #666;
+	cursor: help;
+}
+
