@@ -54,8 +54,8 @@
 		</p>
 	</xsl:template>
 
-	<xsl:template match="programlisting">
-		<pre class="programlisting {@language}">
+	<xsl:template match="programlisting|synopsis">
+		<pre class="{name()} {@language}">
 			<xsl:apply-templates/>
 		</pre>
 	</xsl:template>

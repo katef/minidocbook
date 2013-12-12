@@ -146,12 +146,14 @@
 <!ELEMENT refname (#PCDATA)>
 <!ELEMENT refpurpose (#PCDATA)>
 
-<!ELEMENT refsynopsisdiv (cmdsynopsis | para)*>
+<!ELEMENT refsynopsisdiv (cmdsynopsis | synopsis | para)*>
 <!ATTLIST refsynopsisdiv
 	%common.id;
 >
 
 <!ELEMENT cmdsynopsis (command, (arg | sbr | group)*)>
+
+<!ELEMENT synopsis (#PCDATA)>
 
 <!ELEMENT sbr EMPTY>
 

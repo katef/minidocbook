@@ -52,7 +52,7 @@
 				<xsl:with-param name="title"  select="'Synopsis'"/>
 			</xsl:call-template>
 
-			<xsl:apply-templates select="cmdsynopsis|para"/>
+			<xsl:apply-templates select="cmdsynopsis|synopsis|para"/>
 		</div>
 	</xsl:template>
 
