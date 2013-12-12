@@ -36,7 +36,7 @@
 
 	<xsl:template match="/refentry">
 		<xsl:variable name="title">
-			<xsl:apply-templates select="refmeta"/>
+			<xsl:value-of select="concat(refmeta/refentrytitle, '(', refmeta/manvolnum, ')')"/>
 		</xsl:variable>
 
 		<xsl:call-template name="page-single">

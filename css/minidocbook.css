@@ -5,6 +5,15 @@ body {
 	max-width: 60em;
 }
 
+span.command {
+	font-weight: bold;
+}
+
+span.command[data-manvolnum]:after {
+	content: "(" attr(data-manvolnum) ")";
+	font-weight: 600; /* 100 less than bold */
+}
+
 h1#banner {
 	text-align: right;
 }

@@ -7,12 +7,9 @@
 	xmlns="http://www.w3.org/1999/xhtml">
 
 	<xsl:template match="refmeta" name="reftitle">
-		<tt class="command">
+		<span class="command" data-manvolnum="{manvolnum}">
 			<xsl:value-of select="refentrytitle"/>
-		</tt>
-		<xsl:text>(</xsl:text>
-		<xsl:value-of select="manvolnum"/>
-		<xsl:text>)</xsl:text>
+		</span>
 	</xsl:template>
 
 	<xsl:template match="refsection">
@@ -40,9 +37,9 @@
 				<xsl:with-param name="title"  select="'Name'"/>
 			</xsl:call-template>
 
-			<tt class="command">
+			<span class="command">
 				<xsl:apply-templates select="refname"/>
-			</tt>
+			</span>
 			<xsl:text>&#8212;</xsl:text>
 			<xsl:apply-templates select="refpurpose"/>
 		</div>

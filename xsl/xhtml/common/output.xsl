@@ -13,6 +13,11 @@
 
 	exclude-result-prefixes="common str">
 
+	<xsl:param name="www-base"/>
+	<xsl:param name="www-css"/>
+	<xsl:param name="www-js"/>
+	<xsl:param name="www-ext" select="'xhtml5'"/>
+ 
 	<xsl:template match="processing-instruction()">
 		<xsl:message terminate="yes">
 			<xsl:text>Unhandled PI: </xsl:text>
@@ -31,7 +36,7 @@
 
 		<xsl:variable name="method">
 			<xsl:choose>
-				<xsl:when test="$libfsm.ext = 'xhtml'">
+				<xsl:when test="$www-ext = 'xhtml'">
 					<xsl:value-of select="'xml'"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -76,7 +81,7 @@
 		</xsl:variable>
 
 		<!-- TODO: default to stdout, if no filename is given? -->
-		<xsl:variable name="output-file" select="concat($filename, '.', $libfsm.ext)"/>
+		<xsl:variable name="output-file" select="concat($filename, '.', $www-ext)"/>
 
 		<xsl:message>
 			<xsl:text>Outputting </xsl:text>
@@ -126,6 +131,10 @@
 				<title>
 					<xsl:value-of select="$title"/>
 				</title>
+
+				<xsl:if test="$www-base">
+					<base href="{$www-base}"/>
+				</xsl:if>
 
 				<!-- TODO: maybe a node set is better, after all -->
 				<xsl:for-each select="str:tokenize($css)">

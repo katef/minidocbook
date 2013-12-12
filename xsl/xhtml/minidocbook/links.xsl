@@ -53,21 +53,19 @@
 			<!-- own page -->
 			<xsl:when test="/refentry/refmeta/refentrytitle = refentrytitle
 			            and /refentry/refmeta/manvolnum     = manvolnum">
-				<tt class="command">
+				<span class="command" data-manvolnum="{manvolnum}">
 					<xsl:value-of select="refentrytitle"/>
-				</tt>
+				</span>
 			</xsl:when>
 
-			<xsl:when test="$mdb.url.man">
+			<xsl:when test="$mdb.url.man and not(@role = 'dontlink')">
 				<a href="{$mdb.url.man}/{refentrytitle}.{manvolnum}/">
 					<xsl:call-template name="reftitle"/>
 				</a>
 			</xsl:when>
 
 			<xsl:otherwise>
-				<tt class="command">
-					<xsl:call-template name="reftitle"/>
-				</tt>
+				<xsl:call-template name="reftitle"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

@@ -37,7 +37,13 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template match="userinput|computeroutput|command">	<!-- TODO: dissallow -->
+	<xsl:template match="command">
+		<span class="{name()}">
+			<xsl:apply-templates/>
+		</span>
+	</xsl:template>
+
+	<xsl:template match="userinput|computeroutput">	<!-- TODO: dissallow -->
 		<tt class="{name()}">
 			<xsl:apply-templates/>
 		</tt>
