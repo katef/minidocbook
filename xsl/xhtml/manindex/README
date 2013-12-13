@@ -1,0 +1,15 @@
+
+Generate an index of <refentry> manpages.
+
+
+Usage is something like this:
+
+ % PAGES="`ls -1 $HOME/svn/dev1/mct/man/*.?/*.?.xml | tr '\n' :`"
+ % xsltproc --nonet --nomkdir       \
+   	--path ../common             \
+   	--path ~/svn/dev1/shared/dtd \
+   	-o /tmp/man/index.xhtml5     \
+   	--stringparam title 'xyz'    \
+   	--stringparam src "$PAGES"   \
+   	main.xsl main.xsl
+

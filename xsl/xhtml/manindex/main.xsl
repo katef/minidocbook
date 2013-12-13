@@ -4,23 +4,33 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:str="http://exslt.org/strings"
-	xmlns:mi="http://xml.elide.org/manindex"
+	xmlns:common="http://exslt.org/common"
 
-	exclude-result-prefixes="mi">
+	extension-element-prefixes="str common"
 
-	<xsl:import href="copy.xsl"/>
+	exclude-result-prefixes="str common">
+
 	<xsl:import href="output.xsl"/>
 
-	<xsl:template match="mi:refentry">
+	<xsl:param name="src"/>
+	<xsl:param name="title" select="false()"/>
+
+	<xsl:variable name="root">
+		<xsl:for-each select="str:tokenize($src, ':')">
+			<xsl:copy-of select="document(.)/refentry"/>
+		</xsl:for-each>
+	</xsl:variable>
+
+	<xsl:template match="refentry">
 		<tr>
 			<th>
-				<xsl:for-each select="mi:refnamediv/mi:refname">
+				<xsl:for-each select="refnamediv/refname">
 					<xsl:sort select="."/>
 
-					<a href="{concat(../../mi:refmeta/mi:refentrytitle,
-						'.', ../../mi:refmeta/mi:manvolnum)}">	<!-- canonical page name -->
+					<a href="{concat(../../refmeta/refentrytitle,
+						'.', ../../refmeta/manvolnum)}">	<!-- canonical page name -->
 						<!-- TODO: apply-templates for proper XHTML output -->
-						<span class="command" data-manvolnum="{../../mi:refmeta/mi:manvolnum}">
+						<span class="command" data-manvolnum="{../../refmeta/manvolnum}">
 							<xsl:value-of select="."/>
 						</span>
 					</a>
@@ -33,7 +43,7 @@
 			</th>
 
 			<td>
-				<xsl:value-of select="mi:refnamediv/mi:refpurpose"/>
+				<xsl:value-of select="refnamediv/refpurpose"/>
 			</td>
 		</tr>
 	</xsl:template>
@@ -52,16 +62,16 @@
 
 		<table>
 			<tbody>
-				<xsl:apply-templates select="//mi:refentry
-					[mi:refmeta/mi:manvolnum = $manvolnum]
-					[not($productname) or mi:refentryinfo/mi:productname = $productname]">
+				<xsl:apply-templates select="common:node-set($root)/refentry
+					[refmeta/manvolnum = $manvolnum]
+					[not($productname) or refentryinfo/productname = $productname]">
 					<xsl:sort select="."/>
 				</xsl:apply-templates>
 			</tbody>
 		</table>
 	</xsl:template>
 
-	<xsl:template match="mi:manvolnum" mode="section">
+	<xsl:template match="manvolnum" mode="section">
 		<xsl:variable name="manvolnum" select="."/>
 
 		<section class="manindex">
@@ -71,18 +81,18 @@
 				<xsl:value-of select="$manvolnum"/>
 			</h1>
 
-			<xsl:if test="//mi:refentry
-				[mi:refmeta/mi:manvolnum = current()]
-				[not(mi:refentryinfo/mi:productname)]">
+			<xsl:if test="common:node-set($root)/refentry
+				[refmeta/manvolnum = current()]
+				[not(refentryinfo/productname)]">
 				<xsl:call-template name="section">
 					<xsl:with-param name="manvolnum" select="$manvolnum"/>
 				</xsl:call-template>
 			</xsl:if>
 
-			<xsl:for-each select="//mi:refentry
-				[mi:refmeta/mi:manvolnum = current()]/mi:refentryinfo/mi:productname
-				[not(. = ../../preceding-sibling::mi:refentry
-					[mi:refmeta/mi:manvolnum = current()]/mi:refentryinfo/mi:productname)]">
+			<xsl:for-each select="common:node-set($root)/refentry
+				[refmeta/manvolnum = current()]/refentryinfo/productname
+				[not(. = ../../preceding-sibling::refentry
+					[refmeta/manvolnum = current()]/refentryinfo/productname)]">
 				<xsl:sort select="."/>
 				<xsl:call-template name="section">
 					<xsl:with-param name="manvolnum"   select="$manvolnum"/>
@@ -92,23 +102,23 @@
 		</section>
 	</xsl:template>
 
-	<xsl:template match="/mi:manindex">
-
+	<xsl:template match="/">
 		<xsl:call-template name="output-content">
 			<xsl:with-param name="method" select="'xml'"/>
 
 			<xsl:with-param name="title">
-<!-- TODO -->
+				<xsl:if test="$title">
+					<xsl:value-of select="$title"/>
+				</xsl:if>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
-				<xsl:apply-templates select="mi:refentry/mi:refmeta/mi:manvolnum
-					[not(. = ../../preceding-sibling::mi:refentry/mi:refmeta/mi:manvolnum)]" mode="section">
+				<xsl:apply-templates select="common:node-set($root)/refentry/refmeta/manvolnum
+					[not(. = ../../preceding-sibling::refentry/refmeta/manvolnum)]" mode="section">
 					<xsl:sort select="."/>
 				</xsl:apply-templates>
 			</xsl:with-param>
 		</xsl:call-template>
-
 	</xsl:template>
 
 </xsl:stylesheet>
