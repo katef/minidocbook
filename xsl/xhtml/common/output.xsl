@@ -26,12 +26,13 @@
 	</xsl:template>
 
 	<xsl:template name="output">
-		<xsl:param name="filename"/>
 		<xsl:param name="title"/>
-		<xsl:param name="css"  select="''"/>
-		<xsl:param name="js"   select="''"/>
-		<xsl:param name="head" select="/.."/>
-		<xsl:param name="body" select="/.."/>
+		<xsl:param name="filename" select="'index'"/>
+		<xsl:param name="css"      select="''"/>
+		<xsl:param name="js"       select="''"/>
+		<xsl:param name="head"     select="/.."/>
+		<xsl:param name="body"     select="/.."/>
+		<xsl:param name="class"    select="false()"/>
 
 		<xsl:variable name="method">
 			<xsl:choose>
@@ -43,7 +44,6 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-				
 
 		<!-- TODO: have these as a database of tags in this .xsl file and use document() to get them -->
 		<xsl:variable name="media">
@@ -112,6 +112,7 @@
 				<xsl:with-param name="js"     select="$js"/>
 				<xsl:with-param name="head"   select="$head"/>
 				<xsl:with-param name="body"   select="$body"/>
+				<xsl:with-param name="class"  select="$class"/>
 			</xsl:call-template>
 
 		</common:document>
@@ -123,12 +124,19 @@
 		<xsl:param name="js"     select="''"/>
 		<xsl:param name="onload" select="''"/>
 		<xsl:param name="lang"   select="'en-gb'"/>
+		<xsl:param name="class"  select="false()"/>
 
 		<xsl:param name="title"  select="/.."/>
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
 
 		<html lang="{$lang}">
+			<xsl:if test="$class">
+				<xsl:attribute name="class">
+					<xsl:value-of select="$class"/>
+				</xsl:attribute>
+			</xsl:if>
+
 			<head>
 				<title>
 					<xsl:value-of select="$title"/>

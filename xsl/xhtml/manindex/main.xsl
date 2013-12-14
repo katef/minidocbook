@@ -74,7 +74,7 @@
 	<xsl:template match="manvolnum" mode="section">
 		<xsl:variable name="manvolnum" select="."/>
 
-		<section class="manindex">
+		<section>
 			<h1>
 				<a id="{.}"/>
 				<xsl:text>Section </xsl:text>
@@ -103,8 +103,8 @@
 	</xsl:template>
 
 	<xsl:template match="/">
-		<xsl:call-template name="output-content">
-			<xsl:with-param name="method" select="'xml'"/>
+		<xsl:call-template name="output">
+			<xsl:with-param name="class"  select="'minidocbook manindex'"/>
 
 			<xsl:with-param name="title">
 				<xsl:if test="$title">

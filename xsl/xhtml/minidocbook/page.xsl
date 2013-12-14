@@ -114,8 +114,9 @@
 		<xsl:param name="chunklink"/>
 
 		<xsl:call-template name="output">
-			<xsl:with-param name="filename"    select="$filename"/>
-			<xsl:with-param name="title"       select="$title"/>
+			<xsl:with-param name="class"    select="'minidocbook single'"/>
+			<xsl:with-param name="filename" select="$filename"/>
+			<xsl:with-param name="title"    select="$title"/>
 
 			<xsl:with-param name="body">
 				<xsl:if test="$chunklink">
@@ -161,6 +162,7 @@
 		<xsl:param name="title"/>
 
 		<xsl:call-template name="output">
+			<xsl:with-param name="class"    select="'minidocbook toc'"/>
 			<xsl:with-param name="filename" select="'index'"/>
 			<xsl:with-param name="title"    select="$title"/>
 
@@ -198,6 +200,7 @@
 		<xsl:param name="title"/>
 
 		<xsl:call-template name="output">
+			<xsl:with-param name="class"    select="'minidocbook frontmatter'"/>
 			<xsl:with-param name="filename" select="'frontmatter'"/>
 			<xsl:with-param name="title"    select="$title"/>
 
@@ -228,6 +231,7 @@
 		<xsl:param name="filename"/>
 
 		<xsl:call-template name="output">
+			<xsl:with-param name="class"    select="'minidocbook chunk'"/>
 			<xsl:with-param name="filename" select="$filename"/>
 			<xsl:with-param name="title">
 				<xsl:apply-templates select="title" mode="title"/>
