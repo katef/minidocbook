@@ -122,12 +122,13 @@
 		<xsl:param name="css"    select="''"/>
 		<xsl:param name="js"     select="''"/>
 		<xsl:param name="onload" select="''"/>
+		<xsl:param name="lang"   select="'en-gb'"/>
 
 		<xsl:param name="title"  select="/.."/>
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
 
-		<html lang="en-gb">	<!-- XXX: pass as param -->
+		<html lang="{$lang}">
 			<head>
 				<title>
 					<xsl:value-of select="$title"/>
