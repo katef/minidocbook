@@ -58,7 +58,7 @@
 				</span>
 			</xsl:when>
 
-			<xsl:when test="$mdb.url.man and not(@role = 'dontlink')">
+			<xsl:when test="($mdb.url.man or $mdb.url.man = '') and not(@role = 'dontlink')">
 				<a href="{$mdb.url.man}/{refentrytitle}.{manvolnum}/">
 					<xsl:call-template name="reftitle"/>
 				</a>
