@@ -15,6 +15,7 @@
 
 	<xsl:param name="src"/>
 	<xsl:param name="title" select="false()"/>
+	<xsl:param name="mdb.url.man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
 
 	<mi:sections>
 		<mi:section manvolnum="1" name="User programs"/>
@@ -56,8 +57,16 @@
 				<xsl:for-each select="refnamediv/refname">
 					<xsl:sort select="."/>
 
-					<a href="{concat(../../refmeta/refentrytitle,
-						'.', ../../refmeta/manvolnum)}">	<!-- canonical page name -->
+					<a>
+
+						<xsl:if test="$mdb.url.man or $mdb.url.man = ''">
+							<xsl:attribute name="href">
+								<xsl:value-of select="concat($mdb.url.man,
+									'/', ../../refmeta/refentrytitle,
+									'.', ../../refmeta/manvolnum)"/>	<!-- canonical page name -->
+							</xsl:attribute>
+						</xsl:if>
+
 						<!-- TODO: apply-templates for proper XHTML output -->
 						<span class="command" data-manvolnum="{../../refmeta/manvolnum}">
 							<xsl:value-of select="."/>
