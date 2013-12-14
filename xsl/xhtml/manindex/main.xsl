@@ -5,21 +5,50 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:str="http://exslt.org/strings"
 	xmlns:common="http://exslt.org/common"
+	xmlns:mi="http://xml.elide.org/manindex"
 
 	extension-element-prefixes="str common"
 
-	exclude-result-prefixes="str common">
+	exclude-result-prefixes="str common mi">
 
 	<xsl:import href="output.xsl"/>
 
 	<xsl:param name="src"/>
 	<xsl:param name="title" select="false()"/>
 
+	<mi:sections>
+		<mi:section manvolnum="1" name="User programs"/>
+		<mi:section manvolnum="2" name="System calls"/>
+		<mi:section manvolnum="3" name="Library interfaces"/>
+		<mi:section manvolnum="4" name="Device drivers"/>
+		<mi:section manvolnum="5" name="File formats"/>
+		<mi:section manvolnum="6" name="Games"/>
+		<mi:section manvolnum="7" name="Miscellaneous"/>
+		<mi:section manvolnum="8" name="System utilities"/>
+		<mi:section manvolnum="9" name="Kernel internals"/>
+	</mi:sections>
+
 	<xsl:variable name="root">
 		<xsl:for-each select="str:tokenize($src, ':')">
 			<xsl:copy-of select="document(.)/refentry"/>
 		</xsl:for-each>
 	</xsl:variable>
+
+	 <xsl:template name="section-title">
+		<xsl:param name="manvolnum"/>
+
+			<xsl:choose>
+				<xsl:when test="document('')//mi:section[@manvolnum = $manvolnum]">
+					<xsl:value-of select="document('')//mi:section
+						[@manvolnum = $manvolnum]/@name"/>
+				</xsl:when>
+
+				<xsl:otherwise>
+					<xsl:text>Section </xsl:text>
+					<xsl:value-of select="$manvolnum"/>
+				</xsl:otherwise>
+			</xsl:choose>
+	</xsl:template>
 
 	<xsl:template match="refentry">
 		<tr>
@@ -77,8 +106,9 @@
 		<section>
 			<h1>
 				<a id="{.}"/>
-				<xsl:text>Section </xsl:text>
-				<xsl:value-of select="$manvolnum"/>
+				<xsl:call-template name="section-title">
+					<xsl:with-param name="manvolnum" select="$manvolnum"/>
+				</xsl:call-template>
 			</h1>
 
 			<xsl:if test="common:node-set($root)/refentry
