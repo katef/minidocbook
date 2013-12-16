@@ -53,7 +53,7 @@
 			<!-- own page -->
 			<xsl:when test="/refentry/refmeta/refentrytitle = refentrytitle
 			            and /refentry/refmeta/manvolnum     = manvolnum">
-				<span class="command" data-manvolnum="{manvolnum}">
+				<span class="command">
 					<xsl:value-of select="refentrytitle"/>
 				</span>
 			</xsl:when>
