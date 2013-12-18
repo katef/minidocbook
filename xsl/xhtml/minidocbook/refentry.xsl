@@ -31,17 +31,27 @@
 	</xsl:template>
 
 	<xsl:template match="refnamediv">
-		<div class="refsection">
+		<div class="refsection refnamediv">
 			<xsl:call-template name="title-output">
 				<xsl:with-param name="number" select="false()"/>
 				<xsl:with-param name="title"  select="'Name'"/>
 			</xsl:call-template>
 
-			<span class="command">
-				<xsl:apply-templates select="refname"/>
-			</span>
-			<xsl:text>&#8212;</xsl:text>
-			<xsl:apply-templates select="refpurpose"/>
+			<p>
+				<xsl:for-each select="refname">
+					<span class="command">
+						<xsl:apply-templates select="."/>
+					</span>
+	
+					<xsl:if test="position() != last()">
+						<xsl:text>, </xsl:text>
+					</xsl:if>
+				</xsl:for-each>
+	
+				<xsl:text>&#x2009;&#x2014;&#x2009;</xsl:text>
+	
+				<xsl:apply-templates select="refpurpose"/>
+			</p>
 		</div>
 	</xsl:template>
 
