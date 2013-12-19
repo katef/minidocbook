@@ -11,8 +11,43 @@
 		Links
 	-->
 
+	<xsl:template name="reflink">
+		<xsl:param name="manvolnum"/>
+		<xsl:param name="refentrytitle"/>
+		<xsl:param name="role" select="false()"/>
+
+		<!-- TODO: have callers apply-templates for refentrytitle and manvolnum first -->
+
+		<xsl:choose>
+			<!-- own page -->
+			<xsl:when test="not($role = 'index')
+				and /refentry/refnamediv/refname[. = $refentrytitle]
+				and /refentry/refmeta/manvolnum    = $manvolnum">
+				<xsl:call-template name="refentrytitle">
+					<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
+				</xsl:call-template>
+			</xsl:when>
+
+			<xsl:when test="($mdb.url.man or $mdb.url.man = '') and not($role = 'dontlink')">
+				<a href="{$mdb.url.man}/{$refentrytitle}.{$manvolnum}/">
+					<xsl:call-template name="refentrytitle">
+						<xsl:with-param name="manvolnum"     select="$manvolnum"/>
+						<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
+					</xsl:call-template>
+				</a>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:call-template name="refentrytitle">
+					<xsl:with-param name="manvolnum"     select="$manvolnum"/>
+					<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template match="xref">
-		<!-- TODO: simplify -->
+		<!-- TODO: simplify, or possibly merge into reflink as a different $role -->
 
 		<xsl:if test="count(
 			 //preface [@id = current()/@linkend]
@@ -48,37 +83,12 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template match="citerefentry" name="citerefentry">
-		<xsl:param name="manvolnum"     select="manvolnum"/>
-		<xsl:param name="refentrytitle" select="refentrytitle"/>
-		<xsl:param name="role"          select="@role"/>
-
-		<xsl:choose>
-			<!-- own page -->
-			<xsl:when test="not($role = 'index')
-				and /refentry/refnamediv/refname[. = $refentrytitle]
-				and /refentry/refmeta/manvolnum    = $manvolnum">
-				<xsl:call-template name="refentrytitle">
-					<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
-				</xsl:call-template>
-			</xsl:when>
-
-			<xsl:when test="($mdb.url.man or $mdb.url.man = '') and not($role = 'dontlink')">
-				<a href="{$mdb.url.man}/{$refentrytitle}.{$manvolnum}/">
-					<xsl:call-template name="refentrytitle">
-						<xsl:with-param name="manvolnum"     select="$manvolnum"/>
-						<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
-					</xsl:call-template>
-				</a>
-			</xsl:when>
-
-			<xsl:otherwise>
-				<xsl:call-template name="refentrytitle">
-					<xsl:with-param name="manvolnum"     select="$manvolnum"/>
-					<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+	<xsl:template match="citerefentry">
+		<xsl:call-template name="reflink">
+			<xsl:with-param name="manvolnum"     select="manvolnum"/>
+			<xsl:with-param name="refentrytitle" select="refentrytitle"/>
+			<xsl:with-param name="role"          select="@role"/>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template match="ulink">
