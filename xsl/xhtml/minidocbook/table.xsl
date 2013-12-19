@@ -7,7 +7,7 @@
 	xmlns="http://www.w3.org/1999/xhtml">
 
 	<xsl:template match="table">
-		<div class="table">
+		<figure class="table">
 			<xsl:apply-templates select="title" mode="link"/>
 
 			<table>
@@ -20,7 +20,7 @@
 			<xsl:apply-templates select="title"/>
 
 			<xsl:call-template name="footnotes"/>
-		</div>
+		</figure>
 	</xsl:template>
 
 	<xsl:template match="informaltable">

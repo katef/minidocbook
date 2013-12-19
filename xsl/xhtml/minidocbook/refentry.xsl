@@ -23,7 +23,10 @@
 	</xsl:template>
 
 	<xsl:template match="refsection">
-		<div class="refsection">
+		<xsl:variable name="u" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ '"/>
+		<xsl:variable name="l" select="'abcdefhijklmnopqrqstuvwxyz_'"/>
+
+		<section class="refsection {translate(title, $u, $l)}">
 			<xsl:apply-templates select="title">
 				<xsl:with-param name="number" select="false()"/>
 			</xsl:apply-templates>
@@ -33,7 +36,7 @@
 			<xsl:call-template name="footnotes">
 				<xsl:with-param name="predicate" select="'[not(ancestor::table)]'"/>
 			</xsl:call-template>
-		</div>
+		</section>
 	</xsl:template>
 
 	<xsl:template match="refname|refpurpose">
@@ -41,7 +44,7 @@
 	</xsl:template>
 
 	<xsl:template match="refnamediv">
-		<div class="refsection refnamediv">
+		<section class="refsection refnamediv">
 			<xsl:call-template name="title-output">
 				<xsl:with-param name="number" select="false()"/>
 				<xsl:with-param name="title"  select="'Name'"/>
@@ -61,18 +64,18 @@
 				<xsl:text>&#x2009;&#x2014;&#x2009;</xsl:text>
 				<xsl:apply-templates select="refpurpose"/>
 			</p>
-		</div>
+		</section>
 	</xsl:template>
 
 	<xsl:template match="refsynopsisdiv">
-		<div class="refsection">
+		<section class="refsection synopsis">
 			<xsl:call-template name="title-output">
 				<xsl:with-param name="number" select="false()"/>
 				<xsl:with-param name="title"  select="'Synopsis'"/>
 			</xsl:call-template>
 
 			<xsl:apply-templates select="cmdsynopsis|synopsis|para"/>
-		</div>
+		</section>
 	</xsl:template>
 
 	<xsl:template name="cmd-opt">

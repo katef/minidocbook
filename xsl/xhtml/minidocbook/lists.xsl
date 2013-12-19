@@ -26,12 +26,13 @@
 
 	<xsl:template match="variablelist">
 		<dl>
-			<xsl:apply-templates/>
+			<xsl:apply-templates>
+				<xsl:sort select="varlistentry/term"/>
+			</xsl:apply-templates>
 		</dl>
 	</xsl:template>
 
 	<xsl:template match="varlistentry">
-		<!-- TODO: sort by varlistentry -->
 		<xsl:apply-templates/>
 	</xsl:template>
 

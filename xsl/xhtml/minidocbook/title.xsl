@@ -23,13 +23,13 @@
 	</xsl:template>
 
 	<xsl:template match="table/title|figure/title">
-		<b>
+		<figcaption>
 			<xsl:value-of select="translate(name(..), 'tf', 'TF')"/>	<!-- TODO: silly... -->
 			<xsl:text>&#160;</xsl:text>
 			<xsl:number count="*[name() = name(current()/..)][title]" level="any" format="1"/>
 			<xsl:text>.&#160;</xsl:text>
 			<xsl:call-template name="title"/>
-		</b>
+		</figcaption>
 	</xsl:template>
 
 	<xsl:template name="title-output">

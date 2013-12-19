@@ -7,7 +7,7 @@
 	xmlns="http://www.w3.org/1999/xhtml">
 
 	<xsl:template match="preface|chapter|appendix">
-		<div class="chapter">
+		<section class="chapter">
 			<xsl:apply-templates select="title"/>
 
 			<xsl:call-template name="toc">
@@ -19,13 +19,13 @@
 			<xsl:call-template name="footnotes">
 				<xsl:with-param name="predicate" select="'[not(ancestor::table)]'"/>
 			</xsl:call-template>
-		</div>
+		</section>
 	</xsl:template>
 
 	<xsl:template match="section|bibliography">
-		<div class="section">
+		<section class="section">
 			<xsl:apply-templates/>
-		</div>
+		</section>
 	</xsl:template>
 
 	<xsl:template match="graphic">
@@ -33,19 +33,19 @@
 	</xsl:template>
 
 	<xsl:template match="figure">
-		<div class="figure">
+		<figure>
 			<xsl:apply-templates select="title" mode="link"/>
 
 			<xsl:apply-templates select="graphic|literallayout"/>
 
 			<xsl:apply-templates select="title"/>
-		</div>
+		</figure>
 	</xsl:template>
 
 	<xsl:template match="informalfigure">
-		<div class="figure">
+		<figure>
 			<xsl:apply-templates select="graphic|literallayout"/>
-		</div>
+		</figure>
 	</xsl:template>
 
 	<xsl:template match="para">
