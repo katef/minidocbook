@@ -11,6 +11,8 @@
 
 	exclude-result-prefixes="str common mi">
 
+	<xsl:import href="../minidocbook/refentry.xsl"/>
+	<xsl:import href="../minidocbook/links.xsl"/>
 	<xsl:import href="output.xsl"/>
 
 	<xsl:param name="src"/>
@@ -18,10 +20,10 @@
 	<xsl:param name="mdb.url.man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
 
 	<mi:sections>
-		<mi:section manvolnum="1" name="User programs"/>
+		<mi:section manvolnum="1" name="Programs"/>
 		<mi:section manvolnum="2" name="System calls"/>
-		<mi:section manvolnum="3" name="Library interfaces"/>
-		<mi:section manvolnum="4" name="Device drivers"/>
+		<mi:section manvolnum="3" name="Libraries"/>
+		<mi:section manvolnum="4" name="Devices"/>
 		<mi:section manvolnum="5" name="File formats"/>
 		<mi:section manvolnum="6" name="Games"/>
 		<mi:section manvolnum="7" name="Miscellaneous"/>
@@ -52,38 +54,19 @@
 	</xsl:template>
 
 	<xsl:template match="refentry">
-		<tr>
-			<th>
-				<xsl:for-each select="refnamediv/refname">
-					<xsl:sort select="."/>
+		<xsl:for-each select="refnamediv/refname">
+			<dt>
+				<xsl:call-template name="reflink">
+					<xsl:with-param name="manvolnum"	 select="../../refmeta/manvolnum"/>
+					<xsl:with-param name="refentrytitle" select="."/>
+					<xsl:with-param name="role"          select="'index'"/>
+				</xsl:call-template>
+			</dt>
+		</xsl:for-each>
 
-					<a>
-
-						<xsl:if test="$mdb.url.man or $mdb.url.man = ''">
-							<xsl:attribute name="href">
-								<xsl:value-of select="concat($mdb.url.man,
-									'/', ../../refmeta/refentrytitle,
-									'.', ../../refmeta/manvolnum)"/>	<!-- canonical page name -->
-							</xsl:attribute>
-						</xsl:if>
-
-						<!-- TODO: apply-templates for proper XHTML output -->
-						<span class="command" data-manvolnum="{../../refmeta/manvolnum}">
-							<xsl:value-of select="."/>
-						</span>
-					</a>
-
-					<!-- I would rather do this in CSS, but I can't see how wrt. floats -->
-					<xsl:if test="position() != last()">
-						<xsl:text>, </xsl:text>
-					</xsl:if>
-				</xsl:for-each>
-			</th>
-
-			<td>
-				<xsl:value-of select="refnamediv/refpurpose"/>
-			</td>
-		</tr>
+		<dd>
+			<xsl:apply-templates select="refnamediv/refpurpose"/>
+		</dd>
 	</xsl:template>
 
 	<xsl:template name="section">
@@ -98,21 +81,20 @@
 			</h2>
 		</xsl:if>
 
-		<table>
-			<tbody>
-				<xsl:apply-templates select="common:node-set($root)/refentry
-					[refmeta/manvolnum = $manvolnum]
-					[not($productname) or refentryinfo/productname = $productname]">
-					<xsl:sort select="."/>
-				</xsl:apply-templates>
-			</tbody>
-		</table>
+		<dl>
+			<xsl:apply-templates select="common:node-set($root)/refentry
+				[refmeta/manvolnum = $manvolnum]
+				[not($productname) or refentryinfo/productname = $productname]">
+				<xsl:sort select="concat('lib', refmeta/refentrytitle) != $productname"/>
+				<xsl:sort select="refmeta/refentrytitle"/>
+			</xsl:apply-templates>
+		</dl>
 	</xsl:template>
 
 	<xsl:template match="manvolnum" mode="section">
 		<xsl:variable name="manvolnum" select="."/>
 
-		<section>
+		<section data-manvolnum="{$manvolnum}">
 			<h1>
 				<a id="{.}"/>
 				<xsl:call-template name="section-title">
@@ -133,10 +115,13 @@
 				[not(. = ../../preceding-sibling::refentry
 					[refmeta/manvolnum = current()]/refentryinfo/productname)]">
 				<xsl:sort select="."/>
-				<xsl:call-template name="section">
-					<xsl:with-param name="manvolnum"   select="$manvolnum"/>
-					<xsl:with-param name="productname" select="."/>
-				</xsl:call-template>
+
+				<section data-productname="{.}">
+					<xsl:call-template name="section">
+						<xsl:with-param name="manvolnum"   select="$manvolnum"/>
+						<xsl:with-param name="productname" select="."/>
+					</xsl:call-template>
+				</section>
 			</xsl:for-each>
 		</section>
 	</xsl:template>

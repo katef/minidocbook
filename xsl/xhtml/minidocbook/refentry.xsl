@@ -6,9 +6,19 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns="http://www.w3.org/1999/xhtml">
 
-	<xsl:template match="refmeta" name="reftitle">
-		<span class="command" data-manvolnum="{manvolnum}">
-			<xsl:value-of select="refentrytitle"/>
+	<xsl:template name="refentrytitle">
+		<xsl:param name="manvolnum" select="false()"/>
+		<xsl:param name="refentrytitle"/>
+
+		<span class="command donthyphenate">
+			<xsl:if test="$manvolnum">
+				<xsl:attribute name="data-manvolnum">
+					<xsl:value-of select="$manvolnum"/>
+				</xsl:attribute>
+			</xsl:if>
+
+			<!-- XXX: copy-of and pass the output -->
+			<xsl:value-of select="$refentrytitle"/>
 		</span>
 	</xsl:template>
 
@@ -39,17 +49,16 @@
 
 			<p>
 				<xsl:for-each select="refname">
-					<span class="command">
-						<xsl:apply-templates select="."/>
-					</span>
-	
+					<xsl:call-template name="reflink">
+						<xsl:with-param name="manvolnum"     select="../../refmeta/manvolnum"/>
+						<xsl:with-param name="refentrytitle" select="."/>
+					</xsl:call-template>
+
 					<xsl:if test="position() != last()">
 						<xsl:text>, </xsl:text>
 					</xsl:if>
 				</xsl:for-each>
-	
 				<xsl:text>&#x2009;&#x2014;&#x2009;</xsl:text>
-	
 				<xsl:apply-templates select="refpurpose"/>
 			</p>
 		</div>
