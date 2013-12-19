@@ -27,7 +27,7 @@
 
 	<xsl:template name="output">
 		<xsl:param name="title"/>
-		<xsl:param name="filename" select="'index'"/>
+		<xsl:param name="filename"/>
 		<xsl:param name="css"      select="''"/>
 		<xsl:param name="js"       select="''"/>
 		<xsl:param name="head"     select="/.."/>
@@ -79,14 +79,28 @@
 			</xsl:choose>
 		</xsl:variable>
 
-		<!-- TODO: default to stdout, if no filename is given? -->
-		<xsl:variable name="output-file" select="concat($filename, '.', $www-ext)"/>
+		<xsl:variable name="output-file">
+			<xsl:choose>
+				<xsl:when test="$filename">
+ 					<xsl:value-of select="concat($filename, '.', $www-ext)"/>
+				</xsl:when>
+
+				<xsl:otherwise>
+					<xsl:text>/dev/stdout</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 
 		<xsl:message>
 			<xsl:text>Outputting </xsl:text>
 			<xsl:value-of select="concat($output-file, ': &quot;', $title, '&quot;')"/>
 		</xsl:message>
 
+		<!--
+			The idea here is that we never generate output in the default document tree;
+			instead, <common:document> is used for all output. This means a filename given
+			by xsltproc -o is always ignored. Instead, -o applies as a directory name only.
+		-->
 		<common:document
 			href="{$output-file}"
 			method="{$method}"
