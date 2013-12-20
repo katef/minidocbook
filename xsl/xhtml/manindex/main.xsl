@@ -13,6 +13,7 @@
 
 	<xsl:import href="../minidocbook/refentry.xsl"/>
 	<xsl:import href="../minidocbook/links.xsl"/>
+	<xsl:import href="../minidocbook/inline.xsl"/>
 	<xsl:import href="output.xsl"/>
 
 	<xsl:param name="src"/>
@@ -57,7 +58,7 @@
 		<xsl:for-each select="refnamediv/refname">
 			<dt>
 				<xsl:call-template name="reflink">
-					<xsl:with-param name="manvolnum"	 select="../../refmeta/manvolnum"/>
+					<xsl:with-param name="manvolnum"     select="../../refmeta/manvolnum"/>
 					<xsl:with-param name="refentrytitle" select="."/>
 					<xsl:with-param name="role"          select="'index'"/>
 				</xsl:call-template>

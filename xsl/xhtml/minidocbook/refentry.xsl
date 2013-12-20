@@ -17,8 +17,7 @@
 				</xsl:attribute>
 			</xsl:if>
 
-			<!-- XXX: copy-of and pass the output -->
-			<xsl:value-of select="$refentrytitle"/>
+			<xsl:apply-templates select="$refentrytitle"/>
 		</span>
 	</xsl:template>
 
@@ -39,7 +38,7 @@
 		</section>
 	</xsl:template>
 
-	<xsl:template match="refname|refpurpose">
+	<xsl:template match="refname|refpurpose|refentrytitle">
 		<xsl:apply-templates/>
 	</xsl:template>
 
