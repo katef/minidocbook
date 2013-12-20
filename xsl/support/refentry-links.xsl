@@ -14,6 +14,8 @@
 	<xsl:template match="refname">
 		<xsl:if test="position() &gt; 1">
 			<xsl:value-of select="."/>
+			<xsl:text>.</xsl:text>
+			<xsl:apply-templates select="../../refmeta/manvolnum"/>
 			<xsl:text>&#10;</xsl:text>
 		</xsl:if>
 	</xsl:template>
