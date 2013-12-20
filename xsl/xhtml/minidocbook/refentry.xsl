@@ -24,7 +24,7 @@
 
 	<xsl:template match="refsection">
 		<xsl:variable name="u" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ '"/>
-		<xsl:variable name="l" select="'abcdefhijklmnopqrqstuvwxyz_'"/>
+		<xsl:variable name="l" select="'abcdefghijklmnopqrstuvwxyz_'"/>
 
 		<section class="refsection {translate(title, $u, $l)}">
 			<xsl:apply-templates select="title">
