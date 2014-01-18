@@ -1,0 +1,104 @@
+
+% XXX: could have different setups for refentry vs. other documents
+
+% TODO: xinclude: http://wiki.contextgarden.net/Command/xmlinclude
+
+\input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/blocks
+\input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/inline
+\input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/lists
+\input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/links
+
+\startxmlsetups xml:mdb-refentry
+	\xmlsetsetup{\xmldocument}{*}{-}
+	\xmlsetsetup{\xmldocument}{refentry|refname|refnamediv|refsynopsisdiv|refsection}{xml:*}
+	\xmlsetsetup{\xmldocument}{cmdsynopsis|synopsis}{xml:*}
+	\xmlsetsetup{\xmldocument}{arg|group|sbr}{xml:*}
+
+    \xmlsetsetup{\xmldocument}{para}{xml:*}
+ 
+    \xmlsetsetup{\xmldocument}{acronym}{xml:*}
+    \xmlsetsetup{\xmldocument}{command}{xml:*}
+    \xmlsetsetup{\xmldocument}{userinput|computeroutput}{xml:*}
+    \xmlsetsetup{\xmldocument}{application}{xml:*}
+    \xmlsetsetup{\xmldocument}{code}{xml:*}
+    \xmlsetsetup{\xmldocument}{varname|type|token|parameter|constant|function|literal}{xml:*}
+    \xmlsetsetup{\xmldocument}{emphasis}{xml:*}
+    \xmlsetsetup{\xmldocument}{superscript|subscript}{xml:*}
+    \xmlsetsetup{\xmldocument}{option}{xml:*}
+    \xmlsetsetup{\xmldocument}{filename}{xml:*}
+    \xmlsetsetup{\xmldocument}{replaceable|citetitle|firstterm}{xml:*}
+    \xmlsetsetup{\xmldocument}{quote}{xml:*}
+
+    \xmlsetsetup{\xmldocument}{orderedlist|itemizedlist|listitem}{xml:*}
+    \xmlsetsetup{\xmldocument}{variablelist|varlistentry|term}{xml:*}
+%	\xmlfilter{\xmldocument}{/varlistentry/listitem/command(xml:varlistitem)}
+
+    \xmlsetsetup{\xmldocument}{reflink|xref|citerefentry|ulink|link}{xml:*}
+    \xmlsetsetup{\xmldocument}{refentrytitle|manvolnum}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-refentry}
+
+
+\startxmlsetups xml:refentry
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:refname
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:refnamediv
+	\startsection[title=Name,reference=sec:TODO]
+	\xmlconcat{#1}{refname}{, }
+	\thinspace—\thinspace
+	\xmltext{#1}{refpurpose}
+	\stopsection
+\stopxmlsetups
+
+\startxmlsetups xml:refsynopsisdiv
+	\startsection[title=Synopsis,reference=sec:TODO]
+	\xmlflush{#1}
+	\stopsection
+\stopxmlsetups
+
+\startxmlsetups xml:arg
+	\doifelse{\xmlatt{#1}{choice}} {opt}
+		{[\thinspace\xmlflush{#1}\thinspace] }
+		{\thinspace\xmlflush{#1}\thinspace}
+\stopxmlsetups
+
+\startxmlsetups xml:group
+	\doifelse{\xmlatt{#1}{choice}} {opt}
+		{[\xmlconcat{#1}{arg}{\|}]}
+		{\{\xmlconcat{#1}{arg}{\|}\}}
+\stopxmlsetups
+
+\startxmlsetups xml:sbr
+	\crlf
+\stopxmlsetups
+
+% XXX: why isn't width automatically correct here?
+\definedescription[synopsis][headstyle=normal,width=1.5em]
+
+\startxmlsetups xml:cmdsynopsis
+	\startsynopsis{\xmltext{#1}{command}}
+	\xmlall{#1}{/arg|group|sbr}
+	\stopsynopsis
+\stopxmlsetups
+
+\startxmlsetups xml:refsection
+	\startsection[title={\xmltext{#1}{title}},reference=sec:TODO]
+	\xmlflush{#1}
+	\stopsection
+\stopxmlsetups
+
+% XXX: doesn't belong here
+\input ../common/tex/bp-setup
+
+% XXX: style doesn't belong here, but pagnation does
+\setuphead[section][
+	style=\tfb,
+	number=no,
+	page=no]
+

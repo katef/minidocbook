@@ -1,0 +1,32 @@
+
+\startxmlsetups xml:reflink
+	% TODO
+\stopxmlsetups
+
+\startxmlsetups xml:xref
+	% TODO: unimplemented
+\stopxmlsetups
+
+\startxmlsetups xml:refentrytitle
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:manvolnum
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:citerefentry
+	% TODO: no manvolnum if it's this same page
+	\xmltext{#1}{refentrytitle}(\xmltext{#1}{manvolnum})
+\stopxmlsetups
+
+\startxmlsetups xml:ulink
+	% TODO: unimplemented
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:link
+	% TODO: unimplemented
+	\xmlflush{#1}
+\stopxmlsetups
+

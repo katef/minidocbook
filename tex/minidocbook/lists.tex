@@ -1,0 +1,36 @@
+
+\startxmlsetups xml:orderedlist
+	\startitemize[n]
+	\xmlflush{#1}
+	\stopitemize
+\stopxmlsetups
+
+\startxmlsetups xml:itemizedlist
+	\startitemize[1]
+	\xmlflush{#1}
+	\stopitemize
+\stopxmlsetups
+
+\startxmlsetups xml:listitem
+XXXLI
+%	\item
+%	\xmlflush{#1}
+\stopxmlsetups
+
+% XXX: perhaps a different style for within an Options refsection; bold for Options only
+\definedescription[variablelist][location=top,headstyle=bold,width=broad]
+
+\startxmlsetups xml:variablelist
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:term
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:varlistentry
+	\startvariablelist{\xmlconcat{#1}{term}{\crlf}}
+	\xmltext{#1}{listitem}
+	\stopvariablelist
+\stopxmlsetups
+
