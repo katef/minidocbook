@@ -16,11 +16,36 @@
 	\xmlflush{#1}
 \stopxmlsetups
 
-% XXX: perhaps a different style for within an Options refsection; bold for Options only
-\definedescription[variablelist][location=top,headstyle=bold,width=broad]
+\startluacode
+function xml.functions.termthing(r)
+	local max = 0;
+
+	for e in xml.collected(r, "/varlistentry/term") do
+		local l = string.len(xml.textonly(e))
+
+		if (l > max) then
+			max = l
+		end
+	end
+
+	context.setvalue("vp:max", (max + 1) .. "ex");
+end
+\stopluacode
 
 \startxmlsetups xml:variablelist
+	\crlf % XXX: do in \defineparagraphs
+
+\xmlfunction{#1}{termthing}
+
+% XXX: perhaps a different style for within an Options refsection; bold for Options only
+	\defineparagraphs[vp][n=2,before=,after=,distance=1em]
+
+	\setupparagraphs[vp][1][width=\getvalue{vp:max}]
+	\setupparagraphs[vp][2][width=]
+
 	\xmlflush{#1}
+
+	\crlf % XXX: do in \defineparagraphs
 \stopxmlsetups
 
 \startxmlsetups xml:term
@@ -28,8 +53,17 @@
 \stopxmlsetups
 
 \startxmlsetups xml:varlistentry
-	\startvariablelist{\xmlconcat{#1}{term}{\crlf}}
-	\xmltext{#1}{listitem}
-	\stopvariablelist
+	% I'm not using \definedescription for this, because it misestimates widths
+	% for multiple <term>s, and does not indent on nesting.
+
+	% TODO: paragraph spacing needs to be the same as the surrounding text. \setupwhitespace?
+\setupwhitespace[big]
+
+\startvp
+	\bf \xmlconcat{#1}{/term}{\crlf}
+\vp
+	\xmltext{#1}{/listitem}
+\stopvp
+
 \stopxmlsetups
 
