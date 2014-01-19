@@ -7,6 +7,7 @@
 \input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/inline
 \input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/lists
 \input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/links
+\input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/table
 
 \startxmlsetups xml:mdb-refentry
 	\xmlsetsetup{\xmldocument}{*}{-}
@@ -35,6 +36,8 @@
 
     \xmlsetsetup{\xmldocument}{reflink|xref|citerefentry|ulink|link}{xml:*}
     \xmlsetsetup{\xmldocument}{refentrytitle|manvolnum}{xml:*}
+
+    \xmlsetsetup{\xmldocument}{table|thead|tbody|tr|th|td}{xml:*}
 \stopxmlsetups
 
 \xmlregistersetup{xml:mdb-refentry}
@@ -42,6 +45,11 @@
 
 \startxmlsetups xml:refentry
 	\xmlflush{#1}
+
+	% TODO: only if present
+	\startsection[title=Author,reference=sec:TODO]
+	TODO
+	\stopsection
 \stopxmlsetups
 
 \startxmlsetups xml:refname
