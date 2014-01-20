@@ -17,10 +17,11 @@
 \stopxmlsetups
 
 \startluacode
-function xml.functions.termthing(r)
+
+function findmax(t, path)
 	local max = 0;
 
-	for e in xml.collected(r, "/varlistentry/term") do
+	for e in xml.collected(t, path) do
 		local l = string.len(xml.textonly(e))
 
 		if (l > max) then
@@ -28,42 +29,85 @@ function xml.functions.termthing(r)
 		end
 	end
 
-	context.setvalue("vp:max", (max + 1) .. "ex");
+	return max
 end
+
+function xml.functions.termthing(t)
+	local max = findmax(t, "/varlistentry/term")
+
+	-- 8 looks about right
+	if max > 8 then
+		context.setvalue("VarPara:max", 1)
+	else
+		context.setvalue("VarPara:max", max)
+	end
+end
+
+function xml.functions.termthingsingle(t)
+	local max = findmax(t, "/term")
+
+	context.setvalue("VarPara:curr", max)
+end
+
 \stopluacode
 
 \startxmlsetups xml:variablelist
-	\crlf % XXX: do in \defineparagraphs
+	\xmlfunction{#1}{termthing}
 
-\xmlfunction{#1}{termthing}
+	\defineparagraphs[VarPara][n=2,distance=2em]
 
-% XXX: perhaps a different style for within an Options refsection; bold for Options only
-	\defineparagraphs[vp][n=2,before=,after=,distance=1em]
+	\setupparagraphs[VarPara][1][width=\getvalue{VarPara:max}ex]
+	\setupparagraphs[VarPara][2][width=]
 
-	\setupparagraphs[vp][1][width=\getvalue{vp:max}]
-	\setupparagraphs[vp][2][width=]
+	% TODO:
+	% 1. within Options, 2em gutter and newline for terms longer than "-x"
+	% 2. otherwise, if VarPara:max < 10 or so, inline
+	% otherwise, always on top
 
 	\xmlflush{#1}
-
-	\crlf % XXX: do in \defineparagraphs
 \stopxmlsetups
 
-\startxmlsetups xml:term
-	\xmlflush{#1}
-\stopxmlsetups
 
 \startxmlsetups xml:varlistentry
 	% I'm not using \definedescription for this, because it misestimates widths
 	% for multiple <term>s, and does not indent on nesting.
 
-	% TODO: paragraph spacing needs to be the same as the surrounding text. \setupwhitespace?
-\setupwhitespace[big]
+	% XXX: this is all such a mess
 
-\startvp
-	\bf \xmlconcat{#1}{/term}{\crlf}
-\vp
-	\xmltext{#1}{/listitem}
-\stopvp
+	\xmlfunction{#1}{termthingsingle}
 
+	% TODO: override to inline single-letter -x options if inside Options
+
+	\def\TermStuff{\xmlconcat{#1}{/term}{\crlf}}
+
+	\setupparagraphs[VarPara][before={}]
+
+	\ifnum\getvalue{VarPara:curr}>\getvalue{VarPara:max}
+		\setupparagraphs[VarPara][before=\TermStuff\crlf]
+	\fi
+
+	% paragraph spacing needs to be the same as the surrounding text.
+	% XXX: shouldn't be here
+	\setupwhitespace[big]
+
+	\startVarPara
+		% XXX: i want <= not not >
+		\ifnum\getvalue{VarPara:max}>\getvalue{VarPara:curr}
+			\TermStuff
+		\fi
+		\ifnum\getvalue{VarPara:max}=\getvalue{VarPara:curr}
+			\TermStuff
+		\fi
+	\VarPara
+		\xmltext{#1}{/listitem}
+	\stopVarPara
+
+\stopxmlsetups
+
+\startxmlsetups xml:term
+	\bgroup
+		\xmldoif{#1}{../../../title[text() = 'Options']}{\bf}
+		\xmlflush{#1}
+	\egroup
 \stopxmlsetups
 
