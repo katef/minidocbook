@@ -34,6 +34,10 @@
 	<xsl:param name="mdb.url.man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
 
 
+	<xsl:template match="node()" mode="refmeta">
+		<meta name="refmeta-{name()}" content="{.}"/>
+	</xsl:template>
+
 	<xsl:template match="/refentry">
 		<xsl:variable name="title">
 			<xsl:value-of select="concat(refmeta/refentrytitle, '(', refmeta/manvolnum, ')')"/>
@@ -43,6 +47,12 @@
 			<xsl:with-param name="title"     select="$title"/>
 			<xsl:with-param name="filename"  select="'index'"/>
 			<xsl:with-param name="chunklink" select="false"/>
+
+			<xsl:with-param name="head">
+				<xsl:apply-templates select="refentryinfo/productname" mode="refmeta"/>
+				<xsl:apply-templates select="refentryinfo/title"       mode="refmeta"/>
+				<xsl:apply-templates select="refmeta/manvolnum"        mode="refmeta"/>
+			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 

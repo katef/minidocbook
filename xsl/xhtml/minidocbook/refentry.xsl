@@ -21,6 +21,10 @@
 		</span>
 	</xsl:template>
 
+	<xsl:template name="refentryauthor">
+XXX:
+	</xsl:template>
+
 	<xsl:template match="refsection">
 		<xsl:variable name="u" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ '"/>
 		<xsl:variable name="l" select="'abcdefghijklmnopqrstuvwxyz_'"/>
