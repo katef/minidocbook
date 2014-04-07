@@ -17,7 +17,7 @@
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
 	<xsl:param name="www-ext" select="'xhtml5'"/>
- 
+
 	<xsl:template match="processing-instruction()">
 		<xsl:message terminate="yes">
 			<xsl:text>Unhandled PI: </xsl:text>
