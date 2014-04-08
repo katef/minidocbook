@@ -50,7 +50,7 @@
 
 			<xsl:with-param name="head">
 				<xsl:apply-templates select="refentryinfo/productname" mode="refmeta"/>
-				<xsl:apply-templates select="refentryinfo/title"       mode="refmeta"/>
+				<xsl:apply-templates select="refmeta/refentrytitle"    mode="refmeta"/>
 				<xsl:apply-templates select="refmeta/manvolnum"        mode="refmeta"/>
 			</xsl:with-param>
 		</xsl:call-template>
