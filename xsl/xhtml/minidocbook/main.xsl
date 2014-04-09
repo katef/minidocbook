@@ -38,6 +38,19 @@
 		<meta name="refmeta-{name()}" content="{.}"/>
 	</xsl:template>
 
+	<xsl:template match="refnamediv" mode="refmeta">
+		<meta name="refmeta-refname">
+			<xsl:attribute name="content">
+				<xsl:for-each select="refname">
+					<xsl:if test="position() != 1">
+						<xsl:text> </xsl:text>
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</xsl:for-each>
+			</xsl:attribute>
+		</meta>
+	</xsl:template>
+
 	<xsl:template match="/refentry">
 		<xsl:variable name="title">
 			<xsl:value-of select="concat(refmeta/refentrytitle, '(', refmeta/manvolnum, ')')"/>
@@ -50,8 +63,8 @@
 
 			<xsl:with-param name="head">
 				<xsl:apply-templates select="refentryinfo/productname" mode="refmeta"/>
-				<xsl:apply-templates select="refmeta/refentrytitle"    mode="refmeta"/>
 				<xsl:apply-templates select="refmeta/manvolnum"        mode="refmeta"/>
+				<xsl:apply-templates select="refnamediv"               mode="refmeta"/>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
