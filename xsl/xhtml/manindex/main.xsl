@@ -55,8 +55,16 @@
 	</xsl:template>
 
 	<xsl:template match="refentry">
+		<xsl:variable name="productname" select="refentryinfo/productname"/>
+
 		<xsl:for-each select="refnamediv/refname">
 			<dt>
+				<xsl:if test="$productname">
+					<xsl:attribute name="data-productname">
+						<xsl:value-of select="$productname"/>
+					</xsl:attribute>
+				</xsl:if>
+
 				<xsl:call-template name="reflink">
 					<xsl:with-param name="manvolnum"     select="../../refmeta/manvolnum"/>
 					<xsl:with-param name="refentrytitle" select="."/>
@@ -66,6 +74,12 @@
 		</xsl:for-each>
 
 		<dd>
+			<xsl:if test="$productname">
+				<xsl:attribute name="data-productname">
+					<xsl:value-of select="$productname"/>
+				</xsl:attribute>
+			</xsl:if>
+
 			<xsl:apply-templates select="refnamediv/refpurpose"/>
 		</dd>
 	</xsl:template>
