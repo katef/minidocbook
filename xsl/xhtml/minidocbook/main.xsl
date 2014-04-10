@@ -38,6 +38,10 @@
 		<meta name="refmeta-{name()}" content="{.}"/>
 	</xsl:template>
 
+	<xsl:template match="refentryinfo/productname/@role" mode="refmeta">
+		<meta name="refmeta-productrole" content="{.}"/>
+	</xsl:template>
+
 	<xsl:template match="refnamediv" mode="refmeta">
 		<meta name="refmeta-refname">
 			<xsl:attribute name="content">
@@ -62,9 +66,11 @@
 			<xsl:with-param name="chunklink" select="false"/>
 
 			<xsl:with-param name="head">
-				<xsl:apply-templates select="refentryinfo/productname" mode="refmeta"/>
-				<xsl:apply-templates select="refmeta/manvolnum"        mode="refmeta"/>
-				<xsl:apply-templates select="refnamediv"               mode="refmeta"/>
+				<xsl:apply-templates select="refentryinfo/productname"       mode="refmeta"/>
+				<xsl:apply-templates select="refentryinfo/productname/@role" mode="refmeta"/>
+				<xsl:apply-templates select="refentryinfo/title"             mode="refmeta"/>
+				<xsl:apply-templates select="refmeta/manvolnum"              mode="refmeta"/>
+				<xsl:apply-templates select="refnamediv"                     mode="refmeta"/>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
