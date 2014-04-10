@@ -72,12 +72,12 @@
 
 	<xsl:template name="section">
 		<xsl:param name="manvolnum"/>
-		<xsl:param name="productname"/>
+		<xsl:param name="productrole"/>
 
-		<xsl:if test="$productname">
+		<xsl:if test="$productrole">
 			<h2>
 				<span class="product">
-					<xsl:value-of select="$productname"/>
+					<xsl:value-of select="$productrole"/>
 				</span>
 			</h2>
 		</xsl:if>
@@ -85,8 +85,8 @@
 		<dl>
 			<xsl:apply-templates select="common:node-set($root)/refentry
 				[refmeta/manvolnum = $manvolnum]
-				[not($productname) or refentryinfo/productname = $productname]">
-				<xsl:sort select="concat('lib', refmeta/refentrytitle) != $productname"/>
+				[not($productrole) or refentryinfo/productname/@role = $productrole]">
+				<xsl:sort select="concat('lib', refmeta/refentrytitle) != $productrole"/>
 				<xsl:sort select="refmeta/refentrytitle"/>
 			</xsl:apply-templates>
 		</dl>
@@ -105,22 +105,22 @@
 
 			<xsl:if test="common:node-set($root)/refentry
 				[refmeta/manvolnum = current()]
-				[not(refentryinfo/productname)]">
+				[not(refentryinfo/productname/@role)]">
 				<xsl:call-template name="section">
 					<xsl:with-param name="manvolnum" select="$manvolnum"/>
 				</xsl:call-template>
 			</xsl:if>
 
 			<xsl:for-each select="common:node-set($root)/refentry
-				[refmeta/manvolnum = current()]/refentryinfo/productname
-				[not(. = ../../preceding-sibling::refentry
-					[refmeta/manvolnum = current()]/refentryinfo/productname)]">
+				[refmeta/manvolnum = current()]/refentryinfo/productname/@role
+				[not(. = ../../../preceding-sibling::refentry
+					[refmeta/manvolnum = current()]/refentryinfo/productname/@role)]">
 				<xsl:sort select="."/>
 
-				<section data-productname="{.}">
+				<section data-productrole="{.}">
 					<xsl:call-template name="section">
 						<xsl:with-param name="manvolnum"   select="$manvolnum"/>
-						<xsl:with-param name="productname" select="."/>
+						<xsl:with-param name="productrole" select="."/>
 					</xsl:call-template>
 				</section>
 			</xsl:for-each>
