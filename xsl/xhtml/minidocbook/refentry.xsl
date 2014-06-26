@@ -22,7 +22,7 @@
 	</xsl:template>
 
 	<xsl:template name="refentryauthor">
-XXX:
+		<!-- TODO: author -->
 	</xsl:template>
 
 	<xsl:template match="refsection">
