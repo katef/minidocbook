@@ -144,7 +144,16 @@
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
 
-		<html lang="{$lang}">
+		<!--
+			The moznomarginboxes and mozdisallowselectionprint attributes here
+			are meaningful to firefox; they elide the browser-supplied header
+			and footer for printed content.
+			What a horrible way to expose that setting.
+		-->
+		<html lang="{$lang}"
+			moznomarginboxes="moznomarginboxes"
+			mozdisallowselectionprint="mozdisallowselectionprint">
+
 			<xsl:if test="$class">
 				<xsl:attribute name="class">
 					<xsl:value-of select="$class"/>
