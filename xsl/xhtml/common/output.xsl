@@ -162,7 +162,7 @@
 
 				<!-- TODO: maybe a node set is better, after all -->
 				<xsl:for-each select="str:tokenize($css)">
-					<link rel="stylesheet" type="text/css" media="screen" href="{$www-css}/{.}"/>
+					<link rel="stylesheet" type="text/css" media="all" href="{$www-css}/{.}"/>
 				</xsl:for-each>
 
 				<xsl:for-each select="str:tokenize($js)">
