@@ -13,6 +13,9 @@
 
 	exclude-result-prefixes="common str">
 
+	<!-- for HTML5 -->
+	<xsl:output method="html" media-type="text/html" omit-xml-declaration="yes" indent="yes"/>
+
 	<xsl:param name="www-base"/>
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
@@ -106,7 +109,7 @@
 			method="{$method}"
 			encoding="utf-8"
 			indent="yes"
-			omit-xml-declaration="no"
+			omit-xml-declaration="yes"
 			cdata-section-elements="script"
 			media-type="{$media}"
 			standalone="yes">
@@ -143,6 +146,9 @@
 		<xsl:param name="title"  select="/.."/>
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
+
+		<!-- XXX: hack -->
+		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
 
 		<!--
 			The moznomarginboxes and mozdisallowselectionprint attributes here
