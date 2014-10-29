@@ -118,10 +118,6 @@
 			doctype-system="{$doctype-system}"
 -->
 
-			<xsl:if test="$method = 'html'">
-				<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
-			</xsl:if>
-
 			<xsl:call-template name="output-content">
 				<xsl:with-param name="title"  select="$title"/>
 				<xsl:with-param name="method" select="$method"/>
@@ -147,8 +143,9 @@
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
 
-		<!-- XXX: hack -->
-		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
+		<xsl:if test="$method = 'html'">
+			<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
+		</xsl:if>
 
 		<!--
 			The moznomarginboxes and mozdisallowselectionprint attributes here
