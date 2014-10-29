@@ -10,7 +10,6 @@
 <!ENTITY % ent-ext  SYSTEM "ent-ext.dtd">  %ent-ext;
 <!ENTITY % ent-arg  SYSTEM "ent-arg.dtd">  %ent-arg;
 
-
 <!ENTITY % common.role "
 	role	CDATA	#IMPLIED
 ">
