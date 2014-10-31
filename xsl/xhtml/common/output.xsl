@@ -181,6 +181,8 @@
 					<script type="text/javascript" src="{$www-js}/{.}"></script>
 				</xsl:for-each>
 
+				<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
 				<xsl:if test="$method = 'html'">
 					<meta http-equiv="Content-Type"
 						content="text/html; charset=utf-8"/>
