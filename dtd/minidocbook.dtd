@@ -10,6 +10,9 @@
 <!ENTITY % ent-ext  SYSTEM "ent-ext.dtd">  %ent-ext;
 <!ENTITY % ent-arg  SYSTEM "ent-arg.dtd">  %ent-arg;
 
+<!-- an extension to docbook, intended for use in <title> and <td> -->
+<!ENTITY br "<?br?>">
+
 <!ENTITY % common.role "
 	role	CDATA	#IMPLIED
 ">
