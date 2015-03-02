@@ -14,6 +14,8 @@
 	<xsl:import href="../minidocbook/refentry.xsl"/>
 	<xsl:import href="../minidocbook/links.xsl"/>
 	<xsl:import href="../minidocbook/inline.xsl"/>
+
+	<xsl:import href="fallback.xsl"/>
 	<xsl:import href="output.xsl"/>
 
 	<xsl:param name="src"/>

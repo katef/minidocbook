@@ -21,13 +21,6 @@
 	<xsl:param name="www-js"/>
 	<xsl:param name="www-ext" select="'xhtml5'"/>
 
-	<xsl:template match="processing-instruction()">
-		<xsl:message terminate="yes">
-			<xsl:text>Unhandled PI: </xsl:text>
-			<xsl:value-of select="name()"/>
-		</xsl:message>
-	</xsl:template>
-
 	<xsl:template name="output">
 		<xsl:param name="title"/>
 		<xsl:param name="filename"/>
