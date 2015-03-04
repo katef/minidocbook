@@ -6,6 +6,11 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns="http://www.w3.org/1999/xhtml">
 
+	<!-- XXX: i don't know why i need this. without the mode, refname does not match -->
+	<xsl:template match="refname" mode="XXX">
+		<xsl:apply-templates/>
+	</xsl:template>
+
 	<xsl:template name="refentrytitle">
 		<xsl:param name="manvolnum" select="false()"/>
 		<xsl:param name="refentrytitle"/>
@@ -17,7 +22,7 @@
 				</xsl:attribute>
 			</xsl:if>
 
-			<xsl:apply-templates select="$refentrytitle"/>
+			<xsl:apply-templates select="$refentrytitle" mode="XXX"/>
 		</span>
 	</xsl:template>
 
