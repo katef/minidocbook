@@ -97,6 +97,12 @@
 		</tt>
 	</xsl:template>
 
+	<xsl:template match="remark">
+		<span class="{name()}">
+			<xsl:apply-templates/>
+		</span>
+	</xsl:template>
+
 	<xsl:template match="replaceable|citetitle|firstterm">
 		<i class="{name()}">
 			<xsl:apply-templates/>
