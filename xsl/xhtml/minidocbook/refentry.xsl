@@ -14,11 +14,18 @@
 	<xsl:template name="refentrytitle">
 		<xsl:param name="manvolnum" select="false()"/>
 		<xsl:param name="refentrytitle"/>
+		<xsl:param name="refclass" select="false()"/>
 
 		<span class="command donthyphenate">
 			<xsl:if test="$manvolnum">
 				<xsl:attribute name="data-manvolnum">
 					<xsl:value-of select="$manvolnum"/>
+				</xsl:attribute>
+			</xsl:if>
+
+			<xsl:if test="$refclass">
+				<xsl:attribute name="data-refclass">
+					<xsl:value-of select="$refclass"/>
 				</xsl:attribute>
 			</xsl:if>
 

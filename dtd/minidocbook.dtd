@@ -140,11 +140,12 @@
 <!ELEMENT refentrytitle (#PCDATA)>
 <!ELEMENT manvolnum (#PCDATA)>
 
-<!ELEMENT refnamediv (refname+, refpurpose)>
+<!ELEMENT refnamediv (refclass?, refname+, refpurpose)>
 <!ATTLIST refnamediv
 	%common.id;
 >
 
+<!ELEMENT refclass (#PCDATA)>
 <!ELEMENT refname (#PCDATA)>
 <!ELEMENT refpurpose (#PCDATA)>
 

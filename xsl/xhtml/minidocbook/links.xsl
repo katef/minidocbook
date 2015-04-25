@@ -14,7 +14,8 @@
 	<xsl:template name="reflink">
 		<xsl:param name="manvolnum"/>
 		<xsl:param name="refentrytitle"/>
-		<xsl:param name="role" select="false()"/>
+		<xsl:param name="role"     select="false()"/>
+		<xsl:param name="refclass" select="false()"/>
 
 		<!-- TODO: have callers apply-templates for refentrytitle and manvolnum first -->
 
@@ -25,6 +26,7 @@
 				and /refentry/refmeta/manvolnum    = $manvolnum">
 				<xsl:call-template name="refentrytitle">
 					<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
+					<xsl:with-param name="refclass"      select="$refclass"/>
 				</xsl:call-template>
 			</xsl:when>
 
@@ -33,6 +35,7 @@
 					<xsl:call-template name="refentrytitle">
 						<xsl:with-param name="manvolnum"     select="$manvolnum"/>
 						<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
+						<xsl:with-param name="refclass"      select="$refclass"/>
 					</xsl:call-template>
 				</a>
 			</xsl:when>
@@ -41,6 +44,7 @@
 				<xsl:call-template name="refentrytitle">
 					<xsl:with-param name="manvolnum"     select="$manvolnum"/>
 					<xsl:with-param name="refentrytitle" select="$refentrytitle"/>
+					<xsl:with-param name="refclass"      select="$refclass"/>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>

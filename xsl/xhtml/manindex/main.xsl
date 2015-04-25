@@ -71,6 +71,7 @@
 					<xsl:with-param name="manvolnum"     select="../../refmeta/manvolnum"/>
 					<xsl:with-param name="refentrytitle" select="."/>
 					<xsl:with-param name="role"          select="'index'"/>
+					<xsl:with-param name="refclass"      select="../refclass"/>
 				</xsl:call-template>
 			</dt>
 		</xsl:for-each>
@@ -103,6 +104,7 @@
 				[refmeta/manvolnum = $manvolnum]
 				[not($productrole) or refentryinfo/productname/@role = $productrole]">
 				<xsl:sort select="concat('lib', refmeta/refentrytitle) != $productrole"/>
+				<xsl:sort select="refnamediv/refclass"/>
 				<xsl:sort select="refmeta/refentrytitle"/>
 			</xsl:apply-templates>
 		</dl>
