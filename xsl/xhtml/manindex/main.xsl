@@ -44,9 +44,9 @@
 		<xsl:param name="manvolnum"/>
 
 			<xsl:choose>
-				<xsl:when test="document('')//mi:section[@manvolnum = $manvolnum]">
+				<xsl:when test="document('')//mi:section[starts-with($manvolnum, @manvolnum)]">
 					<xsl:value-of select="document('')//mi:section
-						[@manvolnum = $manvolnum]/@name"/>
+						[starts-with($manvolnum, @manvolnum)]/@name"/>
 				</xsl:when>
 
 				<xsl:otherwise>
