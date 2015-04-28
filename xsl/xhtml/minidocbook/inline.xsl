@@ -103,10 +103,16 @@
 		</span>
 	</xsl:template>
 
-	<xsl:template match="replaceable|citetitle|firstterm">
+	<xsl:template match="replaceable|citetitle">
 		<i class="{name()}">
 			<xsl:apply-templates/>
 		</i>
+	</xsl:template>
+
+	<xsl:template match="firstterm">
+		<dfn>
+			<xsl:apply-templates/>
+		</dfn>
 	</xsl:template>
 
 	<xsl:template match="quote">
