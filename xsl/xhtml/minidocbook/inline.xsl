@@ -110,9 +110,9 @@
 	</xsl:template>
 
 	<xsl:template match="replaceable">
-		<i class="{name()}">
+		<samp class="{name()}">
 			<xsl:apply-templates/>
-		</i>
+		</samp>
 	</xsl:template>
 
 	<xsl:template match="firstterm">
