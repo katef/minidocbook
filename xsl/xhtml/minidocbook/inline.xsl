@@ -103,7 +103,13 @@
 		</span>
 	</xsl:template>
 
-	<xsl:template match="replaceable|citetitle">
+	<xsl:template match="citetitle">
+		<cite>
+			<xsl:apply-templates/>
+		</cite>
+	</xsl:template>
+
+	<xsl:template match="replaceable">
 		<i class="{name()}">
 			<xsl:apply-templates/>
 		</i>
