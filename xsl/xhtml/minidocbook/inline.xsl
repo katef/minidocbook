@@ -62,9 +62,9 @@
 	</xsl:template>
 
 	<xsl:template match="varname|type|token|parameter|constant|function|literal">	<!-- TODO: dissallow -->
-		<code class="{name()}">
+		<var class="{name()}">
 			<xsl:apply-templates/>
-		</code>
+		</var>
 	</xsl:template>
 
 	<xsl:template match="emphasis">
