@@ -69,6 +69,7 @@
 				<xsl:for-each select="refname">
 					<xsl:call-template name="reflink">
 						<xsl:with-param name="manvolnum"     select="../../refmeta/manvolnum"/>
+						<xsl:with-param name="refclass"      select="../refclass"/>
 						<xsl:with-param name="refentrytitle" select="."/>
 					</xsl:call-template>
 
