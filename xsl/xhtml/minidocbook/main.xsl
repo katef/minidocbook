@@ -81,6 +81,28 @@
 					<meta name="description"
 						content="{normalize-space(refsection[title = 'Description']/para[1])}"/>
 				</xsl:if>
+
+				<meta name="keywords">
+					<xsl:attribute name="content">
+						<xsl:for-each select="refsection[title = 'See Also']/para/citerefentry">
+							<xsl:value-of select="refentrytitle"/>
+							<xsl:text>(</xsl:text>
+							<xsl:value-of select="manvolnum"/>
+							<xsl:text>)</xsl:text>
+							<xsl:text>, </xsl:text>
+						</xsl:for-each>
+						<xsl:for-each select="str:tokenize(refnamediv/refpurpose)">
+							<xsl:value-of select="."/>
+							<xsl:text>, </xsl:text>
+						</xsl:for-each>
+						<xsl:if test="refentryinfo/productname">
+							<xsl:value-of select="refentryinfo/productname"/>
+							<xsl:text>, </xsl:text>
+						</xsl:if>
+						<xsl:text>docs, </xsl:text>
+						<xsl:text>man</xsl:text>
+					</xsl:attribute>
+				</meta>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
