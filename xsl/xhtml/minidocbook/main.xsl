@@ -4,7 +4,12 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://www.w3.org/1999/xhtml">
+	xmlns:str="http://exslt.org/strings"
+	xmlns="http://www.w3.org/1999/xhtml"
+
+	extension-element-prefixes="str"
+
+	exclude-result-prefixes="str">
 
 	<!--
 		This is an XSLT transformation to produce XHTML from the subset of Docbook
@@ -71,6 +76,11 @@
 				<xsl:apply-templates select="refentryinfo/title"             mode="refmeta"/>
 				<xsl:apply-templates select="refmeta/manvolnum"              mode="refmeta"/>
 				<xsl:apply-templates select="refnamediv"                     mode="refmeta"/>
+
+				<xsl:if test="refsection[title = 'Description']">
+					<meta name="description"
+						content="{normalize-space(refsection[title = 'Description']/para[1])}"/>
+				</xsl:if>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
