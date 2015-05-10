@@ -92,6 +92,7 @@
 			<xsl:with-param name="manvolnum"     select="manvolnum"/>
 			<xsl:with-param name="refentrytitle" select="refentrytitle"/>
 			<xsl:with-param name="role"          select="@role"/>
+			<xsl:with-param name="refclass"      select="substring(manvolnum, 2)"/>
 		</xsl:call-template>
 	</xsl:template>
 
