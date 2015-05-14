@@ -29,6 +29,7 @@
 		<xsl:param name="head"     select="/.."/>
 		<xsl:param name="body"     select="/.."/>
 		<xsl:param name="class"    select="false()"/>
+		<xsl:param name="color"    select="false()"/>
 
 		<xsl:variable name="method">
 			<xsl:choose>
@@ -119,6 +120,7 @@
 				<xsl:with-param name="head"   select="$head"/>
 				<xsl:with-param name="body"   select="$body"/>
 				<xsl:with-param name="class"  select="$class"/>
+				<xsl:with-param name="color"  select="$color"/>
 			</xsl:call-template>
 
 		</common:document>
@@ -131,6 +133,7 @@
 		<xsl:param name="onload" select="''"/>
 		<xsl:param name="lang"   select="'en-gb'"/>
 		<xsl:param name="class"  select="false()"/>
+		<xsl:param name="color"  select="false()"/>
 
 		<xsl:param name="title"  select="/.."/>
 		<xsl:param name="head"   select="/.."/>
@@ -184,6 +187,10 @@
 				<xsl:if test="$method = 'html'">
 					<meta http-equiv="Content-Type"
 						content="text/html; charset=utf-8"/>
+				</xsl:if>
+
+				<xsl:if test="$color">
+					<meta name="theme-color" content="{$color}"/>
 				</xsl:if>
 
 				<xsl:copy-of select="$head"/>
