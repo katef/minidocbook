@@ -1,0 +1,121 @@
+\starttypescriptcollection[sourcepro]
+
+  \starttypescript [\s!sans] [sourcepro,sourcepro-black,sourcepro-semibold,sourcepro-light,sourcepro-extralight]
+    \definefontsynonym [SourceSansPro-Regular]           [\s!file:SourceSansPro-Regular]          [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-Italic]            [\s!file:SourceSansPro-Italic]           [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-Semibold]          [\s!file:SourceSansPro-Semibold]         [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-SemiboldItalic]    [\s!file:SourceSansPro-SemiboldItalic]   [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-Bold]              [\s!file:SourceSansPro-Bold]             [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-BoldItalic]        [\s!file:SourceSansPro-BoldItalic]       [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-Black]             [\s!file:SourceSansPro-Black]            [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-BlackItalic]       [\s!file:SourceSansPro-BlackItalic]      [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-Light]             [\s!file:SourceSansPro-Light]            [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-LightItalic]       [\s!file:SourceSansPro-LightItalic]      [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-Extralight]        [\s!file:SourceSansPro-ExtraLight]       [\s!features=\s!default]
+    \definefontsynonym [SourceSansPro-ExtralightItalic]  [\s!file:sourcesansPro-ExtraLightItalic] [\s!features=\s!default]
+  \stoptypescript
+
+  \starttypescript [\s!mono] [sourcepro,sourcepro-black,sourcepro-semibold,sourcepro-light,sourcepro-extralight]
+    \definefontsynonym [SourceCodePro-Regular]           [\s!file:SourceCodePro-Regular]          [\s!features=\s!default]
+%   \definefontsynonym [SourceCodePro-Italic]            [\s!file:SourceCodePro-Italic]           [\s!features=\s!default]
+    \definefontsynonym [SourceCodePro-Semibold]          [\s!file:SourceCodePro-Semibold]         [\s!features=\s!default]
+%   \definefontsynonym [SourceCodePro-SemiboldItalic]    [\s!file:SourceCodePro-SemiboldItalic]   [\s!features=\s!default]
+    \definefontsynonym [SourceCodePro-Bold]              [\s!file:SourceCodePro-Bold]             [\s!features=\s!default]
+%   \definefontsynonym [SourceCodePro-BoldItalic]        [\s!file:SourceCodePro-BoldItalic]       [\s!features=\s!default]
+    \definefontsynonym [SourceCodePro-Black]             [\s!file:SourceCodePro-Black]            [\s!features=\s!default]
+%   \definefontsynonym [SourceCodePro-BlackItalic]       [\s!file:SourceCodePro-BlackItalic]      [\s!features=\s!default]
+    \definefontsynonym [SourceCodePro-Light]             [\s!file:SourceCodePro-Light]            [\s!features=\s!default]
+%   \definefontsynonym [SourceCodePro-LightItalic]       [\s!file:SourceCodePro-LightItalic]      [\s!features=\s!default]
+    \definefontsynonym [SourceCodePro-Extralight]        [\s!file:SourceCodePro-ExtraLight]       [\s!features=\s!default]
+%   \definefontsynonym [SourceCodePro-ExtralightItalic]  [\s!file:sourcesansPro-ExtraLightItalic] [\s!features=\s!default]
+  \stoptypescript
+
+  % regular: from normal bold weight
+  \starttypescript [\s!sans] [sourcepro] [\s!name]
+    \setups[\s!font:\s!fallback:\s!sans]
+    \definefontsynonym [\s!Sans]           [SourceSansPro-Regular]
+    \definefontsynonym [\s!SansBold]       [SourceSansPro-Bold]
+    \definefontsynonym [\s!SansItalic]     [SourceSansPro-Italic]
+    \definefontsynonym [\s!SansBoldItalic] [SourceSansPro-BoldItalic]
+  \stoptypescript
+  \starttypescript [\s!mono] [sourcepro] [\s!name]
+    \setups[\s!font:\s!fallback:\s!mono]
+    \definefontsynonym [\s!Mono]           [SourceCodePro-Regular]
+    \definefontsynonym [\s!MonoBold]       [SourceCodePro-Bold]
+%   \definefontsynonym [\s!MonoItalic]     [SourceCodePro-Italic]
+%   \definefontsynonym [\s!MonoBoldItalic] [SourceCodePro-BoldItalic]
+  \stoptypescript
+
+  % sourcepro-black: bold is black
+  \starttypescript [\s!sans] [sourcepro-black] [\s!name]
+    \setups[\s!font:\s!fallback:\s!sans]
+    \definefontsynonym [\s!Sans]           [SourceSansPro-Regular]
+    \definefontsynonym [\s!SansBold]       [SourceSansPro-Black]
+    \definefontsynonym [\s!SansItalic]     [SourceSansPro-Italic]
+    \definefontsynonym [\s!SansBoldItalic] [SourceSansPro-BlackItalic]
+  \stoptypescript
+  \starttypescript [\s!mono] [sourcepro-black] [\s!name]
+    \setups[\s!font:\s!fallback:\s!mono]
+    \definefontsynonym [\s!Mono]           [SourceCodePro-Regular]
+    \definefontsynonym [\s!MonoBold]       [SourceCodePro-Black]
+%   \definefontsynonym [\s!MonoItalic]     [SourceCodePro-Italic]
+%   \definefontsynonym [\s!MonoBoldItalic] [SourceCodePro-BlackItalic]
+  \stoptypescript
+
+  % sourcepro-semibold: bold is semibold
+  \starttypescript [\s!sans] [sourcepro-semibold] [\s!name]
+    \setups[\s!font:\s!fallback:\s!sans]
+    \definefontsynonym [\s!Sans]           [SourceSansPro-Regular]
+    \definefontsynonym [\s!SansBold]       [SourceSansPro-Semibold]
+    \definefontsynonym [\s!SansItalic]     [SourceSansPro-Italic]
+    \definefontsynonym [\s!SansBoldItalic] [SourceSansPro-SemiboldItalic]
+  \stoptypescript
+  \starttypescript [\s!mono] [sourcepro-semibold] [\s!mono]
+    \setups[\s!font:\s!fallback:\s!mono]
+    \definefontsynonym [\s!Mono]           [SourceCodePro-Regular]
+    \definefontsynonym [\s!MonoBold]       [SourceCodePro-Semibold]
+%   \definefontsynonym [\s!MonoItalic]     [SourceCodePro-Italic]
+%   \definefontsynonym [\s!MonoBoldItalic] [SourceCodePro-SemiboldItalic]
+  \stoptypescript
+
+  % sourcepro-light: regular is light, bold is bold
+  \starttypescript [\s!sans] [sourcepro-light] [\s!name]
+    \setups[\s!font:\s!fallback:\s!sans]
+    \definefontsynonym [\s!Sans]           [SourceSansPro-Light]
+    \definefontsynonym [\s!SansBold]       [SourceSansPro-Bold]
+    \definefontsynonym [\s!SansItalic]     [SourceSansPro-LightItalic]
+    \definefontsynonym [\s!SansBoldItalic] [SourceSansPro-BoldItalic]
+  \stoptypescript
+  \starttypescript [\s!mono] [sourcepro-light] [\s!name]
+    \setups[\s!font:\s!fallback:\s!mono]
+    \definefontsynonym [\s!Mono]           [SourceCodePro-Light]
+    \definefontsynonym [\s!MonoBold]       [SourceCodePro-Bold]
+%   \definefontsynonym [\s!MonoItalic]     [SourceCodePro-LightItalic]
+%   \definefontsynonym [\s!MonoBoldItalic] [SourceCodePro-BoldItalic]
+  \stoptypescript
+
+  % sourcepro-extralight: regular is extralight, bold is bold
+  \starttypescript [\s!sans] [sourcepro-extralight] [\s!name]
+    \setups[\s!font:\s!fallback:\s!sans]
+    \definefontsynonym [\s!Sans]           [SourceSansPro-Extralight]
+    \definefontsynonym [\s!SansBold]       [SourceSansPro-Bold]
+    \definefontsynonym [\s!SansItalic]     [SourceSansPro-ExtralightItalic]
+    \definefontsynonym [\s!SansBoldItalic] [SourceSansPro-BoldItalic]
+  \stoptypescript
+  \starttypescript [\s!mono] [sourcepro-extralight] [\s!name]
+    \setups[\s!font:\s!fallback:\s!mono]
+    \definefontsynonym [\s!Mono]           [SourceCodePro-Extralight]
+    \definefontsynonym [\s!MonoBold]       [SourceCodePro-Bold]
+    \definefontsynonym [\s!MonoItalic]     [SourceCodePro-ExtralightItalic]
+    \definefontsynonym [\s!MonoBoldItalic] [SourceCodePro-BoldItalic]
+  \stoptypescript
+
+  \starttypescript [sourcepro,sourcepro-black,sourcepro-semibold,sourcepro-light,sourcepro-extralight]
+    \definetypeface [\typescriptone] [\s!ss] [\s!sans]  [\typescriptone] [\s!default]
+  % \definetypeface [\typescriptone] [\s!rm] [\s!serif] [modern]         [\s!default]
+    \definetypeface [\typescriptone] [\s!tt] [\s!mono]  [\typescriptone] [\s!default]
+  % \definetypeface [\typescriptone] [\s!mm] [\s!math]  [modern]         [\s!default]
+    \quittypescriptscanning
+  \stoptypescript
+
+\stoptypescriptcollection
