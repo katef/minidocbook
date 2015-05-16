@@ -2,7 +2,11 @@
 \startenvironment manpage
 
 	\setuphead[section][
-		style=\tfb,
+		style=WORD,
+		after={\startnarrower[1.5cm]},
+		aftersection={\stopnarrower}]
+
+	\setuphead[section][
 		number=no,
 		page=no]
 

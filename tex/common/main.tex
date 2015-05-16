@@ -1,0 +1,52 @@
+
+% TODO: xinclude: http://wiki.contextgarden.net/Command/xmlinclude
+
+% XXX: \definestartstop left=,right= polyfill until this is committed to ConTeXt proper
+\unprotect
+\unexpanded\def\syst_startstop_indeed#1%
+  {\groupedcommand
+     {\def\currentstartstop{#1}%
+\startstopparameter\c!commands % better: setups so that will show op soon
+      \dostarttagged\t!construct\currentstartstop
+      \usestartstopstyleandcolor\c!style\c!color
+      \startstopparameter\c!left}
+     {\def\currentstartstop{#1}% safeguard, nto really needed
+      \startstopparameter\c!right
+      \dostoptagged
+      \startstopparameter\c!inbetween}}
+\protect
+
+\setupinteraction[state=start]
+\setupcolors[state=start]
+
+\input common/debug.tex
+
+% input DTD
+\startmode[minidocbook]
+	\input minidocbook/primitive
+	\input minidocbook/blocks
+	\input minidocbook/inline
+	\input minidocbook/lists
+	\input minidocbook/links
+	\input minidocbook/table
+	\input minidocbook/refentry
+\stopmode
+
+% output document type
+\startmode[manpage]
+	\environment manpage
+\stopmode
+\startmode[minimal]
+	\environment minimal
+\stopmode
+\startmode[report]
+	\environment report
+\stopmode
+
+% XXX: doesn't belong here; get this from the document XML
+%\Revision[4]
+%\Product[KMKF]
+%\Document[Manual]
+%\Author[Katherine Flavel]
+%\Classify[]
+
