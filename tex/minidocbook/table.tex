@@ -1,10 +1,41 @@
 
+\startxmlsetups xml:col
+	c
+\stopxmlsetups
+
 \startxmlsetups xml:table
-	%\setupTABLE[c][1][align=right]
-	%\setupTABLE[c][2][align=right]
-	\bTABLE[frame=on,split=yes]
-		\xmlflush{#1}
-	\eTABLE
+%local function ForLorien(n,maxa,maxb,answers)
+%context.startcolumns { n = 3 }
+%context.starttabulate { "|r|c|r|c|r|" }
+%for i=1,n do
+%local sign = random(0,1) > 0.5
+%local a, b = random(1,maxa or 99), random(1,max or maxb or 99)
+%if b > a and not sign then a, b = b, a end
+%context.NC()
+%context(a)
+%context.NC()
+%context.mathematics(sign and "+" or "-")
+%context.NC()
+%context(b)
+%context.NC()
+%context("=")
+%context.NC()
+%context(answers and (sign and a+b or a-b))
+%context.NC()
+%context.NR()
+%end
+%context.stoptabulate()
+%context.stopcolumns()
+%context.page()
+%end
+
+% XXX: i can't find a way to use this:
+% \xmlconcat{#1}{col}{\|}
+% TODO: perhaps i could do this from inside lua
+
+	\starttabulate[|l|l|l|l|l|l|l|]
+	\xmlall{#1}{thead|tbody}
+	\stoptabulate
 \stopxmlsetups
 
 \startxmlsetups xml:thead
@@ -16,29 +47,22 @@
 \stopxmlsetups
 
 \startxmlsetups xml:tr
-	\bTR
+	\NC
 	\xmlflush{#1}
-	\eTR
+	\NR
 \stopxmlsetups
 
 \startxmlsetups xml:th
 	% TODO: use <col/> for alignment
-	\bTD[align=middle,style=bold]
-	\xmlflush{#1}
-	\eTD
+	\bf \xmlflush{#1}
+	\NC
 \stopxmlsetups
 
 \startxmlsetups xml:td
+	% TODO: rowspan
 	\doifnumberelse {\xmlatt{#1}{rowspan}}
-	{
-		\bTD[nr=\xmlatt{#1}{rowspan},align=lohi]
-		\xmlflush{#1}
-		\eTD
-	}
-	{
-		\bTD
-		\xmlflush{#1}
-		\eTD
-	}
+		{\xmlflush{#1}}
+		{\xmlflush{#1}}
+	\NC
 \stopxmlsetups
 
