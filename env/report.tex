@@ -1,0 +1,38 @@
+
+\startenvironment report
+
+	% numbered ToC, chapters on new page
+
+	\setuphead[chapter,section][
+		number=yes]
+
+	\definesectionblock[cofolon][cofolon]
+	\setupsectionblock[cofolon][
+		conversion=romannumerals]
+
+% idea for chapter names top-right as in vpnt CDE report:
+%
+% \definetext
+%   [fish]    % name, used for \setuphead[...][footer=<name>]
+%   [footer]     % location of the text, can be âheaderâ or âfooterâ
+%   [chapternumber] % takes the same arguments as \setupheadertexts
+% 
+% \setuphead
+%   [chapter]
+%   [header=empty, % donât show any text in the header on chapter pages
+%    footer=fish]
+
+
+	% overridden by \definelayout for chapter first pages
+	\setupheadertexts[][\setup{doc:reminder}]
+
+	\setupfootertexts[\setup{doc:classify}][\small\pagenumber]
+
+% first page layout
+% TODO: use the same mechanism for a cover page for deliverable reports
+\definelayout
+	[1]
+	[footer=9\bodyfontsize]
+
+\stopenvironment
+

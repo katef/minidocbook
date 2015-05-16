@@ -1,0 +1,38 @@
+
+\startenvironment manpage
+
+	\setuphead[section][
+		style=\tfb,
+		number=no,
+		page=no]
+
+	\setvariable{env}{manual}{{\bf KMKF} Manual}
+	\setvariable{env}{company}{kmkf.elide.org}
+	\setvariable{env}{manpage}{INSTALL(7MK)}
+
+\startsetups[text a]
+	\rlap{\getvariable{env}{manpage}}
+	\hfill
+	\getvariable{env}{manual}
+	\hfill
+	\llap{\getvariable{env}{manpage}}
+\stopsetups
+
+\startsetups[text b]
+	\rlap{\getvariable{env}{company}}
+	\hfill
+	\setup{doc:classify}
+	\hfill
+	\llap{\pagenumber}
+\stopsetups
+
+\setupheadertexts[\setups{text a}][]
+\setupfootertexts[\setups{text b}][]
+
+	% XXX:
+%	\setupheadertexts[{MCT(1)}\hfill {MCT Programmer's manual} \hfill {MCT(1)}][]
+%	\setupfootertexts[Bubblephone Ltd.\setup{doc:classify}][\small\pagenumber]
+%	\setupfootertexts[\setup{doc:classify}][\setup{doc:revision}]
+
+\stopenvironment
+
