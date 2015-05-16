@@ -1,90 +1,91 @@
 
+\definestartstop[mdbacronym][style=cap] % TODO: unsure if smcp is a good idea here
 \startxmlsetups xml:acronym
-	% TODO: unsure if smcp is a good idea here
-	{\xmlflush{#1}}
+	\mdbacronym{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbcommand][style=mono]
 \startxmlsetups xml:command
-	{\tt \xmlflush{#1}}
+	\mdbcommand{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbuserinput][style=mono]
 \startxmlsetups xml:userinput
-	{\tt \xmlflush{#1}}
+	\mdbuserinput{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbcomputeroutput][style=mono]
 \startxmlsetups xml:computeroutput
-	{\tt \xmlflush{#1}}
+	\mdbcomputeroutput{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbapplication][style=mono]
 \startxmlsetups xml:application
-	\xmlflush{#1}
+	\mdbapplication{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbcode][style=mono]
 \startxmlsetups xml:code
-	{\tt \xmlflush{#1}}
+	\mdbcode{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbvarname][style=mono]
 \startxmlsetups xml:varname
-	{\tt \xmlflush{#1}}
+	\mdbvarname{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbtype][style=mono]
 \startxmlsetups xml:type
-	{\tt \xmlflush{#1}}
+	\mdbtype{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbtoken][style=mono]
 \startxmlsetups xml:token
-	{\tt \xmlflush{#1}}
+	\mdbtoken{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbparameter][style=mono]
 \startxmlsetups xml:parameter
-	{\tt \xmlflush{#1}}
+	\mdbparameter{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbconstant][style=mono]
 \startxmlsetups xml:constant
-	{\tt \xmlflush{#1}}
+	\mdbconstant{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbfunction][style=mono]
 \startxmlsetups xml:function
-	{\tt \xmlflush{#1}}
+	\mdbfunction{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbliteral][style=mono]
 \startxmlsetups xml:literal
-	{\tt \xmlflush{#1}}
+	\mdbliteral{\xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:emphasis
-	{\em \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xml:superscript
-	\high{\xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xml:subscript
-	\low{\xmlflush{#1}}
-\stopxmlsetups
-
+\definestartstop[mdboption][style=italic]
 \startxmlsetups xml:option
-	{\tt \xmlflush{#1}}
+	\mdboption{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbfilename][]
 \startxmlsetups xml:filename
-	{\tt \xmlflush{#1}}
+	\mdbfilename{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbreplaceable][style=italic]
 \startxmlsetups xml:replaceable
-	{\it \xmlflush{#1}}
+	{\mdbreplaceable{\xmlflush{#1}}}
 \stopxmlsetups
 
+\definestartstop[mdbcitetitle][style=italic]
 \startxmlsetups xml:citetitle
-	{\it \xmlflush{#1}}
+	\mdbcitetitle{\xmlflush{#1}}
 \stopxmlsetups
 
+\definestartstop[mdbfirstterm][style=italic]
 \startxmlsetups xml:firstterm
-	{\it \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xml:quote
-	\quotation{\xmlflush{#1}}
+	\mdbfirstterm{\xmlflush{#1}}
 \stopxmlsetups
 

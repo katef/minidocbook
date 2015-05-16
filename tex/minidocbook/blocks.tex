@@ -12,13 +12,17 @@
 
 \stopluacode
 
+% XXX: startlines does not work
+\definestartstop[mdbsynopsis][
+   style=mono,
+   before={
+      \startlines
+      \noindent},
+   after={\stoplines
+      \indenting[next]}]
 \startxmlsetups xml:synopsis
-	% XXX: \starttyping does not work here
-	{\tt \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xml:para
-	\xmlflush{#1}
-	\par
+	\startmdbsynopsis
+	\xmlflushspacewise{#1} % XXX: doesn't seem quite right
+	\stopmdbsynopsis
 \stopxmlsetups
 

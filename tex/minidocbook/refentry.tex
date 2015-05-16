@@ -3,6 +3,22 @@
 
 % TODO: xinclude: http://wiki.contextgarden.net/Command/xmlinclude
 
+% XXX: \definestartstop left=,right= polyfill until this is committed to ConTeXt proper
+\unprotect
+\unexpanded\def\syst_startstop_indeed#1%
+  {\groupedcommand
+     {\def\currentstartstop{#1}%
+\startstopparameter\c!commands % better: setups so that will show op soon
+      \dostarttagged\t!construct\currentstartstop
+      \usestartstopstyleandcolor\c!style\c!color
+      \startstopparameter\c!left}
+     {\def\currentstartstop{#1}% safeguard, nto really needed
+      \startstopparameter\c!right
+      \dostoptagged
+      \startstopparameter\c!inbetween}}
+\protect
+
+\input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/primitive
 \input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/blocks
 \input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/inline
 \input /home/kate/svn/www/wc/minidocbook/tex/minidocbook/lists
@@ -146,7 +162,8 @@
 
 % XXX: doesn't belong here
 \input tex/kmkf-setup
-%\input tex/kmkf-debug
+%\input tex/bp-setup
+\input tex/kmkf-debug
 
 % XXX: doesn't belong here
 \Revision[4]

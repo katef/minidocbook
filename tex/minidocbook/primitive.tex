@@ -1,0 +1,26 @@
+
+% Docbook elements which map directly to native ConTeXt commands.
+% These should be all "presentational" Docbook elements, rather than
+% anything with particularly meaningful semantics.
+
+\startxmlsetups xml:emphasis
+	{\em \xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:superscript
+	\high{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:subscript
+	\low{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:quote
+	\quotation{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:para
+	\xmlflush{#1}
+	\par
+\stopxmlsetups
+

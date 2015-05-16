@@ -17,6 +17,8 @@
 
 \startxmlsetups xml:citerefentry
 	% TODO: no manvolnum if it's this same page
+% \xmldoifelse{\xmldocument}{refentry/refnamediv/refname = 'mctl'} {A}{B}
+% \xmltext{\xmldocument}{refentry/refnamediv/refname}
 	\xmltext{#1}{refentrytitle}(\xmltext{#1}{manvolnum})
 \stopxmlsetups
 
