@@ -12,44 +12,85 @@
 \startxmlsetups xml:mdb-refentry
 	\xmlsetsetup{\xmldocument}{*}{-}
 	\xmlsetsetup{\xmldocument}{refentry|refname|refnamediv|refsynopsisdiv|refsection}{xml:*}
+	\xmlsetsetup{\xmldocument}{author|firstname|surname|affiliation|orgname}{xml:*}
 	\xmlsetsetup{\xmldocument}{cmdsynopsis|synopsis}{xml:*}
 	\xmlsetsetup{\xmldocument}{arg|group|sbr}{xml:*}
 
-    \xmlsetsetup{\xmldocument}{para}{xml:*}
+	\xmlsetsetup{\xmldocument}{para}{xml:*}
+	\xmlsetsetup{\xmldocument}{synopsis}{xml:*}
+%	\xmlsetfunction{\xmldocument}{synopsis}{mdb_synopsis}
  
-    \xmlsetsetup{\xmldocument}{acronym}{xml:*}
-    \xmlsetsetup{\xmldocument}{command}{xml:*}
-    \xmlsetsetup{\xmldocument}{userinput|computeroutput}{xml:*}
-    \xmlsetsetup{\xmldocument}{application}{xml:*}
-    \xmlsetsetup{\xmldocument}{code}{xml:*}
-    \xmlsetsetup{\xmldocument}{varname|type|token|parameter|constant|function|literal}{xml:*}
-    \xmlsetsetup{\xmldocument}{emphasis}{xml:*}
-    \xmlsetsetup{\xmldocument}{superscript|subscript}{xml:*}
-    \xmlsetsetup{\xmldocument}{option}{xml:*}
-    \xmlsetsetup{\xmldocument}{filename}{xml:*}
-    \xmlsetsetup{\xmldocument}{replaceable|citetitle|firstterm}{xml:*}
-    \xmlsetsetup{\xmldocument}{quote}{xml:*}
+	\xmlsetsetup{\xmldocument}{acronym}{xml:*}
+	\xmlsetsetup{\xmldocument}{command}{xml:*}
+	\xmlsetsetup{\xmldocument}{userinput|computeroutput}{xml:*}
+	\xmlsetsetup{\xmldocument}{application}{xml:*}
+	\xmlsetsetup{\xmldocument}{code}{xml:*}
+	\xmlsetsetup{\xmldocument}{varname|type|token|parameter|constant|function|literal}{xml:*}
+	\xmlsetsetup{\xmldocument}{emphasis}{xml:*}
+	\xmlsetsetup{\xmldocument}{superscript|subscript}{xml:*}
+	\xmlsetsetup{\xmldocument}{option}{xml:*}
+	\xmlsetsetup{\xmldocument}{filename}{xml:*}
+	\xmlsetsetup{\xmldocument}{replaceable|citetitle|firstterm}{xml:*}
+	\xmlsetsetup{\xmldocument}{quote}{xml:*}
 
-    \xmlsetsetup{\xmldocument}{orderedlist|itemizedlist|listitem}{xml:*}
-    \xmlsetsetup{\xmldocument}{variablelist|varlistentry|term}{xml:*}
+	\xmlsetsetup{\xmldocument}{orderedlist|itemizedlist|listitem}{xml:*}
+%	\xmlsetsetup{\xmldocument}{variablelist}{xml:*}
+	\xmlsetsetup{\xmldocument}{varlistentry}{xml:*}
+	\xmlsetsetup{\xmldocument}{term}{xml:*}
+%	\xmlsetsetup{\xmldocument}{variablelist}{xml:*}
+
 %	\xmlfilter{\xmldocument}{/varlistentry/listitem/command(xml:varlistitem)}
+% TODO: different term for refsection[title = 'Options']/variablelist/varlistentry/term
+% TODO: different term for refsection[title = 'Options']/variablelist
+%	\xmlfilter{\xmldocument}{variablelist/command(xml:vl2)}
 
-    \xmlsetsetup{\xmldocument}{reflink|xref|citerefentry|ulink|link}{xml:*}
-    \xmlsetsetup{\xmldocument}{refentrytitle|manvolnum}{xml:*}
+	\xmlsetsetup{\xmldocument}{reflink|xref|citerefentry|ulink|link}{xml:*}
+	\xmlsetsetup{\xmldocument}{refentrytitle|manvolnum}{xml:*}
 
-    \xmlsetsetup{\xmldocument}{table|thead|tbody|tr|th|td}{xml:*}
+	\xmlsetsetup{\xmldocument}{table|col|thead|tbody|tr|th|td}{xml:*}
+
+
+	\xmlsetsetup{\xmldocument}{variablelist}{xml:*}
 \stopxmlsetups
 
 \xmlregistersetup{xml:mdb-refentry}
 
 
 \startxmlsetups xml:refentry
+
+	\startbodymatter
+
 	\xmlflush{#1}
 
 	% TODO: only if present
 	\startsection[title=Author,reference=sec:TODO]
-	TODO
+		\xmlall{#1}{/refentryinfo/author}
 	\stopsection
+
+	\stopbodymatter
+\stopxmlsetups
+
+\startxmlsetups xml:author
+	% XXX: copy the scheme per the html xslt
+	\xmlconcat{#1}{firstname|surname}{ }
+	{, }
+	\xmlall{#1}{affiliation}
+\stopxmlsetups
+
+\startxmlsetups xml:firstname
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:surname
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:affiliation
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:orgname
+	\xmlflush{#1}
 \stopxmlsetups
 
 \startxmlsetups xml:refname
@@ -101,12 +142,16 @@
 	\stopsection
 \stopxmlsetups
 
-% XXX: doesn't belong here
-\input ../common/tex/bp-setup
+\environment env/manpage
 
-% XXX: style doesn't belong here, but pagnation does
-\setuphead[section][
-	style=\tfb,
-	number=no,
-	page=no]
+% XXX: doesn't belong here
+\input tex/kmkf-setup
+%\input tex/kmkf-debug
+
+% XXX: doesn't belong here
+\Revision[4]
+\Product[KMKF]
+\Document[Manual]
+\Author[Katherine Flavel]
+\Classify[]
 
