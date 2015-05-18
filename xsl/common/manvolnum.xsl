@@ -4,8 +4,11 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:mi="http://xml.elide.org/manindex"
+	xmlns:func="http://exslt.org/functions"
 
-	exclude-result-prefixes="mi">
+	extension-element-prefixes="func"
+
+	exclude-result-prefixes="mi func">
 
 	<mi:sections>
 		<mi:section manvolnum="1" name="Programs"/>
@@ -18,6 +21,24 @@
 		<mi:section manvolnum="8" name="System utilities"/>
 		<mi:section manvolnum="9" name="Kernel internals"/>
 	</mi:sections>
+
+	 <func:function name="mi:title">
+		<xsl:param name="manvolnum"/>
+
+		<func:result>
+			<xsl:choose>
+				<xsl:when test="document('')//mi:section[starts-with($manvolnum, @manvolnum)]">
+					<xsl:value-of select="document('')//mi:section
+						[starts-with($manvolnum, @manvolnum)]/@name"/>
+				</xsl:when>
+
+				<xsl:otherwise>
+					<xsl:text>Section </xsl:text>
+					<xsl:value-of select="$manvolnum"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</func:result>
+	</func:function>
 
 </xsl:stylesheet>
 

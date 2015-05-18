@@ -29,22 +29,6 @@
 		</xsl:for-each>
 	</xsl:variable>
 
-	 <xsl:template name="section-title">
-		<xsl:param name="manvolnum"/>
-
-			<xsl:choose>
-				<xsl:when test="document('manvolnum.xsl')//mi:section[starts-with($manvolnum, @manvolnum)]">
-					<xsl:value-of select="document('manvolnum.xsl')//mi:section
-						[starts-with($manvolnum, @manvolnum)]/@name"/>
-				</xsl:when>
-
-				<xsl:otherwise>
-					<xsl:text>Section </xsl:text>
-					<xsl:value-of select="$manvolnum"/>
-				</xsl:otherwise>
-			</xsl:choose>
-	</xsl:template>
-
 	<xsl:template match="refentry">
 		<xsl:variable name="productname" select="refentryinfo/productname"/>
 
@@ -105,9 +89,7 @@
 		<section data-manvolnum="{$manvolnum}">
 			<h1>
 				<a id="{.}"/>
-				<xsl:call-template name="section-title">
-					<xsl:with-param name="manvolnum" select="$manvolnum"/>
-				</xsl:call-template>
+				<xsl:value-of select="mi:title($manvolnum)"/>
 			</h1>
 
 			<xsl:if test="common:node-set($root)/refentry
