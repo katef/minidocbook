@@ -16,23 +16,12 @@
 	<xsl:import href="../minidocbook/inline.xsl"/>
 
 	<xsl:import href="fallback.xsl"/>
+	<xsl:import href="manvolnum.xsl"/>
 	<xsl:import href="output.xsl"/>
 
 	<xsl:param name="src"/>
 	<xsl:param name="title" select="false()"/>
 	<xsl:param name="mdb.url.man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
-
-	<mi:sections>
-		<mi:section manvolnum="1" name="Programs"/>
-		<mi:section manvolnum="2" name="System calls"/>
-		<mi:section manvolnum="3" name="Libraries"/>
-		<mi:section manvolnum="4" name="Devices"/>
-		<mi:section manvolnum="5" name="File formats"/>
-		<mi:section manvolnum="6" name="Games"/>
-		<mi:section manvolnum="7" name="Miscellaneous"/>
-		<mi:section manvolnum="8" name="System utilities"/>
-		<mi:section manvolnum="9" name="Kernel internals"/>
-	</mi:sections>
 
 	<xsl:variable name="root">
 		<xsl:for-each select="str:tokenize($src, ':')">
@@ -44,8 +33,8 @@
 		<xsl:param name="manvolnum"/>
 
 			<xsl:choose>
-				<xsl:when test="document('')//mi:section[starts-with($manvolnum, @manvolnum)]">
-					<xsl:value-of select="document('')//mi:section
+				<xsl:when test="document('manvolnum.xsl')//mi:section[starts-with($manvolnum, @manvolnum)]">
+					<xsl:value-of select="document('manvolnum.xsl')//mi:section
 						[starts-with($manvolnum, @manvolnum)]/@name"/>
 				</xsl:when>
 
