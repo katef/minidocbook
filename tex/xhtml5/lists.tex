@@ -1,0 +1,35 @@
+
+\startxmlsetups xml:li
+	\item
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:ul
+	\startitemize
+	\xmlflush{#1}
+	\stopitemize
+\stopxmlsetups
+
+\startxmlsetups xml:ol
+	\startitemize[n]
+	\xmlflush{#1}
+	\stopitemize
+\stopxmlsetups
+
+
+\startxmlsetups xml:dl
+	\par
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:dt
+	\xmlflush{#1}
+	\crlf
+\stopxmlsetups
+
+\startxmlsetups xml:dd
+	\startnarrower
+	\xmlflush{#1}
+	\stopnarrower
+\stopxmlsetups
+

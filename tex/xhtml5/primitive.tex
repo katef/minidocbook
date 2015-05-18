@@ -1,0 +1,39 @@
+
+% XXX: not supported in html5
+\startxmlsetups xml:tt
+	{\tt \xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:b
+	{\bf \xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:i
+	{\it \xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:em
+	{\em \xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:sup
+	\high{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:sub
+	\low{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:q
+	\quotation{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:p
+	\xmlflush{#1}
+	\par
+\stopxmlsetups
+
+\startxmlsetups xml:br
+	\crlf
+\stopxmlsetups
+

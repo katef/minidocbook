@@ -1,0 +1,49 @@
+
+\startxmlsetups xml:mdb-xhtml5
+	\xmlsetsetup{\xmldocument}{*}{-}
+
+	\xmlsetsetup{\xmldocument}{html|head|body}{xml:*}
+
+	\xmlsetsetup{\xmldocument}{h1|h2|h3|h4}{xml:*}
+
+	\xmlsetsetup{\xmldocument}{ol|ul|li}{xml:*}
+	\xmlsetsetup{\xmldocument}{dl|dt|dd}{xml:*}
+
+	\xmlsetsetup{\xmldocument}{i|b|em|tt}{xml:*}
+	\xmlsetsetup{\xmldocument}{p}{xml:*}
+	\xmlsetsetup{\xmldocument}{span|div}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-xhtml5}
+
+
+\startxmlsetups xml:html
+	\startbodymatter
+	\xmlflush{#1}
+	\stopbodymatter
+\stopxmlsetups
+
+\startxmlsetups xml:head
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:body
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:section
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:article
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:div
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xml:span
+	\xmlflush{#1}
+\stopxmlsetups
+
