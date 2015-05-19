@@ -7,9 +7,11 @@
 	xmlns:set="http://exslt.org/sets"
 	xmlns:common="http://exslt.org/common"
 
-	extension-element-prefixes="str common"
+	extension-element-prefixes="str common">
 
-	exclude-result-prefixes="str common">
+	<!--
+		Print a list of unique product names from manpages.
+	-->
 
 	<xsl:output method="text"/>
 
