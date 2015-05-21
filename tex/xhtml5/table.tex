@@ -33,8 +33,12 @@
 % \xmlconcat{#1}{col}{\|}
 % TODO: perhaps i could do this from inside lua
 
+	% note for HTML this includes <tr> directly, whereas for miidocbook
+	% we always require <tbody>. Alternatively we could pre-process HTML
+	% into shape, but I'd rather avoid the extra step.
+
 	\starttabulate[|l|l|l|l|l|l|l|]
-	\xmlall{#1}{thead|tbody}
+	\xmlall{#1}{thead|tbody|tr}
 	\stoptabulate
 \stopxmlsetups
 
