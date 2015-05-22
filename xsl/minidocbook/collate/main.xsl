@@ -33,66 +33,72 @@
 
 	<!-- TODO: also other things, not just refenry -->
 	<xsl:template match="refentry">
-		<chapter>
-			<xsl:copy-of select="."/>
-		</chapter>
+		<xsl:copy-of select="."/>
 	</xsl:template>
 
 	<xsl:template name="section">
 		<xsl:param name="manvolnum"/>
 		<xsl:param name="productrole"/>
 
-		<part id="{$manvolnum}">
-			<xsl:if test="$productrole">
-				<xsl:attribute name="role">
-					<xsl:value-of select="$productrole"/>
-				</xsl:attribute>
-			</xsl:if>
-
-			<title>
-				<xsl:choose>
-					<xsl:when test="$productrole">
+		<xsl:choose>
+			<xsl:when test="$productrole">
+				<reference>
+					<title>
 						<xsl:value-of select="$productrole"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="mi:title($manvolnum)"/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</title>
+					</title>
 
-			<!-- TODO: also other things -->
-			<xsl:apply-templates select="common:node-set($root)/refentry
-				[refmeta/manvolnum = $manvolnum]
-				[not($productrole) or refentryinfo/productname/@role = $productrole]">
-				<xsl:sort select="concat('lib', refmeta/refentrytitle) != $productrole"/>
-				<xsl:sort select="refnamediv/refclass"/>
-				<xsl:sort select="refmeta/refentrytitle"/>
-			</xsl:apply-templates>
-		</part>
+					<!-- TODO: also other things -->
+					<xsl:apply-templates select="common:node-set($root)/refentry
+						[refmeta/manvolnum = $manvolnum]
+						[not($productrole) or refentryinfo/productname/@role = $productrole]">
+						<xsl:sort select="concat('lib', refmeta/refentrytitle) != $productrole"/>
+						<xsl:sort select="refnamediv/refclass"/>
+						<xsl:sort select="refmeta/refentrytitle"/>
+					</xsl:apply-templates>
+				</reference>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<!-- TODO: also other things -->
+				<xsl:apply-templates select="common:node-set($root)/refentry
+					[refmeta/manvolnum = $manvolnum]
+					[not($productrole) or refentryinfo/productname/@role = $productrole]">
+					<xsl:sort select="concat('lib', refmeta/refentrytitle) != $productrole"/>
+					<xsl:sort select="refnamediv/refclass"/>
+					<xsl:sort select="refmeta/refentrytitle"/>
+				</xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="manvolnum" mode="section">
 		<xsl:variable name="manvolnum" select="."/>
 
-		<xsl:if test="common:node-set($root)/refentry
-			[refmeta/manvolnum = current()]
-			[not(refentryinfo/productname/@role)]">
-			<xsl:call-template name="section">
-				<xsl:with-param name="manvolnum" select="$manvolnum"/>
-			</xsl:call-template>
-		</xsl:if>
+		<part id="{$manvolnum}">
+			<title>
+				<xsl:value-of select="mi:title($manvolnum)"/>
+			</title>
 
-		<xsl:for-each select="common:node-set($root)/refentry
-			[refmeta/manvolnum = current()]/refentryinfo/productname/@role
-			[not(. = ../../../preceding-sibling::refentry
-				[refmeta/manvolnum = current()]/refentryinfo/productname/@role)]">
-			<xsl:sort select="."/>
+			<xsl:if test="common:node-set($root)/refentry
+				[refmeta/manvolnum = current()]
+				[not(refentryinfo/productname/@role)]">
+				<xsl:call-template name="section">
+					<xsl:with-param name="manvolnum" select="$manvolnum"/>
+				</xsl:call-template>
+			</xsl:if>
 
-			<xsl:call-template name="section">
-				<xsl:with-param name="manvolnum"   select="$manvolnum"/>
-				<xsl:with-param name="productrole" select="."/>
-			</xsl:call-template>
-		</xsl:for-each>
+			<xsl:for-each select="common:node-set($root)/refentry
+				[refmeta/manvolnum = current()]/refentryinfo/productname/@role
+				[not(. = ../../../preceding-sibling::refentry
+					[refmeta/manvolnum = current()]/refentryinfo/productname/@role)]">
+				<xsl:sort select="."/>
+
+				<xsl:call-template name="section">
+					<xsl:with-param name="manvolnum"   select="$manvolnum"/>
+					<xsl:with-param name="productrole" select="."/>
+				</xsl:call-template>
+			</xsl:for-each>
+		</part>
 	</xsl:template>
 
 	<xsl:template match="/">
