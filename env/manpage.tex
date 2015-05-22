@@ -52,16 +52,51 @@
 %	\setupfootertexts[Bubblephone Ltd.\setup{doc:classify}][\small\pagenumber]
 %	\setupfootertexts[\setup{doc:classify}][\setup{doc:revision}]
 
-	\setuphead[part,Reference][placehead=yes,after=\directsetup{Mansectpage}]
 
-	\startsetups[Mansectpage]
-		\determinelistcharacteristics[Reference]
-
-		\doifnot{\structurelistsize}{0}{
-			% TODO: setups for list
-			\placelist[Reference,alternative=c]
-		}
+	\startsetups[Reference:before]
+		\ifconditional\libraryentries
+			% making a page; the second library page onwards
+			\page
+		\else
+			% not making a page; this is on the part title page
+			\settrue\libraryentries
+		\fi
 	\stopsetups
+
+	\startsetups[Reference:after]
+		\startframed[frame=off,width=\textwidth,height=\dimexpr\textheight-\strutdp\relax,align={middle,lohi}]
+			\placeheadtext[part]
+			\placeheadtext[Reference]
+		\stopframed
+		\page
+	\stopsetups
+
+	\newconditional\libraryentries
+	\settrue\libraryentries
+
+	\startsetups[xlibraryentries]
+		\determinelistcharacteristics[Reference]
+		\ifnum\structurelistsize=0
+			\startframed[frame=off,width=\textwidth,height=\dimexpr\textheight-\strutdp\relax,align={middle,lohi}]
+			\placeheadtext[part]
+			\stopframed
+		\else
+			\setfalse\libraryentries
+		\fi
+	\stopsetups
+
+	\setuphead[part,Reference][
+		placehead=empty,
+		page=no]
+
+	\setuphead[part][
+		after=\directsetup{xlibraryentries}]
+
+	% XXX: this causes the PDF bookmark to be on the page before
+	% is there something I can use other than before=, after=?
+	\setuphead[Reference][
+		before=\directsetup{Reference:before},
+		after=\directsetup{Reference:after}]
 
 \stopenvironment
 
