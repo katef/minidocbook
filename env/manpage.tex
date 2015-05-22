@@ -1,42 +1,67 @@
 
 \startenvironment manpage
 
-	\setuphead[section][
-		style=WORD,
-		after={\startnarrower[1.5cm]},
-		aftersection={\stopnarrower}]
+	\setuphead[part][
+		placehead=yes,
+		number=no]
+
+	\setuphead[Reference][
+		placehead=yes,
+		number=no,
+		page=yes,
+		bodypartlabel=part]
+
+	\setuphead[Refentry][
+		number=no,
+		page=yes]
 
 	\setuphead[section][
 		number=no,
-		page=no]
+		page=no,
+		style=\WORD\bf,
+		after={\startnarrower[1.5cm]},
+		aftersection={\stopnarrower}]
 
 	\setvariable{env}{manual}{{\bf KMKF} Manual}
 	\setvariable{env}{company}{kmkf.elide.org}
 	\setvariable{env}{manpage}{INSTALL(7MK)}
 
-\startsetups[text a]
-	\rlap{\getvariable{env}{manpage}}
-	\hfill
-	\getvariable{env}{manual}
-	\hfill
-	\llap{\getvariable{env}{manpage}}
-\stopsetups
+	\setupcombinedlist[content][list={part,Reference,Refentry}]
 
-\startsetups[text b]
-	\rlap{\getvariable{env}{company}}
-	\hfill
-	\setup{doc:classify}
-	\hfill
-	\llap{\pagenumber}
-\stopsetups
+	\startsetups[text a]
+		\rlap{\getvariable{env}{manpage}}
+		\hfill
+		\getvariable{env}{manual}
+		\hfill
+		\llap{\getvariable{env}{manpage}}
+	\stopsetups
 
-\setupheadertexts[\setups{text a}][]
-\setupfootertexts[\setups{text b}][]
+	\startsetups[text b]
+		\rlap{\getvariable{env}{company}}
+		\hfill
+		\setup{doc:classify}
+		\hfill
+		\llap{\pagenumber}
+	\stopsetups
+
+	\setupheadertexts[\setups{text a}][]
+	\setupfootertexts[\setups{text b}][]
 
 	% XXX:
 %	\setupheadertexts[{MCT(1)}\hfill {MCT Programmer's manual} \hfill {MCT(1)}][]
 %	\setupfootertexts[Bubblephone Ltd.\setup{doc:classify}][\small\pagenumber]
 %	\setupfootertexts[\setup{doc:classify}][\setup{doc:revision}]
+
+	\setuphead[part,Reference][placehead=yes,after=\directsetup{Mansectpage}]
+
+	\startsetups[Mansectpage]
+		\determinelistcharacteristics[Reference]
+
+		\doifnot{\structurelistsize}{0}{
+			% TODO: setups for list
+			\placelist[Reference,alternative=c]
+		}
+	\stopsetups
 
 \stopenvironment
 
