@@ -1,0 +1,8 @@
+
+\startxmlsetups xml:a
+	% TODO: only do this for absolute links.
+	% for #xyz anchors, use internal references
+	% for relative links (../xyz.html), assuming a consolidted document, figure out internal references
+	\goto{\xmlflush{#1}}[url(\xmlatt{#1}{href})]
+\stopxmlsetups
+
