@@ -31,6 +31,7 @@
 
 		<xsl:message terminate="no">
 			<xsl:choose>
+				<!-- XXX: this is specific to docbook; it should not be in common/ -->
 				<xsl:when test="document('')//mdb:disallowed/mdb:element[name(current()) = @mdb:name]">
 					<xsl:text>Disallowed element: </xsl:text>
 				</xsl:when>
