@@ -1,17 +1,27 @@
 
 \startxmlsetups xml:h1
-	\chapter{\xmlflush{#1}}
+	% XXX: eliding specific to os161: \chapter{\xmlflush{#1}}
+	\H1{\xmlflush{#1}}
 \stopxmlsetups
 
 \startxmlsetups xml:h2
-	\section{\xmlflush{#1}}
+	\section{\xmlflush{#1}} % XXX: why not \H2{} ?
+%	\H2{\xmlflush{#1}}
 \stopxmlsetups
 
 \startxmlsetups xml:h3
-	\subsection{\xmlflush{#1}}
+	\H3{\xmlflush{#1}}
 \stopxmlsetups
 
 \startxmlsetups xml:h4
-	\subsubsection{\xmlflush{#1}}
+	\H4{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:h5
+	\H5{\xmlflush{#1}}
+\stopxmlsetups
+
+\startxmlsetups xml:h6
+	\H6{\xmlflush{#1}}
 \stopxmlsetups
 

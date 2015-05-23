@@ -1,17 +1,42 @@
 
+\definehead[Article]           [chapter]
+\definehead[H1,H2,H3,H4,H5,H6] [chapter]
+
+\setuphead[part]    [syle=\tfa\bf, page=yes, number=no, color=darkblue] % XXX: colour specific to general theme
+\setuphead[Article] [page=yes]
+\setuphead[H1,H2,H3,H4,H5,H6] [color=darkblue, style=\tfa\bf\doifmode{manpage}{\WORD}, page=no, number=no] % TODO: inherit from theme setups
+
+\setuplist[part]   [margin=0em, style=\tfb\bf]
+\setuplist[part]   [after={\startcolumns[n=3,balance=yes]\placelist[Article]\stopcolumns}] % XXX: columns specific to os161
+\setuplist[Article][margin=2em, distance=5em]
+
+% XXX: title pages specific to generic theme
+\startsetups[parttitlepage]
+	\startframed[frame=off,width=\textwidth,height=\dimexpr\textheight-\strutdp\relax,align={middle,lohi}]
+	\placeheadtext[part]
+	\stopframed
+\stopsetups
+\setuphead[part] [after=\directsetup{parttitlepage}, placehead=empty]
+
 \startxmlsetups xml:mdb-xhtml5
 	\xmlsetsetup{\xmldocument}{*}{xml:unhandled}
 
 	\xmlsetsetup{\xmldocument}{html|head|body}{xml:*}
 
-	\xmlsetsetup{\xmldocument}{h1|h2|h3|h4}{xml:*}
+	\xmlsetsetup{\xmldocument}{section|article}{xml:*}
+
+	\xmlsetsetup{\xmldocument}{h1|h2|h3|h4|h5|h6}{xml:*}
 
 	\xmlsetsetup{\xmldocument}{ol|ul|li}{xml:*}
 	\xmlsetsetup{\xmldocument}{dl|dt|dd}{xml:*}
 
-	\xmlsetsetup{\xmldocument}{i|b|em|tt}{xml:*}
+	\xmlsetsetup{\xmldocument}{i|b|em|tt|q}{xml:*}
+	\xmlsetsetup{\xmldocument}{sub|sup}{xml:*}
 	\xmlsetsetup{\xmldocument}{p}{xml:*}
+	\xmlsetsetup{\xmldocument}{br}{xml:*}
 	\xmlsetsetup{\xmldocument}{span|div}{xml:*}
+
+	\xmlsetsetup{\xmldocument}{a}{xml:*}
 
 	\xmlsetsetup{\xmldocument}{table|tbody|thead|tr|th|td}{xml:*}
 \stopxmlsetups
@@ -20,13 +45,22 @@
 
 
 \startxmlsetups xml:html
+	% TODO: conditional frontmatter, only if articles present
+	\startfrontmatter
+\start
+\setupinterlinespace[line=10pt] % XXX: whitespace specific to generic theme
+\setupwhitespace[halfline] % XXX: whitespace specific to generic theme
+	\placecontent[list={part},alternative=c] % XXX: part,Article in general; omitting Article for os161 columns
+\stop
+	\stopfrontmatter
+
 	\startbodymatter
 	\xmlflush{#1}
 	\stopbodymatter
 \stopxmlsetups
 
 \startxmlsetups xml:head
-	\xmlflush{#1}
+%	\xmlflush{#1}
 \stopxmlsetups
 
 \startxmlsetups xml:body
@@ -34,18 +68,14 @@
 \stopxmlsetups
 
 \startxmlsetups xml:section
+	\startpart[title=\xmltext{#1}{title}]
 	\xmlflush{#1}
+	\stoppart
 \stopxmlsetups
 
 \startxmlsetups xml:article
+	\startArticle[title=\xmltext{#1}{h1}]
 	\xmlflush{#1}
-\stopxmlsetups
-
-\startxmlsetups xml:div
-	\xmlflush{#1}
-\stopxmlsetups
-
-\startxmlsetups xml:span
-	\xmlflush{#1}
+	\stopArticle
 \stopxmlsetups
 
