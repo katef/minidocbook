@@ -1,48 +1,15 @@
 
 \startxmlsetups xhtml:setup-primitive
-	\xmlsetsetup{\xmldocument}{i|b|em|tt|q}{xhtml:*}
-	\xmlsetsetup{\xmldocument}{sub|sup}{xhtml:*}
-	\xmlsetsetup{\xmldocument}{p}{xhtml:*}
-	\xmlsetsetup{\xmldocument}{br}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{i}{xml:it}
+	\xmlsetsetup{\xmldocument}{b}{xml:bf}
+	\xmlsetsetup{\xmldocument}{em}{xml:em}
+	\xmlsetsetup{\xmldocument}{tt}{xml:tt} % not supported in html5
+	\xmlsetsetup{\xmldocument}{sub}{xml:low}
+	\xmlsetsetup{\xmldocument}{sup}{xml:high}
+	\xmlsetsetup{\xmldocument}{q}{xml:quotation}
+	\xmlsetsetup{\xmldocument}{p}{xml:par}
+	\xmlsetsetup{\xmldocument}{br}{xml:crlf}
 \stopxmlsetups
 
 \xmlregistersetup{xhtml:setup-primitive}
-
-% not supported in html5
-\startxmlsetups xhtml:tt
-	{\tt \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xhtml:b
-	{\bf \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xhtml:i
-	{\it \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xhtml:em
-	{\em \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xhtml:sub
-	\low{\xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xhtml:sup
-	\high{\xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xhtml:q
-	\quotation{\xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups xhtml:p
-	\xmlflush{#1}
-	\par
-\stopxmlsetups
-
-\startxmlsetups xhtml:br
-	\crlf
-\stopxmlsetups
 

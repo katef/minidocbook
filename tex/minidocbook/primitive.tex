@@ -4,32 +4,12 @@
 % anything with particularly meaningful semantics.
 
 \startxmlsetups mdb:setup-primitive
-	\xmlsetsetup{\xmldocument}{emphasis}{mdb:*}
-	\xmlsetsetup{\xmldocument}{subscript|superscript}{mdb:*}
-	\xmlsetsetup{\xmldocument}{quote}{mdb:*}
-	\xmlsetsetup{\xmldocument}{para}{mdb:*}
+	\xmlsetsetup{\xmldocument}{emphasis}{mdb:em}
+	\xmlsetsetup{\xmldocument}{subscript}{mdb:low}
+	\xmlsetsetup{\xmldocument}{superscript}{xml:high}
+	\xmlsetsetup{\xmldocument}{quote}{xml:quotation}
+	\xmlsetsetup{\xmldocument}{para}{xml:par}
 \stopxmlsetups
 
 \xmlregistersetup{mdb:setup-primitive}
-
-\startxmlsetups mdb:emphasis
-	{\em \xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups mdb:subscript
-	\low{\xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups mdb:superscript
-	\high{\xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups mdb:quote
-	\quotation{\xmlflush{#1}}
-\stopxmlsetups
-
-\startxmlsetups mdb:para
-	\xmlflush{#1}
-	\par
-\stopxmlsetups
 
