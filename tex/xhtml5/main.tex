@@ -1,10 +1,17 @@
 
-\definehead[Article]           [chapter]
-\definehead[H1,H2,H3,H4,H5,H6] [chapter]
+\definehead[Article] [chapter]
+\definehead[Hone]    [chapter]
+\definehead[Htwo]    [chapter]
+\definehead[Hthree]  [chapter]
+\definehead[Hfour]   [chapter]
+\definehead[Hfive]   [chapter]
+\definehead[Hsix]    [chapter]
 
 \setuphead[part]    [syle=\tfa\bf, page=yes, number=no, color=darkblue] % XXX: colour specific to general theme
 \setuphead[Article] [page=yes]
-\setuphead[H1,H2,H3,H4,H5,H6] [color=darkblue, style=\tfa\bf\doifmode{manpage}{\WORD}, page=no, number=no] % TODO: inherit from theme setups
+\setuphead[Hone,Htwo,Hthree,Hfour,Hfive,Hsix] [color=darkblue, style=\tfa\bf\doifmode{manpage}{\WORD}, page=no, number=no] % TODO: inherit from theme setups
+
+\setuphead[Hone,Article][placehead=empty] % XXX: eliding specific to os161
 
 \setuplist[part]   [margin=0em, style=\tfb\bf]
 \setuplist[part]   [after={\startcolumns[n=3,balance=yes]\placelist[Article]\stopcolumns}] % XXX: columns specific to os161
