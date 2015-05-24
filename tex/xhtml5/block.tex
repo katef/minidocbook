@@ -1,4 +1,10 @@
 
+\startxmlsetups xml:mdb-xhtml5-block
+    \xmlsetsetup{\xmldocument}{span|div}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-xhtml5-block}
+
 \startxmlsetups xml:div
 	\xmlflush{#1}
 \stopxmlsetups

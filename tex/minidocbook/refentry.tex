@@ -1,4 +1,23 @@
 
+\definehead [Reference] [chapter]
+\definehead [Refentry]  [chapter]
+
+\startxmlsetups xml:mdb-main-refentry
+	\xmlsetsetup{\xmldocument}{synopsis}{xml:*} % XXX: duplicate
+%	\xmlsetfunction{\xmldocument}{synopsis}{mdb_synopsis}
+
+	\xmlsetsetup{\xmldocument}{reference}{xml:reference}
+	\xmlsetsetup{\xmldocument}{refentry}{xml:collated-refentry}
+	\xmlsetsetup{\xmldocument}{/refentry}{xml:single-refentry}
+
+	\xmlsetsetup{\xmldocument}{refname|refnamediv|refsynopsisdiv|refsection}{xml:*}
+	\xmlsetsetup{\xmldocument}{author|firstname|surname|affiliation|orgname}{xml:*}
+	\xmlsetsetup{\xmldocument}{cmdsynopsis|synopsis}{xml:*}
+	\xmlsetsetup{\xmldocument}{arg|group|sbr}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-main-refentry}
+
 % TODO: centralise refentry guts
 \startxmlsetups xml:single-refentry
 

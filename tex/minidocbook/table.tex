@@ -1,4 +1,11 @@
 
+\startxmlsetups xml:mdb-main-table
+	\xmlsetsetup{\xmldocument}{table|col|thead|tbody|tr|th|td}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-main-table}
+
+% XXX: is this used?
 \startxmlsetups xml:col
 	c
 \stopxmlsetups

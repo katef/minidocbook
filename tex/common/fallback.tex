@@ -1,4 +1,10 @@
 
+\startxmlsetups xml:mdb-fallback
+	\xmlsetsetup{\xmldocument}{*}{xml:unhandled}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-fallback}
+
 \startxmlsetups xml:unhandled
 	\writestatus{mdb}{unhandled element} % TODO: show name
 \stopxmlsetups

@@ -1,4 +1,18 @@
 
+\startxmlsetups xml:mdb-main-inline
+	\xmlsetsetup{\xmldocument}{acronym}{xml:*}
+	\xmlsetsetup{\xmldocument}{command}{xml:*}
+	\xmlsetsetup{\xmldocument}{userinput|computeroutput}{xml:*}
+	\xmlsetsetup{\xmldocument}{application}{xml:*}
+	\xmlsetsetup{\xmldocument}{code}{xml:*}
+	\xmlsetsetup{\xmldocument}{varname|type|token|parameter|constant|function|literal}{xml:*}
+	\xmlsetsetup{\xmldocument}{option}{xml:*}
+	\xmlsetsetup{\xmldocument}{filename}{xml:*}
+	\xmlsetsetup{\xmldocument}{replaceable|citetitle|firstterm}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-main-inline}
+
 \definestartstop[mdbacronym][style=cap] % TODO: unsure if smcp is a good idea here
 \startxmlsetups xml:acronym
 	\mdbacronym{\xmlflush{#1}}

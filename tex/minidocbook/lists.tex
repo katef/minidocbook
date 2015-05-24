@@ -1,4 +1,18 @@
 
+\startxmlsetups xml:mdb-main-lists
+	\xmlsetsetup{\xmldocument}{orderedlist|itemizedlist|listitem}{xml:*}
+	\xmlsetsetup{\xmldocument}{varlistentry}{xml:*}
+	\xmlsetsetup{\xmldocument}{term}{xml:*}
+	\xmlsetsetup{\xmldocument}{variablelist}{xml:*}
+
+%	\xmlfilter{\xmldocument}{/varlistentry/listitem/command(xml:varlistitem)}
+% TODO: different term for refsection[title = 'Options']/variablelist/varlistentry/term
+% TODO: different term for refsection[title = 'Options']/variablelist
+%	\xmlfilter{\xmldocument}{variablelist/command(xml:vl2)}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-main-lists}
+
 \startxmlsetups xml:orderedlist
 	\startitemize[n]
 	\xmlflush{#1}

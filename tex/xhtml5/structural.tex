@@ -1,11 +1,5 @@
 
 \definehead[Article] [chapter]
-\definehead[Hone]    [chapter]
-\definehead[Htwo]    [chapter]
-\definehead[Hthree]  [chapter]
-\definehead[Hfour]   [chapter]
-\definehead[Hfive]   [chapter]
-\definehead[Hsix]    [chapter]
 
 \setuphead[part]    [syle=\tfa\bf, page=yes, number=no, color=darkblue] % XXX: colour specific to general theme
 \setuphead[Article] [page=yes]
@@ -25,30 +19,12 @@
 \stopsetups
 \setuphead[part] [after=\directsetup{parttitlepage}, placehead=empty]
 
-\startxmlsetups xml:mdb-xhtml5
-	\xmlsetsetup{\xmldocument}{*}{xml:unhandled}
-
+\startxmlsetups xml:mdb-xhtml5-structural
 	\xmlsetsetup{\xmldocument}{html|head|body}{xml:*}
-
 	\xmlsetsetup{\xmldocument}{section|article}{xml:*}
-
-	\xmlsetsetup{\xmldocument}{h1|h2|h3|h4|h5|h6}{xml:*}
-
-	\xmlsetsetup{\xmldocument}{ol|ul|li}{xml:*}
-	\xmlsetsetup{\xmldocument}{dl|dt|dd}{xml:*}
-
-	\xmlsetsetup{\xmldocument}{i|b|em|tt|q}{xml:*}
-	\xmlsetsetup{\xmldocument}{sub|sup}{xml:*}
-	\xmlsetsetup{\xmldocument}{p}{xml:*}
-	\xmlsetsetup{\xmldocument}{br}{xml:*}
-	\xmlsetsetup{\xmldocument}{span|div}{xml:*}
-
-	\xmlsetsetup{\xmldocument}{a}{xml:*}
-
-	\xmlsetsetup{\xmldocument}{table|tbody|thead|tr|th|td}{xml:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-xhtml5}
+\xmlregistersetup{xml:mdb-xhtml5-structural}
 
 
 \startxmlsetups xml:html

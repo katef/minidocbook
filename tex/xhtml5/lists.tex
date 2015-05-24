@@ -1,4 +1,11 @@
 
+\startxmlsetups xml:mdb-xhtml5-list
+    \xmlsetsetup{\xmldocument}{ol|ul|li}{xml:*}
+    \xmlsetsetup{\xmldocument}{dl|dt|dd}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-xhtml5-list}
+
 \startxmlsetups xml:li
 	\item
 	\xmlflush{#1}

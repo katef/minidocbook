@@ -1,4 +1,13 @@
 
+\startxmlsetups xml:mdb-xhtml5-primitive
+	\xmlsetsetup{\xmldocument}{i|b|em|tt|q}{xml:*}
+	\xmlsetsetup{\xmldocument}{sub|sup}{xml:*}
+	\xmlsetsetup{\xmldocument}{p}{xml:*}
+	\xmlsetsetup{\xmldocument}{br}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-xhtml5-primitive}
+
 % XXX: not supported in html5
 \startxmlsetups xml:tt
 	{\tt \xmlflush{#1}}

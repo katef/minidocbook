@@ -3,6 +3,15 @@
 % These should be all "presentational" Docbook elements, rather than
 % anything with particularly meaningful semantics.
 
+\startxmlsetups xml:mdb-main-primitive
+	\xmlsetsetup{\xmldocument}{emphasis}{xml:*}
+	\xmlsetsetup{\xmldocument}{subscript|superscript}{xml:*}
+	\xmlsetsetup{\xmldocument}{quote}{xml:*}
+	\xmlsetsetup{\xmldocument}{para}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-main-primitive}
+
 \startxmlsetups xml:emphasis
 	{\em \xmlflush{#1}}
 \stopxmlsetups

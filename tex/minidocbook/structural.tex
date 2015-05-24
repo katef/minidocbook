@@ -1,0 +1,39 @@
+
+\startxmlsetups xml:mdb-main-structural
+	\xmlsetsetup{\xmldocument}{book|part}{xml:*}
+\stopxmlsetups
+
+\xmlregistersetup{xml:mdb-main-structural}
+
+
+\startxmlsetups xml:book
+
+	\startfrontmatter
+		% XXX: why \setuplist here? why does't this work elsewhere?
+		\start
+		\setuplist[chapter][before={\blank[0.5em]}] % tighter spacing for TOC
+		\placecontent
+		\stop
+	\stopfrontmatter
+
+	\startbodymatter
+		\xmlflush{#1}
+	\stopbodymatter
+
+\stopxmlsetups
+
+\definehighlight[important][style=bold]
+
+\define[2]\PartTitle{
+	{\bf Section #1:} #2
+}
+
+\startxmlsetups xml:part
+	% TODO: for manpages, name parts per <part id="3" role="libmct">
+	\startpart[title=\PartTitle{\xmlatt{#1}{id}}{\xmltext{#1}{./title}}]
+
+	\xmlflush{#1}
+
+	\stoppart
+\stopxmlsetups
+
