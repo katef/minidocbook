@@ -1,40 +1,40 @@
 
-\startxmlsetups xml:mdb-main-links
-	\xmlsetsetup{\xmldocument}{reflink|xref|citerefentry|ulink|link}{xml:*}
-	\xmlsetsetup{\xmldocument}{refentrytitle|manvolnum}{xml:*}
+\startxmlsetups mdb:setup-links
+	\xmlsetsetup{\xmldocument}{reflink|xref|citerefentry|ulink|link}{mdb:*}
+	\xmlsetsetup{\xmldocument}{refentrytitle|manvolnum}{mdb:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-main-links}
+\xmlregistersetup{mdb:setup-links}
 
-\startxmlsetups xml:reflink
+\startxmlsetups mdb:reflink
 	% TODO
 \stopxmlsetups
 
-\startxmlsetups xml:xref
+\startxmlsetups mdb:xref
 	% TODO: unimplemented
 \stopxmlsetups
 
-\startxmlsetups xml:refentrytitle
+\startxmlsetups mdb:refentrytitle
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:manvolnum
+\startxmlsetups mdb:manvolnum
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:citerefentry
+\startxmlsetups mdb:citerefentry
 	% TODO: no manvolnum if it's this same page
 % \xmldoifelse{\xmldocument}{refentry/refnamediv/refname = 'mctl'} {A}{B}
 % \xmltext{\xmldocument}{refentry/refnamediv/refname}
 	\xmltext{#1}{refentrytitle}(\xmltext{#1}{manvolnum})
 \stopxmlsetups
 
-\startxmlsetups xml:ulink
+\startxmlsetups mdb:ulink
 	% TODO: unimplemented
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:link
+\startxmlsetups mdb:link
 	% TODO: unimplemented
 	\xmlflush{#1}
 \stopxmlsetups

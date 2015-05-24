@@ -1,40 +1,40 @@
 
-\startxmlsetups xml:mdb-xhtml-list
-    \xmlsetsetup{\xmldocument}{ol|ul|li}{xml:*}
-    \xmlsetsetup{\xmldocument}{dl|dt|dd}{xml:*}
+\startxmlsetups xhtml:setup-list
+	\xmlsetsetup{\xmldocument}{ol|ul|li}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{dl|dt|dd}{xhtml:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-xhtml-list}
+\xmlregistersetup{xhtml:setup-list}
 
-\startxmlsetups xml:li
+\startxmlsetups xhtml:li
 	\item
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:ul
+\startxmlsetups xhtml:ul
 	\startitemize
 	\xmlflush{#1}
 	\stopitemize
 \stopxmlsetups
 
-\startxmlsetups xml:ol
+\startxmlsetups xhtml:ol
 	\startitemize[n]
 	\xmlflush{#1}
 	\stopitemize
 \stopxmlsetups
 
 
-\startxmlsetups xml:dl
+\startxmlsetups xhtml:dl
 	\par
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:dt
+\startxmlsetups xhtml:dt
 	\xmlflush{#1}
 	\crlf
 \stopxmlsetups
 
-\startxmlsetups xml:dd
+\startxmlsetups xhtml:dd
 	\startnarrower
 	\xmlflush{#1}
 	\stopnarrower

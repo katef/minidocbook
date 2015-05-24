@@ -1,15 +1,15 @@
 
-\startxmlsetups xml:mdb-xhtml-block
-    \xmlsetsetup{\xmldocument}{span|div}{xml:*}
+\startxmlsetups xhtml:setup-block
+    \xmlsetsetup{\xmldocument}{span|div}{xhtml:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-xhtml-block}
+\xmlregistersetup{xhtml:setup-block}
 
-\startxmlsetups xml:div
+\startxmlsetups xhtml:div
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:span
+\startxmlsetups xhtml:span
 	\xmlflush{#1}
 \stopxmlsetups
 

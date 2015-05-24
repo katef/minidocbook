@@ -2,24 +2,24 @@
 \definehead [Reference] [chapter]
 \definehead [Refentry]  [chapter]
 
-\startxmlsetups xml:mdb-main-refentry
-	\xmlsetsetup{\xmldocument}{synopsis}{xml:*} % XXX: duplicate
+\startxmlsetups mdb:setup-refentry
+	\xmlsetsetup{\xmldocument}{synopsis}{mdb:*} % XXX: duplicate
 %	\xmlsetfunction{\xmldocument}{synopsis}{mdb_synopsis}
 
-	\xmlsetsetup{\xmldocument}{reference}{xml:reference}
-	\xmlsetsetup{\xmldocument}{refentry}{xml:collated-refentry}
-	\xmlsetsetup{\xmldocument}{/refentry}{xml:single-refentry}
+	\xmlsetsetup{\xmldocument}{reference}{mdb:reference}
+	\xmlsetsetup{\xmldocument}{refentry}{mdb:collated-refentry}
+	\xmlsetsetup{\xmldocument}{/refentry}{mdb:single-refentry}
 
-	\xmlsetsetup{\xmldocument}{refname|refnamediv|refsynopsisdiv|refsection}{xml:*}
-	\xmlsetsetup{\xmldocument}{author|firstname|surname|affiliation|orgname}{xml:*}
-	\xmlsetsetup{\xmldocument}{cmdsynopsis|synopsis}{xml:*}
-	\xmlsetsetup{\xmldocument}{arg|group|sbr}{xml:*}
+	\xmlsetsetup{\xmldocument}{refname|refnamediv|refsynopsisdiv|refsection}{mdb:*}
+	\xmlsetsetup{\xmldocument}{author|firstname|surname|affiliation|orgname}{mdb:*}
+	\xmlsetsetup{\xmldocument}{cmdsynopsis|synopsis}{mdb:*}
+	\xmlsetsetup{\xmldocument}{arg|group|sbr}{mdb:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-main-refentry}
+\xmlregistersetup{mdb:setup-refentry}
 
 % TODO: centralise refentry guts
-\startxmlsetups xml:single-refentry
+\startxmlsetups mdb:single-refentry
 
 	\startbodymatter
 
@@ -34,7 +34,7 @@
 
 \stopxmlsetups
 
-\startxmlsetups xml:reference
+\startxmlsetups mdb:reference
 
 	\startReference[title=\xmltext{#1}{./title}]
 
@@ -44,7 +44,7 @@
 
 \stopxmlsetups
 
-\startxmlsetups xml:collated-refentry
+\startxmlsetups mdb:collated-refentry
 
 	% TODO: handle multiple refnames
 	\startRefentry[title=\xmltext{#1}{refnamediv/refname}(\xmltext{#1}{refmeta/manvolnum})]
@@ -60,34 +60,34 @@
 
 \stopxmlsetups
 
-\startxmlsetups xml:author
+\startxmlsetups mdb:author
 	% XXX: copy the scheme per the html xslt
 	\xmlconcat{#1}{firstname|surname}{ }
 	{, }
 	\xmlall{#1}{affiliation}
 \stopxmlsetups
 
-\startxmlsetups xml:firstname
+\startxmlsetups mdb:firstname
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:surname
+\startxmlsetups mdb:surname
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:affiliation
+\startxmlsetups mdb:affiliation
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:orgname
+\startxmlsetups mdb:orgname
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:refname
+\startxmlsetups mdb:refname
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:refnamediv
+\startxmlsetups mdb:refnamediv
 	\startsection[title=Name,reference=sec:TODO]
 	\xmlconcat{#1}{refname}{, }
 	\thinspace—\thinspace
@@ -95,38 +95,38 @@
 	\stopsection
 \stopxmlsetups
 
-\startxmlsetups xml:refsynopsisdiv
+\startxmlsetups mdb:refsynopsisdiv
 	\startsection[title=Synopsis,reference=sec:TODO]
 	\xmlflush{#1}
 	\stopsection
 \stopxmlsetups
 
-\startxmlsetups xml:arg
+\startxmlsetups mdb:arg
 	\doifelse{\xmlatt{#1}{choice}} {opt}
 		{[\thinspace\xmlflush{#1}\thinspace] }
 		{\thinspace\xmlflush{#1}\thinspace}
 \stopxmlsetups
 
-\startxmlsetups xml:group
+\startxmlsetups mdb:group
 	\doifelse{\xmlatt{#1}{choice}} {opt}
 		{[\xmlconcat{#1}{arg}{\|}]}
 		{\{\xmlconcat{#1}{arg}{\|}\}}
 \stopxmlsetups
 
-\startxmlsetups xml:sbr
+\startxmlsetups mdb:sbr
 	\crlf
 \stopxmlsetups
 
 % XXX: why isn't width automatically correct here?
 \definedescription[synopsis][headstyle=normal,width=1.5em]
 
-\startxmlsetups xml:cmdsynopsis
+\startxmlsetups mdb:cmdsynopsis
 	\startsynopsis{\xmltext{#1}{command}}
 	\xmlall{#1}{/arg|group|sbr}
 	\stopsynopsis
 \stopxmlsetups
 
-\startxmlsetups xml:refsection
+\startxmlsetups mdb:refsection
 	\startsection[title={\xmltext{#1}{title}},reference=sec:TODO]
 	\xmlflush{#1}
 	\stopsection

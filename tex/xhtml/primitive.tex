@@ -1,48 +1,48 @@
 
-\startxmlsetups xml:mdb-xhtml-primitive
-	\xmlsetsetup{\xmldocument}{i|b|em|tt|q}{xml:*}
-	\xmlsetsetup{\xmldocument}{sub|sup}{xml:*}
-	\xmlsetsetup{\xmldocument}{p}{xml:*}
-	\xmlsetsetup{\xmldocument}{br}{xml:*}
+\startxmlsetups xhtml:setup-primitive
+	\xmlsetsetup{\xmldocument}{i|b|em|tt|q}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{sub|sup}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{p}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{br}{xhtml:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-xhtml-primitive}
+\xmlregistersetup{xhtml:setup-primitive}
 
-% XXX: not supported in html5
-\startxmlsetups xml:tt
+% not supported in html5
+\startxmlsetups xhtml:tt
 	{\tt \xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:b
+\startxmlsetups xhtml:b
 	{\bf \xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:i
+\startxmlsetups xhtml:i
 	{\it \xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:em
+\startxmlsetups xhtml:em
 	{\em \xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:sub
+\startxmlsetups xhtml:sub
 	\low{\xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:sup
+\startxmlsetups xhtml:sup
 	\high{\xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:q
+\startxmlsetups xhtml:q
 	\quotation{\xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:p
+\startxmlsetups xhtml:p
 	\xmlflush{#1}
 	\par
 \stopxmlsetups
 
-\startxmlsetups xml:br
+\startxmlsetups xhtml:br
 	\crlf
 \stopxmlsetups
 

@@ -3,32 +3,32 @@
 % These should be all "presentational" Docbook elements, rather than
 % anything with particularly meaningful semantics.
 
-\startxmlsetups xml:mdb-main-primitive
-	\xmlsetsetup{\xmldocument}{emphasis}{xml:*}
-	\xmlsetsetup{\xmldocument}{subscript|superscript}{xml:*}
-	\xmlsetsetup{\xmldocument}{quote}{xml:*}
-	\xmlsetsetup{\xmldocument}{para}{xml:*}
+\startxmlsetups mdb:setup-primitive
+	\xmlsetsetup{\xmldocument}{emphasis}{mdb:*}
+	\xmlsetsetup{\xmldocument}{subscript|superscript}{mdb:*}
+	\xmlsetsetup{\xmldocument}{quote}{mdb:*}
+	\xmlsetsetup{\xmldocument}{para}{mdb:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-main-primitive}
+\xmlregistersetup{mdb:setup-primitive}
 
-\startxmlsetups xml:emphasis
+\startxmlsetups mdb:emphasis
 	{\em \xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:subscript
+\startxmlsetups mdb:subscript
 	\low{\xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:superscript
+\startxmlsetups mdb:superscript
 	\high{\xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:quote
+\startxmlsetups mdb:quote
 	\quotation{\xmlflush{#1}}
 \stopxmlsetups
 
-\startxmlsetups xml:para
+\startxmlsetups mdb:para
 	\xmlflush{#1}
 	\par
 \stopxmlsetups

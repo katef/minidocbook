@@ -1,31 +1,31 @@
 
-\startxmlsetups xml:mdb-main-lists
-	\xmlsetsetup{\xmldocument}{orderedlist|itemizedlist|listitem}{xml:*}
-	\xmlsetsetup{\xmldocument}{varlistentry}{xml:*}
-	\xmlsetsetup{\xmldocument}{term}{xml:*}
-	\xmlsetsetup{\xmldocument}{variablelist}{xml:*}
+\startxmlsetups mdb:setup-lists
+	\xmlsetsetup{\xmldocument}{orderedlist|itemizedlist|listitem}{mdb:*}
+	\xmlsetsetup{\xmldocument}{varlistentry}{mdb:*}
+	\xmlsetsetup{\xmldocument}{term}{mdb:*}
+	\xmlsetsetup{\xmldocument}{variablelist}{mdb:*}
 
-%	\xmlfilter{\xmldocument}{/varlistentry/listitem/command(xml:varlistitem)}
+%	\xmlfilter{\xmldocument}{/varlistentry/listitem/command(mdb:varlistitem)}
 % TODO: different term for refsection[title = 'Options']/variablelist/varlistentry/term
 % TODO: different term for refsection[title = 'Options']/variablelist
-%	\xmlfilter{\xmldocument}{variablelist/command(xml:vl2)}
+%	\xmlfilter{\xmldocument}{variablelist/command(mdb:vl2)}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-main-lists}
+\xmlregistersetup{mdb:setup-lists}
 
-\startxmlsetups xml:orderedlist
+\startxmlsetups mdb:orderedlist
 	\startitemize[n]
 	\xmlflush{#1}
 	\stopitemize
 \stopxmlsetups
 
-\startxmlsetups xml:itemizedlist
+\startxmlsetups mdb:itemizedlist
 	\startitemize[1]
 	\xmlflush{#1}
 	\stopitemize
 \stopxmlsetups
 
-\startxmlsetups xml:listitem
+\startxmlsetups mdb:listitem
 	\item
 	\xmlflush{#1}
 \stopxmlsetups
@@ -65,7 +65,7 @@ end
 
 \stopluacode
 
-\startxmlsetups xml:variablelist
+\startxmlsetups mdb:variablelist
 	\xmlfunction{#1}{termthing}
 
 	\defineparagraphs[VarPara][n=2,distance=2em]
@@ -82,7 +82,7 @@ end
 \stopxmlsetups
 
 
-\startxmlsetups xml:varlistentry
+\startxmlsetups mdb:varlistentry
 	% I'm not using \definedescription for this, because it misestimates widths
 	% for multiple <term>s, and does not indent on nesting.
 
@@ -118,7 +118,7 @@ end
 
 \stopxmlsetups
 
-\startxmlsetups xml:term
+\startxmlsetups mdb:term
 	\bgroup
 		\xmldoif{#1}{../../../title[text() = 'Options']}{\bf}
 		\xmlflush{#1}

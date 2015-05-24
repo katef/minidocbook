@@ -19,15 +19,14 @@
 \stopsetups
 \setuphead[part] [after=\directsetup{parttitlepage}, placehead=empty]
 
-\startxmlsetups xml:mdb-xhtml-structural
-	\xmlsetsetup{\xmldocument}{html|head|body}{xml:*}
-	\xmlsetsetup{\xmldocument}{section|article}{xml:*}
+\startxmlsetups xhtml:setup-structural
+	\xmlsetsetup{\xmldocument}{html|head|body}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{section|article}{xhtml:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-xhtml-structural}
+\xmlregistersetup{xhtml:setup-structural}
 
-
-\startxmlsetups xml:html
+\startxmlsetups xhtml:html
 	% TODO: conditional frontmatter, only if articles present
 	\startfrontmatter
 \start
@@ -42,21 +41,21 @@
 	\stopbodymatter
 \stopxmlsetups
 
-\startxmlsetups xml:head
+\startxmlsetups xhtml:head
 %	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:body
+\startxmlsetups xhtml:body
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:section
+\startxmlsetups xhtml:section
 	\startpart[title=\xmltext{#1}{title}]
 	\xmlflush{#1}
 	\stoppart
 \stopxmlsetups
 
-\startxmlsetups xml:article
+\startxmlsetups xhtml:article
 	\startArticle[title=\xmltext{#1}{h1}]
 	\xmlflush{#1}
 	\stopArticle

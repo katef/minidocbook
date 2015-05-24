@@ -1,21 +1,21 @@
 
-\startxmlsetups xml:mdb-xhtml-table
-	\xmlsetsetup{\xmldocument}{table|tbody|thead}{xml:*}
-	\xmlsetsetup{\xmldocument}{td|th}{xml:*}
-	\xmlsetsetup{\xmldocument}{tbody/tr|thead/tr}{xml:*}
+\startxmlsetups xhtml:setup-table
+	\xmlsetsetup{\xmldocument}{table|tbody|thead}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{td|th}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{tbody/tr|thead/tr}{xhtml:*}
 \startnotmode[minidocbook]
-	\xmlsetsetup{\xmldocument}{table/tr}{xml:tr} % dissallowed in minidocbook's DTD
+	\xmlsetsetup{\xmldocument}{table/tr}{xhtml:tr} % dissallowed in minidocbook's DTD
 \stopnotmode
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-xhtml-table}
+\xmlregistersetup{xhtml:setup-table}
 
 % XXX: is this used?
-\startxmlsetups xml:col
+\startxmlsetups xhtml:col
 	c
 \stopxmlsetups
 
-\startxmlsetups xml:table
+\startxmlsetups xhtml:table
 %local function ForLorien(n,maxa,maxb,answers)
 %context.startcolumns { n = 3 }
 %context.starttabulate { "|r|c|r|c|r|" }
@@ -54,27 +54,27 @@
 	\stoptabulate
 \stopxmlsetups
 
-\startxmlsetups xml:thead
+\startxmlsetups xhtml:thead
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:tbody
+\startxmlsetups xhtml:tbody
 	\xmlflush{#1}
 \stopxmlsetups
 
-\startxmlsetups xml:tr
+\startxmlsetups xhtml:tr
 	\NC
 	\xmlflush{#1}
 	\NR
 \stopxmlsetups
 
-\startxmlsetups xml:th
+\startxmlsetups xhtml:th
 	% TODO: use <col/> for alignment
 	\bf \xmlflush{#1}
 	\NC
 \stopxmlsetups
 
-\startxmlsetups xml:td
+\startxmlsetups xhtml:td
 	% TODO: rowspan
 	\doifnumberelse {\xmlatt{#1}{rowspan}}
 		{\xmlflush{#1}}

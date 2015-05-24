@@ -1,12 +1,11 @@
 
-\startxmlsetups xml:mdb-main-structural
-	\xmlsetsetup{\xmldocument}{book|part}{xml:*}
+\startxmlsetups mdb:setup-structural
+	\xmlsetsetup{\xmldocument}{book|part}{mdb:*}
 \stopxmlsetups
 
-\xmlregistersetup{xml:mdb-main-structural}
+\xmlregistersetup{mdb:setup-structural}
 
-
-\startxmlsetups xml:book
+\startxmlsetups mdb:book
 
 	\startfrontmatter
 		% XXX: why \setuplist here? why does't this work elsewhere?
@@ -28,7 +27,7 @@
 	{\bf Section #1:} #2
 }
 
-\startxmlsetups xml:part
+\startxmlsetups mdb:part
 	% TODO: for manpages, name parts per <part id="3" role="libmct">
 	\startpart[title=\PartTitle{\xmlatt{#1}{id}}{\xmltext{#1}{./title}}]
 
