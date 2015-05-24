@@ -1,6 +1,11 @@
 
 \startxmlsetups xml:mdb-xhtml5-table
-    \xmlsetsetup{\xmldocument}{table|tbody|thead|tr|th|td}{xml:*}
+	\xmlsetsetup{\xmldocument}{table|tbody|thead}{xml:*}
+	\xmlsetsetup{\xmldocument}{td|th}{xml:*}
+	\xmlsetsetup{\xmldocument}{tbody/tr|thead/tr}{xml:*}
+\startnotmode[minidocbook]
+	\xmlsetsetup{\xmldocument}{table/tr}{xml:tr} % dissallowed in minidocbook's DTD
+\stopnotmode
 \stopxmlsetups
 
 \xmlregistersetup{xml:mdb-xhtml5-table}
@@ -40,7 +45,7 @@
 % \xmlconcat{#1}{col}{\|}
 % TODO: perhaps i could do this from inside lua
 
-	% note for HTML this includes <tr> directly, whereas for miidocbook
+	% note for HTML this includes <tr> directly, whereas for minidocbook
 	% we always require <tbody>. Alternatively we could pre-process HTML
 	% into shape, but I'd rather avoid the extra step.
 
