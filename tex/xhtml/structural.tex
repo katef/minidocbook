@@ -1,5 +1,6 @@
 
 \definehead[Article] [chapter]
+\definestartstop[Body] [chapter]
 \definestartstop[Aside] [section]
 
 \setuphead[part]    [syle=\tfa\bf, page=yes, number=no, color=darkblue] % XXX: colour specific to general theme
@@ -48,7 +49,9 @@
 \stopxmlsetups
 
 \startxmlsetups xhtml:body
+	\startBody
 	\xmlflush{#1}
+	\stopBody
 \stopxmlsetups
 
 \startxmlsetups xhtml:section
