@@ -22,6 +22,7 @@
 \startxmlsetups xhtml:setup-structural
 	\xmlsetsetup{\xmldocument}{html|head|body}{xhtml:*}
 	\xmlsetsetup{\xmldocument}{section|article}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{aside}{xhtml:*}
 \stopxmlsetups
 
 \xmlregistersetup{xhtml:setup-structural}
@@ -59,5 +60,10 @@
 	\startArticle[title=\xmltext{#1}{h1}]
 	\xmlflush{#1}
 	\stopArticle
+\stopxmlsetups
+
+\startxmlsetups xhtml:aside
+	\blackrule
+	\xmlflush{#1}
 \stopxmlsetups
 
