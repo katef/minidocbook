@@ -1,0 +1,43 @@
+
+\startxmlsetups xhtml:setup-figure
+	\xmlsetsetup{\xmldocument}{figure}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{figure[@class = 'double']/img}{xhtml:img-double}
+	\xmlsetsetup{\xmldocument}{figure[@class = 'single-wide']/img}{xhtml:img-single-wide}
+	\xmlsetsetup{\xmldocument}{figure[@class = 'single-narrow']/img}{xhtml:img-single-narrow}
+	\xmlsetsetup{\xmldocument}{figure[not(@class)]/img|node()[name() != 'figure']/img}{xhtml:img-single-narrow}
+\stopxmlsetups
+
+\xmlregistersetup{xhtml:setup-figure}
+
+\startxmlsetups xhtml:figure
+	% TODO: heed @class here. XXX: that's theme-specific
+	% classes: single-narrow, double, single-wide
+	% TODO: caption
+
+	% XXX: classes can be whitespace-seperated lists
+	% XXX: do as a \definestartstop so can have theme setups
+	\framed[frame=off,align=middle,width=\hsize] {%
+		\doifelse {\xmlatt{#1}{class}} {double} {%
+			\startcombination[2*1]
+			{\xmlindex{#1}{img}{1}} {}
+			{\xmlindex{#1}{img}{2}} {}
+			\stopcombination
+		} {%
+			\xmlflush{#1}
+		}
+	}
+
+\stopxmlsetups
+
+\startxmlsetups xhtml:img-double
+	\externalfigure[\xmlatt{#1}{src}][width=.48\hsize] % TODO: dimexpr to allow for gutter
+\stopxmlsetups
+
+\startxmlsetups xhtml:img-single-wide
+	\externalfigure[\xmlatt{#1}{src}][width=\hsize]
+\stopxmlsetups
+
+\startxmlsetups xhtml:img-single-narrow
+	\externalfigure[\xmlatt{#1}{src}][width=.8\hsize]
+\stopxmlsetups
+
