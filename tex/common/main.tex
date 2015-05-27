@@ -16,8 +16,16 @@
       \startstopparameter\c!inbetween}}
 \protect
 
+\input common/paper.tex
+
 \startmode[A4]
 	\setuppapersize[A4]
+\stopmode
+\startmode[letter]
+	\setuppapersize[letter]
+\stopmode
+\startmode[ArchB]
+	\setuppapersize[ArchB]
 \stopmode
 
 \setupinteraction[state=start]
@@ -27,7 +35,6 @@
 
 \input otf.tex
 
-\input common/paper.tex
 \input common/debug.tex
 \input common/fallback.tex
 \input common/primitive.tex
