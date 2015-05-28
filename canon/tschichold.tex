@@ -1,0 +1,103 @@
+
+% Jan Tschichold
+% intended for 2:3
+
+% XXX: no idea where to put a footer
+
+\startenvironment tschichold
+
+	% TODO: set double page here; it's a default for this canon
+	% but a theme could override that for a single page layout,
+	% if it were really appropriate
+	\setuppagenumbering[alternative=doublesided]
+
+	\startMPdefinitions
+		def canon(expr h, w) =
+			path p, q;
+			path m;
+
+			p := (w, 0) -- (0, h); % diagonal
+			hyp := h ++ w; % length of p
+			if w < 0:
+				hyp := -hyp;
+			fi
+
+			z0 = (-w + hyp, 0); % hyp rotated down to bottom edge
+
+			% Amazing that this is exactly the arc I want. It's equivalent to
+			% rotating (-w, 0) -- (-w + hyp, 0) until it touches (0, h)
+			% which is the same arc from a segment of the circle:
+			%   path c; c := fullcircle scaled 2hyp shifted (-w, 0);
+			%   draw subpath (0, 2) of c cutafter (0, h) -- (w, h);
+			m := z0{up} .. (0, h);
+
+			z1 = m intersectionpoint p;
+
+			% Tschichold specifies margin ratio 1:1:2:3
+			% TODO: use array of margin[] perhaps
+			rhs := w - xpart z1;
+			lhs := rhs / 2;
+			ths := abs(lhs); % abs for when w < 0
+			bhs := ypart z1;
+
+			draw m withcolor blue;
+			draw p withcolor blue;
+
+			draw (w - rhs, 0) -- (w - rhs, h) withcolor red;
+			draw (0, h - ths) -- (w, h - ths) withcolor red;
+			draw (0, 0 + bhs) -- (w, 0 + bhs) withcolor red;
+			draw (0 + lhs, 0) -- (0 + lhs, h) withcolor red;
+		enddef;
+	\stopMPdefinitions
+
+	\startreusableMPgraphic{canon-recto}
+		h := \overlayheight;
+		w := \overlaywidth;
+		canon(h, w);
+	\stopreusableMPgraphic
+
+	\startreusableMPgraphic{canon-verso}
+		h := \overlayheight;
+		w := \overlaywidth;
+		canon(h, -w);
+	\stopreusableMPgraphic
+
+	\startmode[debug]
+		\defineoverlay[canon-recto] [\reusableMPgraphic{canon-recto}]
+		\defineoverlay[canon-verso] [\reusableMPgraphic{canon-verso}]
+
+		\setupbackgrounds[leftpage] [background=canon-verso]
+		\setupbackgrounds[rightpage][background=canon-recto]
+	\stopmode
+
+	\startMPcalculation
+		h := PaperHeight;
+		w := PaperWidth;
+		canon(h, w);
+
+		passvariable("canon:textleft",   lhs);
+		passvariable("canon:textright",  w - rhs);
+		passvariable("canon:textwidth",  w - rhs - lhs);
+		passvariable("canon:texttop",    ths);
+		passvariable("canon:textbottom", bhs);
+		passvariable("canon:textheight", h - ths - bhs);
+	\stopMPcalculation
+
+	\setuplayout[
+		header=\bodyfontsize,
+		headerdistance=\bodyfontsize, % XXX: this ought to be found geometrically
+		top=0pt,
+		topspace=\dimexpr\MPrunvar{canon:texttop}bp-\headerheight-\headerdistance\relax,
+		footer=0pt,
+		footerdistance=0pt,
+		height=\dimexpr\MPrunvar{canon:textheight}bp
+			+\headerheight+\headerdistance
+			+\footerheight+\footerdistance\relax,
+		backspace=\MPrunvar{canon:textleft}bp,
+		margin=0pt, % TODO: find where to put this
+		width=\MPrunvar{canon:textwidth}bp,
+	]
+
+\stopenvironment
+
+
