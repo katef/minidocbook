@@ -1,0 +1,88 @@
+
+% https://eegg.wordpress.com/2010/01/25/page-margins-in-principle-and-practice/
+% single page canon
+% works for most ratios except 1:1, which looks odd
+
+\startenvironment doublecircle
+
+	\setuppagenumbering[alternative=singlesided]
+
+	\startMPdefinitions
+		def canon(expr h, w) =
+			path p, q;
+			path a, b;
+			path c, d, e, f;
+
+			p := (0, 0) -- (w, h);
+			q := (w, 0) -- (0, h);
+
+			a := (0, .5h + .5w) -- (w, .5h + .5w); % top
+			b := (0, .5h - .5w) -- (w, .5h - .5w); % bottom
+
+			c = fullcircle scaled w shifted (.5w, h - .5w); % top
+			d = fullcircle scaled w shifted (.5w, 0 + .5w); % bottom
+
+			e = subpath (0, 4) of c; % top arc
+			f = subpath (4, 8) of d; % bottom arc
+
+			z0 = p intersectionpoint e; % top right
+			z1 = q intersectionpoint e; % top left
+			z2 = p intersectionpoint f; % bottom right
+			z3 = q intersectionpoint f; % bottom left
+
+			draw p withcolor blue;
+			draw q withcolor blue;
+
+			draw c withcolor blue;
+			draw d withcolor blue;
+
+			draw (xpart z0, 0) -- (xpart z0, h) withcolor red; % right
+			draw (xpart z1, 0) -- (xpart z1, h) withcolor red; % left
+			draw (0, ypart z1) -- (w, ypart z1) withcolor red; % top
+			draw (0, ypart z2) -- (w, ypart z2) withcolor red; % bottom
+		enddef;
+	\stopMPdefinitions
+
+	\startreusableMPgraphic{canon}
+		h := \overlayheight;
+		w := \overlaywidth;
+		canon(h, w);
+	\stopreusableMPgraphic
+
+	\startmode[debug]
+		\defineoverlay[canon] [\reusableMPgraphic{canon}]
+		\setupbackgrounds[rightpage][background=canon]
+	\stopmode
+
+	\startMPcalculation
+		h := PaperHeight;
+		w := PaperWidth;
+		canon(h, w);
+
+		% TODO: centralise these
+		passvariable("canon:textleft",   xpart z1);
+		passvariable("canon:textright",  w - xpart z0);
+		passvariable("canon:textwidth",  xpart z0 - xpart z1);
+		passvariable("canon:texttop",    h - ypart z0);
+		passvariable("canon:textbottom", 0 + ypart z2);
+		passvariable("canon:textheight", ypart z0 - ypart z2);
+	\stopMPcalculation
+
+	% TODO: centralise this
+	\setuplayout[
+		header=\bodyfontsize,
+		headerdistance=\bodyfontsize, % XXX: this ought to be found geometrically
+		top=0pt,
+		topspace=\dimexpr\MPrunvar{canon:texttop}bp-\headerheight-\headerdistance\relax,
+		footer=0pt,
+		footerdistance=0pt,
+		height=\dimexpr\MPrunvar{canon:textheight}bp
+			+\headerheight+\headerdistance
+			+\footerheight+\footerdistance\relax,
+		backspace=\MPrunvar{canon:textleft}bp,
+		margin=0pt, % TODO: find where to put this
+		width=\MPrunvar{canon:textwidth}bp,
+	]
+
+\stopenvironment
+
