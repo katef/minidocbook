@@ -1,0 +1,93 @@
+
+% makes the most sense for ISO 216 A series, where the text area is the next number in the series
+% does not work on 1:1 (occupies entire page)
+% I don't know if there's a proper name for this canon.
+% http://www.oert.org/en/typography-and-proportions/
+
+\startenvironment fib
+
+	\setuppagenumbering[alternative=doublesided]
+
+	\startMPdefinitions
+		def canon(expr h, w) =
+			path p, q;
+
+			p := (w,  0) -- (0, h); % one-page diagonal
+			q := (-w, 0) -- (w, h); % two-page diagonal
+			z0 = q intersectionpoint ((0,0) -- (0, h)); % point on edge
+
+			z1 = whatever[( w, 0), (0, h)]; % bottom right
+			z2 = whatever[(-w, 0), (w, h)]; % top right
+
+			xpart z1 = xpart z2;
+			ypart z2 - ypart z1 = abs(w);
+
+			z3 = p intersectionpoint ((w, ypart z2) -- (0, ypart z2)); % top left
+
+			z4 = (xpart z3, ypart z1); % bottom left
+
+			draw p withcolor blue;
+			draw z0 -- (w, h) withcolor blue;
+
+			draw fullcircle scaled abs(w) shifted (.5w, (ypart z2 - ypart z1) / 2 + ypart z1) withcolor blue;
+
+			draw (xpart z1, 0) -- (xpart z1, h) withcolor red;
+			draw (xpart z3, 0) -- (xpart z3, h) withcolor red;
+			draw (0, ypart z1) -- (w, ypart z1) withcolor red;
+			draw (0, ypart z2) -- (w, ypart z2) withcolor red;
+
+%			draw (0, .5h) -- (w, 0) withcolor green; % maybe for a footer
+
+		enddef;
+	\stopMPdefinitions
+
+	\startreusableMPgraphic{canon-recto}
+		h := \overlayheight;
+		w := \overlaywidth;
+		canon(h, w);
+	\stopreusableMPgraphic
+
+	\startreusableMPgraphic{canon-verso}
+		h := \overlayheight;
+		w := \overlaywidth;
+		canon(h, -w);
+	\stopreusableMPgraphic
+
+	\startmode[debug]
+		\defineoverlay[canon-recto] [\reusableMPgraphic{canon-recto}]
+		\defineoverlay[canon-verso] [\reusableMPgraphic{canon-verso}]
+
+		\setupbackgrounds[leftpage] [background={canon-verso, footer-verso}]
+		\setupbackgrounds[rightpage][background={canon-recto, footer-recto}]
+	\stopmode
+
+	\startMPcalculation
+		h := PaperHeight;
+		w := PaperWidth;
+		canon(h, w);
+
+		passvariable("canon:textleft",   xpart z3);
+		passvariable("canon:textright",  w - xpart z1);
+		passvariable("canon:textwidth",  xpart z1 - xpart z3);
+		passvariable("canon:texttop",    h - ypart z2);
+		passvariable("canon:textbottom", ypart z1);
+		passvariable("canon:textheight", ypart z2 - ypart z1);
+	\stopMPcalculation
+
+	\setuplayout[
+		header=\bodyfontsize,
+		headerdistance=\bodyfontsize, % XXX: this ought to be found geometrically
+		top=0pt,
+		topspace=\dimexpr\MPrunvar{canon:texttop}bp-\headerheight-\headerdistance\relax,
+		footer=0pt,
+		footerdistance=0pt,
+		height=\dimexpr\MPrunvar{canon:textheight}bp
+			+\headerheight+\headerdistance
+			+\footerheight+\footerdistance\relax,
+		backspace=\MPrunvar{canon:textleft}bp,
+		margin=0pt, % TODO: find where to put this
+		width=\MPrunvar{canon:textwidth}bp,
+	]
+
+\stopenvironment
+
