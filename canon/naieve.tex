@@ -8,9 +8,10 @@
 	\setuppagenumbering[alternative=singlesided]
 
 	\startMPdefinitions
-		def canon(expr h, w) =
+		vardef canon(expr h, w) =
 			path p, q;
 			path a, b;
+			pair r[];
 
 			p := (0, 0) -- (w, h);
 			q := (w, 0) -- (0, h);
@@ -25,52 +26,20 @@
 
 			draw p withcolor blue;
 			draw q withcolor blue;
-			draw a withcolor blue;
-			draw b withcolor blue;
+%			draw a withcolor blue;
+%			draw b withcolor blue;
 
-			draw (xpart z0, 0) -- (xpart z0, h) withcolor red;
-			draw (xpart z1, 0) -- (xpart z1, h) withcolor red;
+%			draw (xpart z0, 0) -- (xpart z0, h) withcolor red;
+%			draw (xpart z1, 0) -- (xpart z1, h) withcolor red;
+
+			r0 = (xpart z1, .5h + .5w); % top left
+			r1 = (xpart z0, .5h + .5w); % top right
+			r2 = (xpart z0, .5h - .5w); % bottom right
+			r3 = (xpart z1, .5h - .5w); % bottom left
+
+			r
 		enddef;
 	\stopMPdefinitions
-
-	\startreusableMPgraphic{canon}
-		h := \overlayheight;
-		w := \overlaywidth;
-		canon(h, w);
-	\stopreusableMPgraphic
-
-	\startmode[debug]
-		\defineoverlay[canon] [\reusableMPgraphic{canon}]
-		\setupbackgrounds[rightpage][background=canon]
-	\stopmode
-
-	\startMPcalculation
-		h := PaperHeight;
-		w := PaperWidth;
-		canon(h, w);
-
-		passvariable("canon:textleft",   xpart z1);
-		passvariable("canon:textright",  w - xpart z0);
-		passvariable("canon:textwidth",  xpart z0 - xpart z1);
-		passvariable("canon:texttop",    h - ypart z0);
-		passvariable("canon:textbottom", h - ypart z0);
-		passvariable("canon:textheight", w);
-	\stopMPcalculation
-
-	\setuplayout[
-		header=\bodyfontsize,
-		headerdistance=\bodyfontsize, % XXX: this ought to be found geometrically
-		top=0pt,
-		topspace=\dimexpr\MPrunvar{canon:texttop}bp-\headerheight-\headerdistance\relax,
-		footer=0pt,
-		footerdistance=0pt,
-		height=\dimexpr\MPrunvar{canon:textheight}bp
-			+\headerheight+\headerdistance
-			+\footerheight+\footerdistance\relax,
-		backspace=\MPrunvar{canon:textleft}bp,
-		margin=0pt, % TODO: find where to put this
-		width=\MPrunvar{canon:textwidth}bp,
-	]
 
 \stopenvironment
 

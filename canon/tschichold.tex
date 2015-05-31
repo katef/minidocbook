@@ -12,9 +12,10 @@
 	\setuppagenumbering[alternative=doublesided]
 
 	\startMPdefinitions
-		def canon(expr h, w) =
+		vardef canon(expr h, w) =
 			path p, q;
 			path m;
+			pair r[];
 
 			p := (w, 0) -- (0, h); % diagonal
 			hyp := h ++ w; % length of p
@@ -43,60 +44,14 @@
 			draw m withcolor blue;
 			draw p withcolor blue;
 
-			draw (w - rhs, 0) -- (w - rhs, h) withcolor red;
-			draw (0, h - ths) -- (w, h - ths) withcolor red;
-			draw (0, 0 + bhs) -- (w, 0 + bhs) withcolor red;
-			draw (0 + lhs, 0) -- (0 + lhs, h) withcolor red;
+			r0 = (0 + lhs, h - ths); % top left
+			r1 = (w - rhs, h - ths); % top right
+			r2 = (w - rhs, 0 + bhs); % bottom right
+			r3 = (0 + lhs, 0 + bhs); % bottom left
+
+			r
 		enddef;
 	\stopMPdefinitions
-
-	\startreusableMPgraphic{canon-recto}
-		h := \overlayheight;
-		w := \overlaywidth;
-		canon(h, w);
-	\stopreusableMPgraphic
-
-	\startreusableMPgraphic{canon-verso}
-		h := \overlayheight;
-		w := \overlaywidth;
-		canon(h, -w);
-	\stopreusableMPgraphic
-
-	\startmode[debug]
-		\defineoverlay[canon-recto] [\reusableMPgraphic{canon-recto}]
-		\defineoverlay[canon-verso] [\reusableMPgraphic{canon-verso}]
-
-		\setupbackgrounds[leftpage] [background=canon-verso]
-		\setupbackgrounds[rightpage][background=canon-recto]
-	\stopmode
-
-	\startMPcalculation
-		h := PaperHeight;
-		w := PaperWidth;
-		canon(h, w);
-
-		passvariable("canon:textleft",   lhs);
-		passvariable("canon:textright",  w - rhs);
-		passvariable("canon:textwidth",  w - rhs - lhs);
-		passvariable("canon:texttop",    ths);
-		passvariable("canon:textbottom", bhs);
-		passvariable("canon:textheight", h - ths - bhs);
-	\stopMPcalculation
-
-	\setuplayout[
-		header=\bodyfontsize,
-		headerdistance=\bodyfontsize, % XXX: this ought to be found geometrically
-		top=0pt,
-		topspace=\dimexpr\MPrunvar{canon:texttop}bp-\headerheight-\headerdistance\relax,
-		footer=0pt,
-		footerdistance=0pt,
-		height=\dimexpr\MPrunvar{canon:textheight}bp
-			+\headerheight+\headerdistance
-			+\footerheight+\footerdistance\relax,
-		backspace=\MPrunvar{canon:textleft}bp,
-		margin=0pt, % TODO: find where to put this
-		width=\MPrunvar{canon:textwidth}bp,
-	]
 
 \stopenvironment
 

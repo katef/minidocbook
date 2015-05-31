@@ -9,16 +9,17 @@
 	\setuppagenumbering[alternative=doublesided]
 
 	\startMPdefinitions
-		def canon(expr h, w) =
-			path p, q, r;
+		vardef canon(expr h, w) =
+			path p, q, g;
 			path m, n, o;
 			path t, v, u;
+			pair r[];
 
 			p := (w,  0) -- (0, .5h); % bottom half-page diagonal
 			q := (w,  h) -- (0, .5h); % top half-page diagonal
-			r := (w,  h) -- (0, 0); % one-page diagonal
+			g := (w,  h) -- (0, 0); % one-page diagonal
 
-			z0 = p intersectionpoint r; % centre point
+			z0 = p intersectionpoint g; % centre point
 
 			m := (xpart z0, 0) -- (xpart z0, h); % vertical
 			n := (w, 0) -- (xpart z0, h); % left diagonal
@@ -28,7 +29,7 @@
 
 			t := z1 -- (xpart z0, 0); % crossbar
 
-			z2 = t intersectionpoint r; % bottom left
+			z2 = t intersectionpoint g; % bottom left
 
 			v := (0, ypart z2) -- (w, ypart z2); % bottom
 
@@ -36,74 +37,25 @@
 
 			u := (xpart z3, 0) -- (xpart z3, h); % right
 
-			z4 = u intersectionpoint r; % top right
+			z4 = u intersectionpoint g; % top right
 
 			draw p withcolor blue;
 			draw q withcolor blue;
-			draw r withcolor blue;
+			draw g withcolor blue;
 			draw m withcolor blue;
 			draw n withcolor blue;
 			draw z0 -- z1 withcolor blue;
 			draw t withcolor blue;
 
-			draw (xpart z2, 0) -- (xpart z2, h) withcolor red;
-			draw (xpart z3, 0) -- (xpart z3, h) withcolor red;
-			draw (0, ypart z2) -- (w, ypart z2) withcolor red;
-			draw (0, ypart z4) -- (w, ypart z4) withcolor red;
+			r0 = (xpart z2, ypart z4); % top left
+			r1 = (xpart z3, ypart z4); % top right
+			r2 = (xpart z3, ypart z2); % bottom right
+			r3 = (xpart z2, ypart z2); % bottom left
 
-			% TODO: just a guess for the footer
-%			draw (0, ypart z1 / 2) -- (xpart z0, 0) withcolor green;
-
+			r
 		enddef;
+
 	\stopMPdefinitions
-
-	\startreusableMPgraphic{canon-recto}
-		h := \overlayheight;
-		w := \overlaywidth;
-		canon(h, w);
-	\stopreusableMPgraphic
-
-	\startreusableMPgraphic{canon-verso}
-		h := \overlayheight;
-		w := \overlaywidth;
-		canon(h, -w);
-	\stopreusableMPgraphic
-
-	\startmode[debug]
-		\defineoverlay[canon-recto] [\reusableMPgraphic{canon-recto}]
-		\defineoverlay[canon-verso] [\reusableMPgraphic{canon-verso}]
-
-		\setupbackgrounds[leftpage] [background={canon-verso, footer-verso}]
-		\setupbackgrounds[rightpage][background={canon-recto, footer-recto}]
-	\stopmode
-
-	\startMPcalculation
-		h := PaperHeight;
-		w := PaperWidth;
-		canon(h, w);
-
-		passvariable("canon:textleft",   xpart z2);
-		passvariable("canon:textright",  w - xpart z3);
-		passvariable("canon:textwidth",  xpart z3 - xpart z2);
-		passvariable("canon:texttop",    h - ypart z4);
-		passvariable("canon:textbottom", ypart z2);
-		passvariable("canon:textheight", ypart z4 - ypart z2);
-	\stopMPcalculation
-
-	\setuplayout[
-		header=0pt,
-		headerdistance=0pt,
-		top=0pt,
-		topspace=\dimexpr\MPrunvar{canon:texttop}bp-\headerheight-\headerdistance\relax,
-		footer=\bodyfontsize,
-		footerdistance=\bodyfontsize, % XXX: this ought to be found geometrically
-		height=\dimexpr\MPrunvar{canon:textheight}bp
-			+\headerheight+\headerdistance
-			+\footerheight+\footerdistance\relax,
-		backspace=\MPrunvar{canon:textleft}bp,
-		margin=0pt, % TODO: find where to put this
-		width=\MPrunvar{canon:textwidth}bp,
-	]
 
 \stopenvironment
 

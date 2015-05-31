@@ -1,0 +1,85 @@
+
+\startmode[debug]
+
+	\startreusableMPgraphic{canon-recto}
+		h := \overlayheight;
+		w := \overlaywidth;
+
+		r := canon(h, w);
+
+		draw r0 -- r1 -- r2 -- r3 -- cycle withcolor red;
+
+%		draw r0 withpen pencircle scaled 10bp withcolor red;
+%		draw r1 withpen pencircle scaled 10bp withcolor red;
+%		draw r2 withpen pencircle scaled 10bp withcolor red;
+%		draw r3 withpen pencircle scaled 10bp withcolor red;
+
+%		draw (xpart r1, 0) -- (xpart r1, h) withcolor red; % right
+%		draw (xpart r0, 0) -- (xpart r0, h) withcolor red; % left
+%		draw (0, ypart r0) -- (w, ypart r0) withcolor red; % top
+%		draw (0, ypart r2) -- (w, ypart r2) withcolor red; % bottom
+	\stopreusableMPgraphic
+
+	\startreusableMPgraphic{canon-verso}
+		h := \overlayheight;
+		w := \overlaywidth;
+
+		r := canon(h, -w);
+
+		draw r0 -- r1 -- r2 -- r3 -- cycle withcolor red;
+
+%		draw r0 withpen pencircle scaled 10bp withcolor red;
+%		draw r1 withpen pencircle scaled 10bp withcolor red;
+%		draw r2 withpen pencircle scaled 10bp withcolor red;
+%		draw r3 withpen pencircle scaled 10bp withcolor red;
+
+%		draw (xpart r1, 0) -- (xpart r1, h) withcolor red; % right
+%		draw (xpart r0, 0) -- (xpart r0, h) withcolor red; % left
+%		draw (0, ypart r0) -- (w, ypart r0) withcolor red; % top
+%		draw (0, ypart r2) -- (w, ypart r2) withcolor red; % bottom
+	\stopreusableMPgraphic
+
+	\defineoverlay[canon-recto] [\reusableMPgraphic{canon-recto}]
+	\defineoverlay[canon-verso] [\reusableMPgraphic{canon-verso}]
+
+	\setupbackgrounds[leftpage] [background={canon-verso, footer-verso}]
+	\setupbackgrounds[rightpage][background={canon-recto, footer-recto}]
+
+\stopmode
+
+\startMPcalculation
+	h := PaperHeight;
+	w := PaperWidth;
+
+	r := canon(h, w); % top left, top right, bottom right, bottom left
+
+	passvariable("canon:textleft",   xpart r0);
+	passvariable("canon:textright",  w - xpart r1);
+	passvariable("canon:textwidth",  xpart r1 - xpart r0);
+	passvariable("canon:texttop",    h - ypart r0);
+	passvariable("canon:textbottom", ypart r2);
+	passvariable("canon:textheight", ypart r0 - ypart r2);
+\stopMPcalculation
+
+% TODO: determine single/double sided automatically, based on the left and right margins
+
+\setuplayout[
+	margin=0pt, % TODO: find where to put this
+	header=0pt,
+	headerdistance=0pt,
+	top=0pt,
+	topspace=\dimexpr\MPrunvar{canon:texttop}bp
+		-\headerheight-\headerdistance\relax,
+	height=\dimexpr\MPrunvar{canon:textheight}bp
+		+\headerheight+\headerdistance
+		+\footerheight+\footerdistance\relax,
+	backspace=\MPrunvar{canon:textleft}bp,
+	width=\MPrunvar{canon:textwidth}bp
+]
+
+% XXX: this ought to be found geometrically
+\setuplayout[
+	footer=\bodyfontsize,
+	footerdistance=\bodyfontsize
+]
+
