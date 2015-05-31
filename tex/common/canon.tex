@@ -1,52 +1,4 @@
 
-\startmode[debug]
-
-	\startreusableMPgraphic{canon-recto}
-		h := \overlayheight;
-		w := \overlaywidth;
-
-		r := canon(h, w);
-
-		draw r0 -- r1 -- r2 -- r3 -- cycle withcolor red;
-
-%		draw r0 withpen pencircle scaled 10bp withcolor red;
-%		draw r1 withpen pencircle scaled 10bp withcolor red;
-%		draw r2 withpen pencircle scaled 10bp withcolor red;
-%		draw r3 withpen pencircle scaled 10bp withcolor red;
-
-%		draw (xpart r1, 0) -- (xpart r1, h) withcolor red; % right
-%		draw (xpart r0, 0) -- (xpart r0, h) withcolor red; % left
-%		draw (0, ypart r0) -- (w, ypart r0) withcolor red; % top
-%		draw (0, ypart r2) -- (w, ypart r2) withcolor red; % bottom
-	\stopreusableMPgraphic
-
-	\startreusableMPgraphic{canon-verso}
-		h := \overlayheight;
-		w := \overlaywidth;
-
-		r := canon(h, -w);
-
-		draw r0 -- r1 -- r2 -- r3 -- cycle withcolor red;
-
-%		draw r0 withpen pencircle scaled 10bp withcolor red;
-%		draw r1 withpen pencircle scaled 10bp withcolor red;
-%		draw r2 withpen pencircle scaled 10bp withcolor red;
-%		draw r3 withpen pencircle scaled 10bp withcolor red;
-
-%		draw (xpart r1, 0) -- (xpart r1, h) withcolor red; % right
-%		draw (xpart r0, 0) -- (xpart r0, h) withcolor red; % left
-%		draw (0, ypart r0) -- (w, ypart r0) withcolor red; % top
-%		draw (0, ypart r2) -- (w, ypart r2) withcolor red; % bottom
-	\stopreusableMPgraphic
-
-	\defineoverlay[canon-recto] [\reusableMPgraphic{canon-recto}]
-	\defineoverlay[canon-verso] [\reusableMPgraphic{canon-verso}]
-
-	\setupbackgrounds[leftpage] [background={canon-verso, footer-verso}]
-	\setupbackgrounds[rightpage][background={canon-recto, footer-recto}]
-
-\stopmode
-
 \startMPcalculation
 	h := PaperHeight;
 	w := PaperWidth;
@@ -61,7 +13,83 @@
 	passvariable("canon:textheight", ypart r0 - ypart r2);
 \stopMPcalculation
 
-% TODO: determine single/double sided automatically, based on the left and right margins
+% The default is single-sided where the left and right margins are equal.
+% This may be overridden by explicitly specifying singlesided or doublesided instead.
+%
+% 1pt is our threshold for considering margins equal. This caters for inaccuracies
+% where the left and right margins are calculated by different means.
+\startnotallmodes[singlesided,doublesided]
+	\ifabsdim\dimexpr\MPrunvar{canon:textleft}bp-\MPrunvar{canon:textright}bp\relax<1pt
+		\enablemode[singlesided]
+	\else
+		\enablemode[doublesided]
+	\fi
+\stopnotallmodes
+
+\startmode[debug]
+
+	\startmode[singlesided,doublesided]
+		\startreusableMPgraphic{canon-recto}
+			h := \overlayheight;
+			w := \overlaywidth;
+
+			r := canon(h, w);
+
+			draw r0 -- r1 -- r2 -- r3 -- cycle withcolor red;
+
+%			draw r0 withpen pencircle scaled 10bp withcolor red;
+%			draw r1 withpen pencircle scaled 10bp withcolor red;
+%			draw r2 withpen pencircle scaled 10bp withcolor red;
+%			draw r3 withpen pencircle scaled 10bp withcolor red;
+
+%			draw (xpart r1, 0) -- (xpart r1, h) withcolor red; % right
+%			draw (xpart r0, 0) -- (xpart r0, h) withcolor red; % left
+%			draw (0, ypart r0) -- (w, ypart r0) withcolor red; % top
+%			draw (0, ypart r2) -- (w, ypart r2) withcolor red; % bottom
+		\stopreusableMPgraphic
+
+		\defineoverlay[canon-recto] [\reusableMPgraphic{canon-recto}]
+	\stopmode
+
+	\startmode[doublesided]
+		\startreusableMPgraphic{canon-verso}
+			h := \overlayheight;
+			w := \overlaywidth;
+
+			r := canon(h, -w);
+
+			draw r0 -- r1 -- r2 -- r3 -- cycle withcolor red;
+
+%			draw r0 withpen pencircle scaled 10bp withcolor red;
+%			draw r1 withpen pencircle scaled 10bp withcolor red;
+%			draw r2 withpen pencircle scaled 10bp withcolor red;
+%			draw r3 withpen pencircle scaled 10bp withcolor red;
+
+%			draw (xpart r1, 0) -- (xpart r1, h) withcolor red; % right
+%			draw (xpart r0, 0) -- (xpart r0, h) withcolor red; % left
+%			draw (0, ypart r0) -- (w, ypart r0) withcolor red; % top
+%			draw (0, ypart r2) -- (w, ypart r2) withcolor red; % bottom
+		\stopreusableMPgraphic
+
+		\defineoverlay[canon-verso] [\reusableMPgraphic{canon-verso}]
+	\stopmode
+
+	\startmode[singlesided]
+		\setupbackgrounds[page]     [background=canon-recto]
+	\stopmode
+	\startmode[doublesided]
+		\setupbackgrounds[leftpage] [background=canon-verso]
+		\setupbackgrounds[rightpage][background=canon-recto]
+	\stopmode
+
+\stopmode
+
+\startmode[singlesided]
+	\setuppagenumbering[alternative=singlesided]
+\stopmode
+\startmode[doublesided]
+	\setuppagenumbering[alternative=doublesided]
+\stopmode
 
 \setuplayout[
 	margin=0pt, % TODO: find where to put this
