@@ -1,0 +1,53 @@
+
+% A not particularly pleasing single-page layout with exceptionally narrow margins.
+%
+% This is an attempt to squeeze as much onto the page as possible, which is rarely
+% a good idea. Works for all ratios. Only practical if your text is in columns.
+
+\startenvironment doublecircle
+
+	\startMPdefinitions
+		vardef canon(expr h, w) =
+			path a, b, c, d, e;
+			pair r[];
+
+			a := (.5w, h) -- (0, .5h);
+			b := (0, h) -- (w, 0);
+
+			draw a withcolor blue;
+			draw b withcolor blue;
+
+			z0 = a intersectionpoint b; % off centre
+
+			draw (xpart z0, 0) -- (xpart z0, h) withcolor blue;
+			draw (0, ypart z0) -- (w, ypart z0) withcolor blue;
+
+			c := (0, ypart z0) -- (xpart z0, h);
+			draw c withcolor blue;
+
+			z1 = c intersectionpoint b;
+
+			draw (xpart z1, ypart z1) -- (xpart z1, h) withcolor blue;
+			draw (0, ypart z1) -- (xpart z1, ypart z1) withcolor blue;
+
+			d := (xpart z1, h) -- (0, ypart z1);
+			draw d withcolor blue;
+
+			z2 = b intersectionpoint d; % top left
+
+			e := (w - xpart z2, 0) -- (w - xpart z2, h); % rhs
+			%draw e;
+
+			z3 = b intersectionpoint e; % bottom right
+
+			r0 = z2; % top left
+			r2 = z3; % bottom right
+			r1 = (xpart r2, ypart r0); % top right
+			r3 = (xpart r0, ypart r2); % bottom left
+
+			r
+		enddef;
+	\stopMPdefinitions
+
+\stopenvironment
+
