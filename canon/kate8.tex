@@ -1,0 +1,65 @@
+
+% my attempt at a rational single-page geometry
+% intended to be suitable for any ratio
+
+\startenvironment kate8
+
+	\startMPdefinitions
+		vardef canon(expr h, w) =
+			path p, q, g;
+			path m, n, o;
+			path t, v, u;
+			path c;
+			pair r[];
+
+			p := (w, 0) -- (0, .5h); % bottom half-page diagonal
+			g := (w, h) -- (0, 0); % one-page diagonal
+
+			draw (w, 0) -- (0, h) withcolor blue;
+			draw (w, 0){up} .. (0, h); % a similar effect
+
+			c = (w, 0) -- (0, h);
+
+			z0 = p intersectionpoint g; % centre point
+
+			m := (xpart z0, 0) -- (xpart z0, h); % vertical
+			n := (w, 0) -- (xpart z0, h); % left diagonal
+			o := z0 -- (-xpart z0, 0); % projection off edge
+
+			z1 = o intersectionpoint ((0, 0) -- (0, h)); % edge
+
+			t := z1 -- (xpart z0, 0); % crossbar
+
+			q := (0, h) -- (w, ypart z0); % top half-page diagonal
+			draw (0, ypart z0) -- (w, ypart z0) withcolor blue;
+
+			z2 = t intersectionpoint g; % bottom left
+
+			v := (0, ypart z2) -- (w, ypart z2); % bottom
+
+			z3 = v intersectionpoint n; % bottom right
+
+			u := (xpart z3, 0) -- (xpart z3, h); % right
+
+			z4 = u intersectionpoint g; % top right
+
+			draw (xpart z0, ypart z0) -- (xpart z0, 0) withcolor blue;
+
+			draw p withcolor blue;
+			draw q withcolor blue;
+			draw g withcolor blue;
+			draw z0 -- z1 withcolor blue;
+			draw t withcolor blue;
+
+			r0 = (xpart z2, ypart z4); % top left
+			r2 = c intersectionpoint v; % bottom right
+			r3 = (xpart z2, ypart z2); % bottom left
+			r1 = (xpart r2, ypart z4); % top right
+
+			r
+		enddef;
+
+	\stopMPdefinitions
+
+\stopenvironment
+
