@@ -1,0 +1,66 @@
+
+% my other attempt at a rational single-page geometry
+% intended to be suitable for any ratio
+
+\startenvironment kate9
+
+	\startMPdefinitions
+		vardef canon(expr h, w) =
+			path p, q, g, d;
+			path m, n, o;
+			path t, v, u;
+			path c;
+			path rhs, bhs;
+			pair r[];
+
+			p := (w, 0) -- (0, .5h); % bottom half-page diagonal
+			g := (w, h) -- (0, 0); % one-page diagonal
+
+			draw (0, 0) -- (w, h) withcolor blue;
+
+			draw subpath (0, 1) of fullcircle scaled 2h shifted (w - h, 0) withcolor blue;
+
+			draw (w, 0) -- (0, h) withcolor blue;
+
+			c = (w, 0) -- (0, h);
+
+			z0 = p intersectionpoint g; % centre point
+
+			m := (xpart z0, 0) -- (xpart z0, h); % vertical
+			n := (w, 0) -- (xpart z0, h); % left diagonal
+			o := z0 -- (-xpart z0, 0); % projection off edge
+
+			z1 = o intersectionpoint ((0, 0) -- (0, h)); % edge
+
+			t := z1 -- (xpart z0, 0); % crossbar
+
+			q := (0, h) -- (w, ypart z0); % half-page diagonal
+			d := (w, h) -- (0, ypart z0); % half-page diagonal
+
+			z5 = (subpath (0, 1) of fullcircle scaled 2h shifted (w - h, 0)) intersectionpoint ((0, h) -- (w, ypart z0));
+			rhs := (xpart z5, 0) -- (xpart z5, h);
+
+			draw (0, ypart z0) -- (w, ypart z0) withcolor blue;
+
+			z3 = rhs intersectionpoint c;
+
+			z4 = rhs intersectionpoint d; % top right
+
+			bhs := (0, ypart z3) -- (w, ypart z3);
+
+			z2 = bhs intersectionpoint g; % bottom left
+
+			draw p withcolor blue;
+			draw q withcolor blue;
+			draw d withcolor blue;
+
+			r0 = (xpart z2, ypart z4); % top left
+			r1 = (xpart z3, ypart z3); % bottom right
+
+			r
+		enddef;
+
+	\stopMPdefinitions
+
+\stopenvironment
+
