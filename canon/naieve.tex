@@ -12,28 +12,18 @@
 			pair r[];
 
 			p := (0, 0) -- (w, h);
-			q := (w, 0) -- (0, h);
+			q := (0, h) -- (w, 0);
 
 			a := (0, .5h + .5w) -- (w, .5h + .5w); % top
 			b := (0, .5h - .5w) -- (w, .5h - .5w); % bottom
-
-			z0 = p intersectionpoint a; % top right
-			z1 = q intersectionpoint a; % top left
 
 			draw fullcircle scaled w shifted (.5w, .5h) withcolor blue;
 
 			draw p withcolor blue;
 			draw q withcolor blue;
-%			draw a withcolor blue;
-%			draw b withcolor blue;
 
-%			draw (xpart z0, 0) -- (xpart z0, h) withcolor red;
-%			draw (xpart z1, 0) -- (xpart z1, h) withcolor red;
-
-			r0 = (xpart z1, .5h + .5w); % top left
-			r1 = (xpart z0, .5h + .5w); % top right
-			r2 = (xpart z0, .5h - .5w); % bottom right
-			r3 = (xpart z1, .5h - .5w); % bottom left
+			r0 = q intersectionpoint a; % top left
+			r1 = q intersectionpoint b; % bottom right
 
 			r
 		enddef;
