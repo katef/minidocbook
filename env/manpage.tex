@@ -1,6 +1,9 @@
 
 \startenvironment manpage
 
+	\definemarking[Refentry]  % mctl
+	\definemarking[Manvolnum] % 1
+
 	\setuphead[part][
 		placehead=yes,
 		number=no]
@@ -13,8 +16,11 @@
 
 	\setuphead[Refentry][
 		number=no,
-		page=yes]
+		page=yes,
+		placehead=empty, % shown in header instead
+		after={\blank[none]\blank[nowhite, disable]}] % suppresses blank line after placehead=empty
 
+	% TODO: make this indent a configurable variable
 	\setuphead[section][
 		number=no,
 		page=no,
@@ -22,36 +28,27 @@
 		after={\startnarrower[1.5cm]},
 		aftersection={\stopnarrower}]
 
-	\setvariable{env}{manual}{{\bf KMKF} Manual}
-	\setvariable{env}{company}{kmkf.elide.org}
-	\setvariable{env}{manpage}{INSTALL(7MK)}
-
 	\setupcombinedlist[content][list={part,Reference,Refentry}]
 
-	\startsetups[text a]
-		\rlap{\getvariable{env}{manpage}}
+	\startsetups[Manpage:header]
+		\rlap{\getmarking[Refname](\getmarking[Manvolnum])}
 		\hfill
-		\getvariable{env}{manual}
+		\getmarking[Product] \getmarking[Parttitle]%
+			\doifnotempty{\getmarking[Reference]}{: \getmarking[Reference]} % XXX: broken
 		\hfill
-		\llap{\getvariable{env}{manpage}}
+		\llap{\getmarking[Refname](\getmarking[Manvolnum])}
 	\stopsetups
 
-	\startsetups[text b]
-		\rlap{\getvariable{env}{company}}
+	\startsetups[Manpage:footer]
+		\rlap{\getmarking[Company]}
 		\hfill
 		\setup{doc:classify}
 		\hfill
 		\llap{\pagenumber}
 	\stopsetups
 
-	\setupheadertexts[\setups{text a}][]
-	\setupfootertexts[\setups{text b}][]
-
-	% XXX:
-%	\setupheadertexts[{MCT(1)}\hfill {MCT Programmer's manual} \hfill {MCT(1)}][]
-%	\setupfootertexts[Bubblephone Ltd.\setup{doc:classify}][\small\pagenumber]
-%	\setupfootertexts[\setup{doc:classify}][\setup{doc:revision}]
-
+	\setupheadertexts[\setups{Manpage:header}][]
+	\setupfootertexts[\setups{Manpage:footer}][]
 
 	\startsetups[Reference:before]
 		\ifconditional\libraryentries

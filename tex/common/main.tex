@@ -30,6 +30,13 @@
 \input common/fallback.tex
 \input common/primitive.tex
 
+\definemarking[Company]  % Bubblephone Ltd.
+\definemarking[Title]    % SID Users' Guide
+\definemarking[Revision] % 4
+\definemarking[Product]  % MCT
+\definemarking[Author]   % Katherine Flavel
+\definemarking[Classify] % Unrestricted
+
 % input DTD
 \startmode[minidocbook]
 	\input minidocbook/structural
@@ -62,11 +69,4 @@
 \startmode[report]
 	\environment report
 \stopmode
-
-% XXX: doesn't belong here; get this from the document XML
-%\Revision[4]
-%\Product[KMKF]
-%\Document[Manual]
-%\Author[Katherine Flavel]
-%\Classify[]
 

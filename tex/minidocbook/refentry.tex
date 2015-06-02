@@ -2,6 +2,10 @@
 \definehead [Reference] [chapter]
 \definehead [Refentry]  [chapter]
 
+\definemarking[Manvolnum] % 2
+\definemarking[Reference] % libmct
+\definemarking[Refname]   % mct_init,mct_fini
+
 \startxmlsetups mdb:setup-refentry
 	\xmlsetsetup{\xmldocument}{synopsis}{mdb:*} % XXX: duplicate
 %	\xmlsetfunction{\xmldocument}{synopsis}{mdb_synopsis}
@@ -10,6 +14,9 @@
 	\xmlsetsetup{\xmldocument}{refentry}{mdb:collated-refentry}
 	\xmlsetsetup{\xmldocument}{/refentry}{mdb:single-refentry}
 
+%	\xmlsetsetup{\xmldocument}{title}{-} % handled from other xmlsetups
+	\xmlsetsetup{\xmldocument}{refentryinfo|refmeta}{mdb:*}
+
 	\xmlsetsetup{\xmldocument}{refname|refnamediv|refsynopsisdiv|refsection}{mdb:*}
 	\xmlsetsetup{\xmldocument}{author|firstname|surname|affiliation|orgname}{mdb:*}
 	\xmlsetsetup{\xmldocument}{cmdsynopsis|synopsis}{mdb:*}
@@ -17,6 +24,21 @@
 \stopxmlsetups
 
 \xmlregistersetup{mdb:setup-refentry}
+
+\startxmlsetups mdb:title
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups mdb:reference
+
+	\startReference[title=\xmltext{#1}{./title}]
+	\marking[Reference]{\xmltext{#1}{./title}} % XXX: not \xmltext, but \xmlall
+
+	\xmlflush{#1}
+
+	\stopReference
+
+\stopxmlsetups
 
 % TODO: centralise refentry guts
 \startxmlsetups mdb:single-refentry
@@ -34,20 +56,10 @@
 
 \stopxmlsetups
 
-\startxmlsetups mdb:reference
-
-	\startReference[title=\xmltext{#1}{./title}]
-
-	\xmlflush{#1}
-
-	\stopReference
-
-\stopxmlsetups
-
 \startxmlsetups mdb:collated-refentry
 
-	% TODO: handle multiple refnames
-	\startRefentry[title=\xmltext{#1}{refnamediv/refname}(\xmltext{#1}{refmeta/manvolnum})]
+	% TODO: show refpurpose in TOC text
+	\startRefentry[title=\xmlconcat{#1}{refnamediv/refname}{, }(\xmltext{#1}{refmeta/manvolnum})]
 
 	\xmlflush{#1}
 
@@ -58,6 +70,19 @@
 
 	\stopRefentry
 
+\stopxmlsetups
+
+\startxmlsetups mdb:refentryinfo
+%	\marking[Title]    {\xmlall{#1}{title}} % XXX: this is supposed to be the document title
+%	\marking[Revision] {}
+	\marking[Product]  {\xmlall{#1}{productname}}
+	\marking[Author]   {\xmlall{#1}{author}}
+%	\marking[Classify  {}
+\stopxmlsetups
+
+\startxmlsetups mdb:refmeta
+%	\marking[Refentrytitle] {\xmltext{#1}{./refentrytitle}} % not used
+	\marking[Manvolnum]     {\xmltext{#1}{./manvolnum}}
 \stopxmlsetups
 
 \startxmlsetups mdb:author
@@ -89,6 +114,7 @@
 
 \startxmlsetups mdb:refnamediv
 	\startsection[title=Name,reference=sec:TODO]
+	\marking[Refname]{\xmlconcat{#1}{./refname}{, }}
 	\xmlconcat{#1}{refname}{, }
 	\thinspace—\thinspace
 	\xmltext{#1}{refpurpose}
