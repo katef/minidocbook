@@ -83,10 +83,20 @@
 	\setuppagenumbering[alternative=doublesided]
 \stopmode
 
+% XXX: this ought to be found geometrically
+\setuplayout[
+	header=\bodyfontsize,
+	headerdistance=2\bodyfontsize
+]
+
+% XXX: this ought to be found geometrically
+\setuplayout[
+	footer=\bodyfontsize,
+	footerdistance=3\bodyfontsize
+]
+
 \setuplayout[
 	margin=0pt, % TODO: find where to put this
-	header=0pt,
-	headerdistance=0pt,
 	top=0pt,
 	topspace=\dimexpr\MPrunvar{canon:texttop}bp
 		-\headerheight-\headerdistance\relax,
@@ -95,11 +105,5 @@
 		+\footerheight+\footerdistance\relax,
 	backspace=\MPrunvar{canon:textleft}bp,
 	width=\MPrunvar{canon:textwidth}bp
-]
-
-% XXX: this ought to be found geometrically
-\setuplayout[
-	footer=\bodyfontsize,
-	footerdistance=\bodyfontsize
 ]
 
