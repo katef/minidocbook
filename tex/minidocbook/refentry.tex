@@ -2,10 +2,6 @@
 \definehead [Reference] [chapter]
 \definehead [Refentry]  [chapter]
 
-\definemarking[Manvolnum] % 2
-\definemarking[Reference] % libmct
-\definemarking[Refname]   % mct_init,mct_fini
-
 \startxmlsetups mdb:setup-refentry
 	\xmlsetsetup{\xmldocument}{synopsis}{mdb:*} % XXX: duplicate
 %	\xmlsetfunction{\xmldocument}{synopsis}{mdb_synopsis}
@@ -32,7 +28,7 @@
 \startxmlsetups mdb:reference
 
 	\startReference[title=\xmltext{#1}{./title}]
-	\marking[Reference]{\xmltext{#1}{./title}} % XXX: not \xmltext, but \xmlall
+	\marking[Reference]{\xmltext{#1}{./title}}
 
 	\xmlflush{#1}
 
@@ -59,7 +55,7 @@
 \startxmlsetups mdb:collated-refentry
 
 	% TODO: show refpurpose in TOC text
-	\startRefentry[title=\xmlconcat{#1}{refnamediv/refname}{, }(\xmltext{#1}{refmeta/manvolnum})]
+	\startRefentry[title=\xmltext{#1}{./refmeta/refentrytitle}(\xmltext{#1}{refmeta/manvolnum})]
 
 	\xmlflush{#1}
 
@@ -81,7 +77,7 @@
 \stopxmlsetups
 
 \startxmlsetups mdb:refmeta
-%	\marking[Refentrytitle] {\xmltext{#1}{./refentrytitle}} % not used
+	\marking[Refentrytitle] {\xmltext{#1}{./refentrytitle}}
 	\marking[Manvolnum]     {\xmltext{#1}{./manvolnum}}
 \stopxmlsetups
 
@@ -117,7 +113,7 @@
 	\marking[Refname]{\xmlconcat{#1}{./refname}{, }}
 	\xmlconcat{#1}{refname}{, }
 	\thinspace—\thinspace
-	\xmltext{#1}{refpurpose}
+	\xmltext{#1}{refpurpose} % TODO: indent paragraph body for continued lines e.g. mct_session_add_name
 	\stopsection
 \stopxmlsetups
 

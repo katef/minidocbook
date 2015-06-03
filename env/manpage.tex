@@ -1,8 +1,10 @@
 
 \startenvironment manpage
 
-	\definemarking[Refentry]  % mctl
-	\definemarking[Manvolnum] % 1
+	\definemarking[Reference]     % libmct
+	\definemarking[Refentrytitle] % mct_init/fini
+	\definemarking[Refname]       % mct_init,mct_fini
+	\definemarking[Manvolnum]     % 3
 
 	\setuphead[part][
 		placehead=yes,
@@ -30,13 +32,15 @@
 
 	\setupcombinedlist[content][list={part,Reference,Refentry}]
 
-	\startsetups[Manpage:header]
-		\rlap{\getmarking[Refname](\getmarking[Manvolnum])}
-		\hfill
-		\getmarking[Product] \getmarking[Parttitle]%
-			\doifnotempty{\getmarking[Reference]}{: \getmarking[Reference]} % XXX: broken
-		\hfill
-		\llap{\getmarking[Refname](\getmarking[Manvolnum])}
+	\startsetups[Manpage:header-left]
+		\doiftext{\getmarking[Product]}{\bf \getmarking[Product]}
+		\getmarking[Parttitle]%
+			\doiftext{\getmarking[Reference]}{: \getmarking[Reference]}
+	\stopsetups
+
+	\startsetups[Manpage:header-right]
+		\feature[+][f:smcp]
+		\getmarking[Refentrytitle](\getmarking[Manvolnum])
 	\stopsetups
 
 	\startsetups[Manpage:footer]
@@ -47,7 +51,7 @@
 		\llap{\pagenumber}
 	\stopsetups
 
-	\setupheadertexts[\setups{Manpage:header}][]
+	\setupheadertexts[\setups{Manpage:header-left}][\setups{Manpage:header-right}]
 	\setupfootertexts[\setups{Manpage:footer}][]
 
 	\startsetups[Reference:before]
