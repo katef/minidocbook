@@ -1,6 +1,6 @@
 
-\definemarking[Partid]    % 2
-\definemarking[Parttitle] % Syscalls
+\definemarking[mdb:partid]    % 2
+\definemarking[mdb:parttitle] % Syscalls
 
 \startxmlsetups mdb:setup-structural
 	\xmlsetsetup{\xmldocument}{book|part}{mdb:*}
@@ -33,8 +33,8 @@
 \startxmlsetups mdb:part
 	% TODO: for manpages, name parts per <part id="3" role="libmct">
 	\startpart[title=\PartTitle{\xmlatt{#1}{id}}{\xmltext{#1}{./title}}]
-	\marking[Partid]{\xmlatt{#1}{id}}
-	\marking[Parttitle]{\xmltext{#1}{./title}}
+	\marking[mdb:partid]{\xmlatt{#1}{id}}
+	\marking[mdb:parttitle]{\xmltext{#1}{./title}}
 
 	\xmlflush{#1}
 

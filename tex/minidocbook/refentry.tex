@@ -28,7 +28,7 @@
 \startxmlsetups mdb:reference
 
 	\startReference[title=\xmltext{#1}{./title}]
-	\marking[Reference]{\xmltext{#1}{./title}}
+	\marking[man:reference]{\xmltext{#1}{./title}}
 
 	\xmlflush{#1}
 
@@ -69,16 +69,16 @@
 \stopxmlsetups
 
 \startxmlsetups mdb:refentryinfo
-%	\marking[Title]    {\xmlall{#1}{title}} % XXX: this is supposed to be the document title
-%	\marking[Revision] {}
-	\marking[Product]  {\xmlall{#1}{productname}}
-	\marking[Author]   {\xmlall{#1}{author}}
-%	\marking[Classify  {}
+%	\marking[doc:title]    {\xmlall{#1}{title}} % XXX: this is supposed to be the document title
+%	\marking[doc:revision] {}
+	\marking[doc:product]  {\xmlall{#1}{productname}}
+	\marking[doc:author]   {\xmlall{#1}{author}}
+%	\marking[doc:classify  {}
 \stopxmlsetups
 
 \startxmlsetups mdb:refmeta
-	\marking[Refentrytitle] {\xmltext{#1}{./refentrytitle}}
-	\marking[Manvolnum]     {\xmltext{#1}{./manvolnum}}
+	\marking[man:refentrytitle] {\xmltext{#1}{./refentrytitle}}
+	\marking[man:volnum]        {\xmltext{#1}{./manvolnum}}
 \stopxmlsetups
 
 \startxmlsetups mdb:author
@@ -110,7 +110,7 @@
 
 \startxmlsetups mdb:refnamediv
 	\startsection[title=Name,reference=sec:TODO]
-	\marking[Refname]{\xmlconcat{#1}{./refname}{, }}
+	\marking[man:refname]{\xmlconcat{#1}{./refname}{, }}
 	\xmlconcat{#1}{refname}{, }
 	\thinspace—\thinspace
 	\xmltext{#1}{refpurpose} % TODO: indent paragraph body for continued lines e.g. mct_session_add_name
