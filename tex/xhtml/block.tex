@@ -1,6 +1,11 @@
 
+\definestartstop[Header] [section]
+\definestartstop[Footer] [section]
+
 \startxmlsetups xhtml:setup-block
     \xmlsetsetup{\xmldocument}{span|div}{xhtml:*}
+    \xmlsetsetup{\xmldocument}{header|footer}{xhtml:*}
+    \xmlsetsetup{\xmldocument}{aside}{xhtml:*}
 \stopxmlsetups
 
 \xmlregistersetup{xhtml:setup-block}
@@ -11,5 +16,23 @@
 
 \startxmlsetups xhtml:span
 	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xhtml:header
+	\startHeader
+	\xmlflush{#1}
+	\stopHeader
+\stopxmlsetups
+
+\startxmlsetups xhtml:footer
+	\startFooter
+	\xmlflush{#1}
+	\stopFooter
+\stopxmlsetups
+
+\startxmlsetups xhtml:aside
+	\startAside
+	\xmlflush{#1}
+	\stopAside
 \stopxmlsetups
 
