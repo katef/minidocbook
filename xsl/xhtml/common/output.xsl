@@ -24,12 +24,14 @@
 	<xsl:template name="output">
 		<xsl:param name="title"/>
 		<xsl:param name="filename"/>
-		<xsl:param name="css"      select="''"/>
-		<xsl:param name="js"       select="''"/>
-		<xsl:param name="head"     select="/.."/>
-		<xsl:param name="body"     select="/.."/>
-		<xsl:param name="class"    select="false()"/>
-		<xsl:param name="color"    select="false()"/>
+		<xsl:param name="css"    select="''"/>
+		<xsl:param name="js"     select="''"/>
+		<xsl:param name="head"   select="/.."/>
+		<xsl:param name="body"   select="/.."/>
+		<xsl:param name="onload" select="''"/>
+		<xsl:param name="lang"   select="'en-gb'"/>
+		<xsl:param name="class"  select="false()"/>
+		<xsl:param name="color"  select="false()"/>
 
 		<xsl:variable name="method">
 			<xsl:choose>
@@ -119,6 +121,8 @@
 				<xsl:with-param name="js"     select="$js"/>
 				<xsl:with-param name="head"   select="$head"/>
 				<xsl:with-param name="body"   select="$body"/>
+				<xsl:with-param name="onload" select="$onload"/>
+				<xsl:with-param name="lang"   select="$lang"/>
 				<xsl:with-param name="class"  select="$class"/>
 				<xsl:with-param name="color"  select="$color"/>
 			</xsl:call-template>
