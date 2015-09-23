@@ -112,11 +112,12 @@
 		<xsl:param name="title"/>
 		<xsl:param name="filename"/>
 		<xsl:param name="chunklink"/>
+		<xsl:param name="class" select="''"/>
 
 		<xsl:param name="head" select="/.."/>
 
 		<xsl:call-template name="output">
-			<xsl:with-param name="class"    select="'minidocbook single'"/>
+			<xsl:with-param name="class"    select="concat('minidocbook single ', $class)"/>
 			<xsl:with-param name="filename" select="$filename"/>
 			<xsl:with-param name="title"    select="$title"/>
 			<xsl:with-param name="head"     select="$head"/>
@@ -164,11 +165,12 @@
 
 	<xsl:template name="page-toc">
 		<xsl:param name="title"/>
+		<xsl:param name="class" select="''"/>
 
 		<xsl:param name="head" select="/.."/>
 
 		<xsl:call-template name="output">
-			<xsl:with-param name="class"    select="'minidocbook toc'"/>
+			<xsl:with-param name="class"    select="concat('minidocbook toc ', $class)"/>
 			<xsl:with-param name="filename" select="'index'"/>
 			<xsl:with-param name="title"    select="$title"/>
 			<xsl:with-param name="head"     select="$head"/>
@@ -205,11 +207,12 @@
 
 	<xsl:template name="page-frontmatter">
 		<xsl:param name="title"/>
+		<xsl:param name="class" select="''"/>
 
 		<xsl:param name="head" select="/.."/>
 
 		<xsl:call-template name="output">
-			<xsl:with-param name="class"    select="'minidocbook frontmatter'"/>
+			<xsl:with-param name="class"    select="concat('minidocbook frontmatter ', $class)"/>
 			<xsl:with-param name="filename" select="'frontmatter'"/>
 			<xsl:with-param name="title"    select="$title"/>
 			<xsl:with-param name="head"     select="$head"/>
@@ -239,11 +242,12 @@
 	<xsl:template name="page-chunk">
 		<xsl:param name="title"/>
 		<xsl:param name="filename"/>
+		<xsl:param name="class" select="''"/>
 
 		<xsl:param name="head" select="/.."/>
 
 		<xsl:call-template name="output">
-			<xsl:with-param name="class"    select="'minidocbook chunk'"/>
+			<xsl:with-param name="class"    select="concat('minidocbook chunk ', $class)"/>
 			<xsl:with-param name="filename" select="$filename"/>
 			<xsl:with-param name="head"     select="$head"/>
 

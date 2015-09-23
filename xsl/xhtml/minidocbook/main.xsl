@@ -69,6 +69,7 @@
 			<xsl:with-param name="title"     select="$title"/>
 			<xsl:with-param name="filename"  select="'index'"/>
 			<xsl:with-param name="chunklink" select="false"/>
+			<xsl:with-param name="class"     select="'refentry'"/>
 
 			<xsl:with-param name="head">
 				<xsl:apply-templates select="refentryinfo/productname"       mode="refmeta"/>
@@ -116,6 +117,7 @@
 			<xsl:with-param name="title"     select="$title"/>
 			<xsl:with-param name="filename"  select="'index'"/>
 			<xsl:with-param name="chunklink" select="false"/>
+			<xsl:with-param name="class"     select="'article'"/>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -128,19 +130,23 @@
 			<xsl:with-param name="title"     select="$title"/>
 			<xsl:with-param name="filename"  select="'single'"/>
 			<xsl:with-param name="chunklink" select="'index'"/>
+			<xsl:with-param name="class"     select="'book'"/>
 		</xsl:call-template>
 
 		<xsl:call-template name="page-toc">
 			<xsl:with-param name="title" select="$title"/>
+			<xsl:with-param name="class" select="'book'"/>
 		</xsl:call-template>
 
 		<xsl:call-template name="page-frontmatter">
 			<xsl:with-param name="title" select="$title"/>
+			<xsl:with-param name="class" select="'book'"/>
 		</xsl:call-template>
 
 		<xsl:for-each select="preface|chapter|appendix">
 			<xsl:call-template name="page-chunk">
-				<xsl:with-param name="title"    select="$title"/>
+				<xsl:with-param name="title" select="$title"/>
+				<xsl:with-param name="class" select="'book'"/>
 				<xsl:with-param name="filename">
 					<xsl:apply-templates select="." mode="page-filename"/>
 				</xsl:with-param>
