@@ -34,9 +34,6 @@
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
 
-		<xsl:param name="overlay-rows" select="false()"/>
-		<xsl:param name="overlay-cols" select="false()"/>
-
 		<xsl:variable name="method">
 			<xsl:choose>
 				<xsl:when test="$www-ext = 'xhtml'">
@@ -130,9 +127,6 @@
 				<xsl:with-param name="title"  select="$title"/>
 				<xsl:with-param name="head"   select="$head"/>
 				<xsl:with-param name="body"   select="$body"/>
-
-				<xsl:param name="overlay-rows" select="$overlay-rows"/>
-				<xsl:param name="overlay-cols" select="$overlay-cols"/>
 			</xsl:call-template>
 
 		</common:document>
@@ -150,9 +144,6 @@
 		<xsl:param name="title"  select="/.."/>
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
-
-		<xsl:param name="overlay-rows" select="false()"/>
-		<xsl:param name="overlay-cols" select="false()"/>
 
 		<xsl:if test="$method = 'html'">
 			<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
@@ -212,18 +203,6 @@
 			</head>
 
 			<body onload="var r = document.documentElement; {$onload}">
-				<xsl:if test="$overlay-rows">
-					<xsl:attribute name="data-overlay-rows">
-						<xsl:value-of select="$overlay-rows"/>
-					</xsl:attribute>
-				</xsl:if>
-
-				<xsl:if test="$overlay-cols">
-					<xsl:attribute name="data-overlay-cols">
-						<xsl:value-of select="$overlay-cols"/>
-					</xsl:attribute>
-				</xsl:if>
-
 				<xsl:copy-of select="$body"/>
 			</body>
 		</html>
