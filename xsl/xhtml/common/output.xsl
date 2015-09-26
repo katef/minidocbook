@@ -22,16 +22,20 @@
 	<xsl:param name="www-ext" select="'xhtml5'"/>
 
 	<xsl:template name="output">
-		<xsl:param name="title"/>
 		<xsl:param name="filename"/>
 		<xsl:param name="css"    select="''"/>
 		<xsl:param name="js"     select="''"/>
-		<xsl:param name="head"   select="/.."/>
-		<xsl:param name="body"   select="/.."/>
 		<xsl:param name="onload" select="''"/>
 		<xsl:param name="lang"   select="'en-gb'"/>
 		<xsl:param name="class"  select="false()"/>
 		<xsl:param name="color"  select="false()"/>
+
+		<xsl:param name="title"/>
+		<xsl:param name="head"   select="/.."/>
+		<xsl:param name="body"   select="/.."/>
+
+		<xsl:param name="overlay-rows" select="false()"/>
+		<xsl:param name="overlay-cols" select="false()"/>
 
 		<xsl:variable name="method">
 			<xsl:choose>
@@ -115,16 +119,20 @@
 -->
 
 			<xsl:call-template name="output-content">
-				<xsl:with-param name="title"  select="$title"/>
 				<xsl:with-param name="method" select="$method"/>
 				<xsl:with-param name="css"    select="$css"/>
 				<xsl:with-param name="js"     select="$js"/>
-				<xsl:with-param name="head"   select="$head"/>
-				<xsl:with-param name="body"   select="$body"/>
 				<xsl:with-param name="onload" select="$onload"/>
 				<xsl:with-param name="lang"   select="$lang"/>
 				<xsl:with-param name="class"  select="$class"/>
 				<xsl:with-param name="color"  select="$color"/>
+
+				<xsl:with-param name="title"  select="$title"/>
+				<xsl:with-param name="head"   select="$head"/>
+				<xsl:with-param name="body"   select="$body"/>
+
+				<xsl:param name="overlay-rows" select="$overlay-rows"/>
+				<xsl:param name="overlay-cols" select="$overlay-cols"/>
 			</xsl:call-template>
 
 		</common:document>
@@ -142,6 +150,9 @@
 		<xsl:param name="title"  select="/.."/>
 		<xsl:param name="head"   select="/.."/>
 		<xsl:param name="body"   select="/.."/>
+
+		<xsl:param name="overlay-rows" select="false()"/>
+		<xsl:param name="overlay-cols" select="false()"/>
 
 		<xsl:if test="$method = 'html'">
 			<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
@@ -201,6 +212,18 @@
 			</head>
 
 			<body onload="var r = document.documentElement; {$onload}">
+				<xsl:if test="$overlay-rows">
+					<xsl:attribute name="data-overlay-rows">
+						<xsl:value-of select="$overlay-rows"/>
+					</xsl:attribute>
+				</xsl:if>
+
+				<xsl:if test="$overlay-cols">
+					<xsl:attribute name="data-overlay-cols">
+						<xsl:value-of select="$overlay-cols"/>
+					</xsl:attribute>
+				</xsl:if>
+
 				<xsl:copy-of select="$body"/>
 			</body>
 		</html>
