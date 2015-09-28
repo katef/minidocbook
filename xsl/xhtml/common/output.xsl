@@ -23,12 +23,13 @@
 
 	<xsl:template name="output">
 		<xsl:param name="filename"/>
-		<xsl:param name="css"    select="''"/>
-		<xsl:param name="js"     select="''"/>
-		<xsl:param name="onload" select="''"/>
-		<xsl:param name="lang"   select="'en-gb'"/>
-		<xsl:param name="class"  select="false()"/>
-		<xsl:param name="color"  select="false()"/>
+		<xsl:param name="css"     select="''"/>
+		<xsl:param name="js"      select="''"/>
+		<xsl:param name="onload"  select="''"/>
+		<xsl:param name="lang"    select="'en-gb'"/>
+		<xsl:param name="class"   select="false()"/>
+		<xsl:param name="color"   select="false()"/>
+		<xsl:param name="favicon" select="false()"/>
 
 		<xsl:param name="title"/>
 		<xsl:param name="head"   select="/.."/>
