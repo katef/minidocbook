@@ -35,7 +35,7 @@
 	<xsl:import href="refentry.xsl"/>
 
 	<xsl:param name="mdb.base"    select="'.'"/>
-	<xsl:param name="mdb.ext"     select="'xhtml'"/>
+	<xsl:param name="mdb.ext"     select="'.xhtml'"/>
 	<xsl:param name="mdb.url.man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
 
 
