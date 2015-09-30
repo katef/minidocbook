@@ -85,27 +85,27 @@
 			</xsl:choose>
 		</xsl:variable>
 
-		<div class="pages">
-			<xsl:call-template name="navlink">
-				<xsl:with-param name="filename"  select="$prev"/>
-				<xsl:with-param name="name"      select="'Prev'"/>
-			</xsl:call-template>
-
-			<xsl:text>&#160;|&#160;</xsl:text>
-
-			<xsl:call-template name="navlink">
-				<xsl:with-param name="filename"  select="'index'"/>
-				<xsl:with-param name="name"      select="'Home'"/>
-				<xsl:with-param name="predicate" select="$parent != 'toc'"/>
-			</xsl:call-template>
-
-			<xsl:text>&#160;|&#160;</xsl:text>
-
-			<xsl:call-template name="navlink">
-				<xsl:with-param name="filename"  select="$next"/>
-				<xsl:with-param name="name"      select="'Next'"/>
-			</xsl:call-template>
-		</div>
+		<ul class="pages">
+			<li>
+				<xsl:call-template name="navlink">
+					<xsl:with-param name="filename"  select="$prev"/>
+					<xsl:with-param name="name"      select="'Prev'"/>
+				</xsl:call-template>
+			</li>
+			<li>
+				<xsl:call-template name="navlink">
+					<xsl:with-param name="filename"  select="'index'"/>
+					<xsl:with-param name="name"      select="'Home'"/>
+					<xsl:with-param name="predicate" select="$parent != 'toc'"/>
+				</xsl:call-template>
+			</li>
+			<li>
+				<xsl:call-template name="navlink">
+					<xsl:with-param name="filename"  select="$next"/>
+					<xsl:with-param name="name"      select="'Next'"/>
+				</xsl:call-template>
+			</li>
+		</ul>
 	</xsl:template>
 
 	<xsl:template name="page-single">
