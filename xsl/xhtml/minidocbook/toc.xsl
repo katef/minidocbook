@@ -8,7 +8,9 @@
 	xmlns:func="http://exslt.org/functions"
 	xmlns="http://www.w3.org/1999/xhtml"
 
-	extension-element-prefixes="func">
+	extension-element-prefixes="func"
+
+	exclude-result-prefixes="mdb">
 
 	<!--
 		TODO: possibly merge with title.xsl

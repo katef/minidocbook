@@ -9,7 +9,9 @@
 	xmlns:func="http://exslt.org/functions"
 	xmlns="http://www.w3.org/1999/xhtml"
 
-	extension-element-prefixes="func">
+	extension-element-prefixes="func"
+
+	exclude-result-prefixes="mdb dyn">
 
 	<!--
 		TODO: I'm not particularly happy with any of this
