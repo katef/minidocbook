@@ -18,15 +18,17 @@
 	<!-- for HTML5 -->
 	<xsl:output method="html" media-type="text/html" omit-xml-declaration="yes" indent="yes"/>
 
+	<xsl:param name="file-ext" select="'xhtml5'"/>
+
 	<xsl:param name="www-base"/>
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
-	<xsl:param name="www-ext" select="'xhtml5'"/>
+	<xsl:param name="www-ext" select="$file-ext"/>
 	<xsl:param name="www-man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
 
 	<func:function name="mdb:fileext">
 		<xsl:param name="filename"/>
-		<xsl:param name="ext" select="$www-ext"/>
+		<xsl:param name="ext"/>
 
 		<func:result>
 			<xsl:value-of select="$filename"/>
@@ -52,7 +54,7 @@
 
 		<xsl:variable name="method">
 			<xsl:choose>
-				<xsl:when test="$www-ext = 'xhtml'">
+				<xsl:when test="$file-ext = 'xhtml'">
 					<xsl:value-of select="'xml'"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -99,8 +101,8 @@
 			<xsl:choose>
 				<xsl:when test="$filename">
  					<xsl:value-of select="$filename"/>
-					<xsl:if test="$www-ext">
- 						<xsl:value-of select="concat('.', $www-ext)"/>
+					<xsl:if test="$file-ext">
+ 						<xsl:value-of select="concat('.', $file-ext)"/>
 					</xsl:if>
 				</xsl:when>
 

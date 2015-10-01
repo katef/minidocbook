@@ -27,7 +27,7 @@
 		<xsl:choose>
 			<xsl:when test="$predicate">
 				<!-- TODO: @title. same for all <a> links. centralise that? -->
-				<a href="{mdb:fileext($filename)}">
+				<a href="{mdb:fileext($filename, $www-ext)}">
 					<xsl:value-of select="$name"/>
 				</a>
 			</xsl:when>
@@ -128,7 +128,7 @@
 			<xsl:with-param name="body">
 				<xsl:if test="$chunklink">
 					<div class="navigation">
-						<a href="{mdb:fileext('index')}">
+						<a href="{mdb:fileext('index', $www-ext)}">
 							<xsl:text>Multiple pages</xsl:text>
 						</a>
 					</div>
@@ -180,7 +180,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext('single')}">
+					<a href="{mdb:fileext('single', $www-ext)}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -222,7 +222,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext('single')}">
+					<a href="{mdb:fileext('single', $www-ext)}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -260,7 +260,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext('single')}">
+					<a href="{mdb:fileext('single', $www-ext)}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
