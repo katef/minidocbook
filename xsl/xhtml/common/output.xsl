@@ -83,7 +83,10 @@
 		<xsl:variable name="output-file">
 			<xsl:choose>
 				<xsl:when test="$filename">
- 					<xsl:value-of select="concat($filename, '.', $www-ext)"/>
+ 					<xsl:value-of select="$filename"/>
+					<xsl:if test="$www-ext">
+ 						<xsl:value-of select="concat('.', $www-ext)"/>
+					</xsl:if>
 				</xsl:when>
 
 				<xsl:otherwise>
