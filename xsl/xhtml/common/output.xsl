@@ -4,14 +4,16 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:mdb="http://xml.elide.org/minidocbook"
 	xmlns="http://www.w3.org/1999/xhtml"
 
 	xmlns:common="http://exslt.org/common"
 	xmlns:str="http://exslt.org/strings"
+	xmlns:func="http://exslt.org/functions"
 
-	extension-element-prefixes="common str"
+	extension-element-prefixes="common str func"
 
-	exclude-result-prefixes="common str">
+	exclude-result-prefixes="mdb common str">
 
 	<!-- for HTML5 -->
 	<xsl:output method="html" media-type="text/html" omit-xml-declaration="yes" indent="yes"/>
@@ -20,6 +22,19 @@
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
 	<xsl:param name="www-ext" select="'xhtml5'"/>
+	<xsl:param name="www-man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
+
+	<func:function name="mdb:fileext">
+		<xsl:param name="filename"/>
+		<xsl:param name="ext" select="$www-ext"/>
+
+		<func:result>
+			<xsl:value-of select="$filename"/>
+			<xsl:if test="$ext">
+				<xsl:value-of select="concat('.', $ext)"/>
+			</xsl:if>
+		</func:result>
+	</func:function>
 
 	<xsl:template name="output">
 		<xsl:param name="filename"/>

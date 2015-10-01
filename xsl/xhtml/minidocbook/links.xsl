@@ -32,8 +32,8 @@
 				</xsl:call-template>
 			</xsl:when>
 
-			<xsl:when test="($mdb.url.man or $mdb.url.man = '') and not($role = 'dontlink')">
-				<a href="{$mdb.url.man}/{$refentrytitle}.{$manvolnum}/">
+			<xsl:when test="($www-man or $www-man = '') and not($role = 'dontlink')">
+				<a href="{$www-man}/{$refentrytitle}.{$manvolnum}/">
 					<xsl:call-template name="refentrytitle">
 						<xsl:with-param name="manvolnum"     select="$manvolnum"/>
 						<xsl:with-param name="refentrytitle" select="$refentrytitle"/>

@@ -21,7 +21,6 @@
 
 	<xsl:param name="src"/>
 	<xsl:param name="title" select="false()"/>
-	<xsl:param name="mdb.url.man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
 
 	<xsl:variable name="root">
 		<xsl:for-each select="str:tokenize($src, ':')">

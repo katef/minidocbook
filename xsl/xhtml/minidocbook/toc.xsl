@@ -64,7 +64,7 @@
 						<xsl:apply-templates select="ancestor-or-self::preface
 							|ancestor-or-self::chapter
 							|ancestor-or-self::appendix" mode="page-filename"/>
-						<xsl:value-of select="$mdb.ext"/>
+						<xsl:value-of select="mdb:fileext('')"/>
 					</xsl:if>
 
 					<xsl:if test="$single

@@ -4,7 +4,10 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://www.w3.org/1999/xhtml">
+	xmlns:mdb="http://xml.elide.org/minidocbook"
+	xmlns="http://www.w3.org/1999/xhtml"
+
+	exclude-result-prefixes="mdb">
 
 	<!--
 		TODO: when the dust settles, fold this all into output.xsl
@@ -24,7 +27,7 @@
 		<xsl:choose>
 			<xsl:when test="$predicate">
 				<!-- TODO: @title. same for all <a> links. centralise that? -->
-				<a href="{$filename}{$mdb.ext}">
+				<a href="{mdb:fileext($filename)}">
 					<xsl:value-of select="$name"/>
 				</a>
 			</xsl:when>
@@ -125,7 +128,7 @@
 			<xsl:with-param name="body">
 				<xsl:if test="$chunklink">
 					<div class="navigation">
-						<a href="index{$mdb.ext}">
+						<a href="{mdb:fileext('index')}">
 							<xsl:text>Multiple pages</xsl:text>
 						</a>
 					</div>
@@ -177,7 +180,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="single{$mdb.ext}">
+					<a href="{mdb:fileext('single')}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -219,7 +222,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="single{$mdb.ext}">
+					<a href="{mdb:fileext('single')}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -257,7 +260,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="single{$mdb.ext}">
+					<a href="{mdb:fileext('single')}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
