@@ -196,7 +196,7 @@
 
 				<xsl:call-template name="toc">
 					<xsl:with-param name="depth"  select="1"/>
-					<xsl:with-param name="single" select="false"/>
+					<xsl:with-param name="single" select="false()"/>
 				</xsl:call-template>
 
 				<div class="navigation bottom">
