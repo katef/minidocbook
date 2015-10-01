@@ -18,13 +18,22 @@
 	<!-- for HTML5 -->
 	<xsl:output method="html" media-type="text/html" omit-xml-declaration="yes" indent="yes"/>
 
-	<xsl:param name="file-ext" select="'xhtml5'"/>
+	<!-- filenames -->
+	<xsl:param name="file-ext"    select="'xhtml5'"/>
+	<xsl:param name="file-single" select="'single'"/>
+	<xsl:param name="file-index"  select="'index'"/>
+	<xsl:param name="file-toc"    select="$file-index"/>
+	<xsl:param name="file-front"  select="'frontmatter'"/>
 
+	<!-- URLs to correspond to filenames -->
 	<xsl:param name="www-base"/>
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
-	<xsl:param name="www-ext" select="$file-ext"/>
-	<xsl:param name="www-man" select="false()"/> <!-- e.g. 'http://man.example.com' -->
+	<xsl:param name="www-man"     select="false()"/> <!-- e.g. 'http://man.example.com' -->
+	<xsl:param name="www-ext"     select="$file-ext"/>
+	<xsl:param name="www-single"  select="$file-single"/>
+	<xsl:param name="www-toc"     select="$file-toc"/>
+	<xsl:param name="www-front"   select="$file-front"/>
 
 	<func:function name="mdb:fileext">
 		<xsl:param name="filename"/>

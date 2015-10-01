@@ -53,7 +53,7 @@
 			<xsl:choose>
 				<xsl:when test="$parent = 'toc'"/>
 				<xsl:when test="$parent = 'frontmatter'">
-					<xsl:text>index</xsl:text>
+					<xsl:value-of select="$www-toc"/>
 				</xsl:when>
 				<xsl:when test="preceding-sibling::preface
 					|preceding-sibling::chapter
@@ -63,7 +63,7 @@
 						|preceding-sibling::appendix)[position() = last()]" mode="page-filename"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:text>frontmatter</xsl:text>
+					<xsl:value-of select="$www-front"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -71,7 +71,7 @@
 		<xsl:variable name="next">
 			<xsl:choose>
 				<xsl:when test="$parent = 'toc'">
-					<xsl:text>frontmatter</xsl:text>
+					<xsl:value-of select="$www-front"/>
 				</xsl:when>
 				<xsl:when test="$parent = 'frontmatter'">
 					<xsl:apply-templates select="(preface|chapter|appendix)
@@ -97,7 +97,7 @@
 			</li>
 			<li>
 				<xsl:call-template name="navlink">
-					<xsl:with-param name="filename"  select="'index'"/>
+					<xsl:with-param name="filename"  select="$www-toc"/>
 					<xsl:with-param name="name"      select="'Home'"/>
 					<xsl:with-param name="predicate" select="$parent != 'toc'"/>
 				</xsl:call-template>
@@ -128,7 +128,7 @@
 			<xsl:with-param name="body">
 				<xsl:if test="$chunklink">
 					<div class="navigation">
-						<a href="{mdb:fileext('index', $www-ext)}">
+						<a href="{mdb:fileext($www-toc, $www-ext)}">
 							<xsl:text>Multiple pages</xsl:text>
 						</a>
 					</div>
@@ -174,13 +174,13 @@
 
 		<xsl:call-template name="output">
 			<xsl:with-param name="class"    select="concat('minidocbook toc ', $class)"/>
-			<xsl:with-param name="filename" select="'index'"/>
+			<xsl:with-param name="filename" select="$file-toc"/>
 			<xsl:with-param name="title"    select="$title"/>
 			<xsl:with-param name="head"     select="$head"/>
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext('single', $www-ext)}">
+					<a href="{mdb:fileext($www-single, $www-ext)}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -216,13 +216,13 @@
 
 		<xsl:call-template name="output">
 			<xsl:with-param name="class"    select="concat('minidocbook frontmatter ', $class)"/>
-			<xsl:with-param name="filename" select="'frontmatter'"/>
+			<xsl:with-param name="filename" select="$file-front"/>
 			<xsl:with-param name="title"    select="$title"/>
 			<xsl:with-param name="head"     select="$head"/>
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext('single', $www-ext)}">
+					<a href="{mdb:fileext($www-single, $www-ext)}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -260,7 +260,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext('single', $www-ext)}">
+					<a href="{mdb:fileext($www-single, $www-ext)}">
 						<xsl:text>Single page</xsl:text>
 					</a>
 

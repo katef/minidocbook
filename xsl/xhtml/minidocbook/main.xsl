@@ -63,7 +63,7 @@
 
 		<xsl:call-template name="page-single">
 			<xsl:with-param name="title"     select="$title"/>
-			<xsl:with-param name="filename"  select="'index'"/>
+			<xsl:with-param name="filename"  select="$file-index"/>
 			<xsl:with-param name="chunklink" select="false()"/>
 			<xsl:with-param name="class"     select="'refentry'"/>
 
@@ -111,7 +111,7 @@
 
 		<xsl:call-template name="page-single">
 			<xsl:with-param name="title"     select="$title"/>
-			<xsl:with-param name="filename"  select="'index'"/>
+			<xsl:with-param name="filename"  select="$file-index"/>
 			<xsl:with-param name="chunklink" select="false()"/>
 			<xsl:with-param name="class"     select="'article'"/>
 		</xsl:call-template>
@@ -124,7 +124,7 @@
 
 		<xsl:call-template name="page-single">
 			<xsl:with-param name="title"     select="$title"/>
-			<xsl:with-param name="filename"  select="'single'"/>
+			<xsl:with-param name="filename"  select="$file-single"/>
 			<xsl:with-param name="chunklink" select="true()"/>
 			<xsl:with-param name="class"     select="'book'"/>
 		</xsl:call-template>
