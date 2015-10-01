@@ -39,7 +39,7 @@
 
 	<xsl:template match="edition">
 		<span class="edition">
-			<xsl:text> &#8211; </xsl:text>
+			<xsl:text> &#8211;&#xA0;</xsl:text>
 			<xsl:value-of select="."/>
 		</span>
 	</xsl:template>
