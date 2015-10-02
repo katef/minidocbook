@@ -89,7 +89,9 @@
 			<xsl:for-each select="year">
 				<xsl:sort/>	<!-- TODO: numerically -->
 
-				<xsl:value-of select="."/>
+				<time datetime="{.}">
+					<xsl:value-of select="."/>
+				</time>
 
 				<xsl:if test="position() != last()">
 					<xsl:text>, </xsl:text>
