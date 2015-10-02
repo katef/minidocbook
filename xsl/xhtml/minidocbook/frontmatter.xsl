@@ -75,7 +75,9 @@
 	<xsl:template match="pubdate">
 		<p class="firstpub">
 			<xsl:text>First published </xsl:text>
-			<xsl:value-of select="."/>	<!-- TODO: format? -->
+			<time>
+				<xsl:value-of select="."/>	<!-- TODO: format? -->
+			</time>
 			<xsl:text>.</xsl:text>
 		</p>
 	</xsl:template>
@@ -131,7 +133,9 @@
 					<xsl:when test="date">
 						<td class="date">
 							<!-- TODO: formatted how? maybe pass in locale as a param? -->
-							<xsl:value-of select="date"/>
+							<time>
+								<xsl:value-of select="date"/>
+							</time>
 						</td>
 					</xsl:when>
 
