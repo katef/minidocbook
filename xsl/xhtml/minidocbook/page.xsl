@@ -194,6 +194,9 @@
 			<xsl:with-param name="title"    select="$title"/>
 			<xsl:with-param name="head"     select="$head"/>
 
+			<xsl:with-param name="prev" select="mdb:prev('toc')"/>
+			<xsl:with-param name="next" select="mdb:next('toc')"/>
+
 			<xsl:with-param name="body">
 				<div class="navigation">
 					<a href="{mdb:fileext($www-single, $www-ext)}">
@@ -236,6 +239,9 @@
 			<xsl:with-param name="title"    select="$title"/>
 			<xsl:with-param name="head"     select="$head"/>
 
+			<xsl:with-param name="prev" select="mdb:prev('frontmatter')"/>
+			<xsl:with-param name="next" select="mdb:next('frontmatter')"/>
+
 			<xsl:with-param name="body">
 				<div class="navigation">
 					<a href="{mdb:fileext($www-single, $www-ext)}">
@@ -269,6 +275,9 @@
 			<xsl:with-param name="class"    select="concat('minidocbook chunk ', $class)"/>
 			<xsl:with-param name="filename" select="$filename"/>
 			<xsl:with-param name="head"     select="$head"/>
+
+			<xsl:with-param name="prev" select="mdb:prev('chunk')"/>
+			<xsl:with-param name="next" select="mdb:next('chunk')"/>
 
 			<xsl:with-param name="title">
 				<xsl:apply-templates select="title" mode="title"/>
