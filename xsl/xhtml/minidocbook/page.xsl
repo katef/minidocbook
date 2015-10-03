@@ -114,7 +114,7 @@
 			<li>
 				<xsl:call-template name="navlink">
 					<xsl:with-param name="filename"  select="$www-toc"/>
-					<xsl:with-param name="name"      select="'Home'"/>
+					<xsl:with-param name="name"      select="'Index'"/>
 					<xsl:with-param name="predicate" select="$this != 'toc'"/>
 				</xsl:call-template>
 			</li>
