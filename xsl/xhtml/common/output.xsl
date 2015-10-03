@@ -26,6 +26,7 @@
 	<xsl:param name="file-front"  select="'frontmatter'"/>
 
 	<!-- URLs to correspond to filenames -->
+	<xsl:param name="www-home"/>
 	<xsl:param name="www-base"/>
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
@@ -56,6 +57,13 @@
 		<xsl:param name="class"   select="false()"/>
 		<xsl:param name="color"   select="false()"/>
 		<xsl:param name="favicon" select="false()"/>
+
+		<xsl:param name="canonical" select="false()"/>
+		<xsl:param name="next"      select="false()"/>
+		<xsl:param name="prev"      select="false()"/>
+		<xsl:param name="first"     select="false()"/>
+		<xsl:param name="last"      select="false()"/>
+		<xsl:param name="up"        select="false()"/>
 
 		<xsl:param name="title"/>
 		<xsl:param name="head"   select="/.."/>
@@ -155,6 +163,13 @@
 				<xsl:with-param name="color"   select="$color"/>
 				<xsl:with-param name="favicon" select="$favicon"/>
 
+				<xsl:with-param name="canonical" select="$canonical"/>
+				<xsl:with-param name="next"      select="$next"/>
+				<xsl:with-param name="prev"      select="$prev"/>
+				<xsl:with-param name="first"     select="$first"/>
+				<xsl:with-param name="last"      select="$last"/>
+				<xsl:with-param name="up"        select="$up"/>
+
 				<xsl:with-param name="title"   select="$title"/>
 				<xsl:with-param name="head"    select="$head"/>
 				<xsl:with-param name="body"    select="$body"/>
@@ -172,6 +187,13 @@
 		<xsl:param name="class"   select="false()"/>
 		<xsl:param name="color"   select="false()"/>
 		<xsl:param name="favicon" select="false()"/>
+
+		<xsl:param name="canonical" select="false()"/>
+		<xsl:param name="next"      select="false()"/>
+		<xsl:param name="prev"      select="false()"/>
+		<xsl:param name="first"     select="false()"/>
+		<xsl:param name="last"      select="false()"/>
+		<xsl:param name="up"        select="false()"/>
 
 		<xsl:param name="title"   select="/.."/>
 		<xsl:param name="head"    select="/.."/>
@@ -204,6 +226,43 @@
 
 				<xsl:if test="$www-base">
 					<base href="{$www-base}"/>
+
+					<!-- $www-base is expected for chunked documents -->
+					<xsl:if test="not($canonical)">
+						<link rel="canonical" href=""/>
+					</xsl:if>
+				</xsl:if>
+
+				<xsl:if test="$canonical">
+					<link rel="canonical" href="{$canonical}"/>
+				</xsl:if>
+
+				<xsl:if test="$next">
+					<link rel="next" href="{$next}"/>
+				</xsl:if>
+
+				<xsl:if test="$prev">
+					<link rel="prev"     href="{$prev}"/>
+					<link rel="previous" href="{$prev}"/>
+				</xsl:if>
+
+				<xsl:if test="$first">
+					<link rel="first" href="{$first}"/>
+					<link rel="begin" href="{$first}"/>
+					<link rel="start" href="{$first}"/>
+				</xsl:if>
+
+				<xsl:if test="$last">
+					<link rel="last" href="{$last}"/>
+					<link rel="end"  href="{$last}"/>
+				</xsl:if>
+
+				<xsl:if test="$up">
+					<link rel="up" href="{$up}"/>
+				</xsl:if>
+
+				<xsl:if test="$www-home">
+					<link rel="home" href="{$www-home}"/>
 				</xsl:if>
 
 				<xsl:if test="$favicon">
