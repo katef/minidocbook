@@ -7,6 +7,10 @@
 	xmlns:mdb="http://xml.elide.org/minidocbook"
 	xmlns="http://www.w3.org/1999/xhtml"
 
+	xmlns:func="http://exslt.org/functions"
+
+	extension-element-prefixes="func"
+
 	exclude-result-prefixes="mdb">
 
 	<!--
@@ -44,15 +48,15 @@
 		</span>
 	</xsl:template>
 
-	<xsl:template name="navigation">
-		<xsl:param name="parent"/>
+	<func:function name="mdb:prev">
+		<xsl:param name="this"/>
 
-		<!-- TODO: i don't like that this requires chunking and filename knowledge.
-			it should be done in the root xsl file -->
-		<xsl:variable name="prev">
+		<func:result>
+			<!-- TODO: i don't like that this requires chunking and filename knowledge.
+				it should be done in the root xsl file -->
 			<xsl:choose>
-				<xsl:when test="$parent = 'toc'"/>
-				<xsl:when test="$parent = 'frontmatter'">
+				<xsl:when test="$this = 'toc'"/>
+				<xsl:when test="$this = 'frontmatter'">
 					<xsl:value-of select="$www-toc"/>
 				</xsl:when>
 				<xsl:when test="preceding-sibling::preface
@@ -66,14 +70,20 @@
 					<xsl:value-of select="$www-front"/>
 				</xsl:otherwise>
 			</xsl:choose>
-		</xsl:variable>
+		</func:result>
+	</func:function>
 
-		<xsl:variable name="next">
+	<func:function name="mdb:next">
+		<xsl:param name="this"/>
+
+		<func:result>
+			<!-- TODO: i don't like that this requires chunking and filename knowledge.
+				it should be done in the root xsl file -->
 			<xsl:choose>
-				<xsl:when test="$parent = 'toc'">
+				<xsl:when test="$this = 'toc'">
 					<xsl:value-of select="$www-front"/>
 				</xsl:when>
-				<xsl:when test="$parent = 'frontmatter'">
+				<xsl:when test="$this = 'frontmatter'">
 					<xsl:apply-templates select="(preface|chapter|appendix)
 						[position() = 1]" mode="page-filename"/>
 				</xsl:when>
@@ -86,12 +96,16 @@
 				</xsl:when>
 				<xsl:otherwise/>
 			</xsl:choose>
-		</xsl:variable>
+		</func:result>
+	</func:function>
+
+	<xsl:template name="navigation">
+		<xsl:param name="this"/>
 
 		<ul class="pages">
 			<li>
 				<xsl:call-template name="navlink">
-					<xsl:with-param name="filename"  select="$prev"/>
+					<xsl:with-param name="filename"  select="mdb:prev($this)"/>
 					<xsl:with-param name="name"      select="'Prev'"/>
 				</xsl:call-template>
 			</li>
@@ -99,12 +113,12 @@
 				<xsl:call-template name="navlink">
 					<xsl:with-param name="filename"  select="$www-toc"/>
 					<xsl:with-param name="name"      select="'Home'"/>
-					<xsl:with-param name="predicate" select="$parent != 'toc'"/>
+					<xsl:with-param name="predicate" select="$this != 'toc'"/>
 				</xsl:call-template>
 			</li>
 			<li>
 				<xsl:call-template name="navlink">
-					<xsl:with-param name="filename"  select="$next"/>
+					<xsl:with-param name="filename"  select="mdb:next($this)"/>
 					<xsl:with-param name="name"      select="'Next'"/>
 				</xsl:call-template>
 			</li>
@@ -185,7 +199,7 @@
 					</a>
 
 					<xsl:call-template name="navigation">
-						<xsl:with-param name="parent" select="'toc'"/>
+						<xsl:with-param name="this" select="'toc'"/>
 					</xsl:call-template>
 				</div>
 
@@ -201,7 +215,7 @@
 
 				<div class="navigation bottom">
 					<xsl:call-template name="navigation">
-						<xsl:with-param name="parent" select="'toc'"/>
+						<xsl:with-param name="this" select="'toc'"/>
 					</xsl:call-template>
 				</div>
 			</xsl:with-param>
@@ -227,7 +241,7 @@
 					</a>
 
 					<xsl:call-template name="navigation">
-						<xsl:with-param name="parent" select="'frontmatter'"/>
+						<xsl:with-param name="this" select="'frontmatter'"/>
 					</xsl:call-template>
 				</div>
 
@@ -235,7 +249,7 @@
 
 				<div class="navigation bottom">
 					<xsl:call-template name="navigation">
-						<xsl:with-param name="parent" select="'frontmatter'"/>
+						<xsl:with-param name="this" select="'frontmatter'"/>
 					</xsl:call-template>
 				</div>
 			</xsl:with-param>
@@ -265,7 +279,7 @@
 					</a>
 
 					<xsl:call-template name="navigation">
-						<xsl:with-param name="parent" select="'chunk'"/>
+						<xsl:with-param name="this" select="'chunk'"/>
 					</xsl:call-template>
 				</div>
 
@@ -273,7 +287,7 @@
 
 				<div class="navigation bottom">
 					<xsl:call-template name="navigation">
-						<xsl:with-param name="parent" select="'chunk'"/>
+						<xsl:with-param name="this" select="'chunk'"/>
 					</xsl:call-template>
 				</div>
 			</xsl:with-param>
