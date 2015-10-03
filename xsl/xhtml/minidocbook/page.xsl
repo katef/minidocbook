@@ -51,52 +51,54 @@
 	<func:function name="mdb:prev">
 		<xsl:param name="this"/>
 
-		<func:result>
-			<!-- TODO: i don't like that this requires chunking and filename knowledge.
-				it should be done in the root xsl file -->
-			<xsl:choose>
-				<xsl:when test="$this = 'toc'"/>
-				<xsl:when test="$this = 'frontmatter'">
-					<xsl:value-of select="$www-toc"/>
-				</xsl:when>
-				<xsl:when test="preceding-sibling::preface
-					|preceding-sibling::chapter
-					|preceding-sibling::appendix">
+		<!-- TODO: i don't like that this requires chunking and filename knowledge.
+			it should be done in the root xsl file -->
+		<xsl:choose>
+			<xsl:when test="$this = 'toc'"/>
+			<xsl:when test="$this = 'frontmatter'">
+				<func:result select="$www-toc"/>
+			</xsl:when>
+			<xsl:when test="preceding-sibling::preface
+				|preceding-sibling::chapter
+				|preceding-sibling::appendix">
+				<func:result>
 					<xsl:apply-templates select="(preceding-sibling::preface
 						|preceding-sibling::chapter
 						|preceding-sibling::appendix)[position() = last()]" mode="page-filename"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="$www-front"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</func:result>
+				</func:result>
+			</xsl:when>
+			<xsl:otherwise>
+				<func:result select="$www-front"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</func:function>
 
 	<func:function name="mdb:next">
 		<xsl:param name="this"/>
 
-		<func:result>
-			<!-- TODO: i don't like that this requires chunking and filename knowledge.
-				it should be done in the root xsl file -->
-			<xsl:choose>
-				<xsl:when test="$this = 'toc'">
-					<xsl:value-of select="$www-front"/>
-				</xsl:when>
-				<xsl:when test="$this = 'frontmatter'">
+		<!-- TODO: i don't like that this requires chunking and filename knowledge.
+			it should be done in the root xsl file -->
+		<xsl:choose>
+			<xsl:when test="$this = 'toc'">
+				<func:result select="$www-front"/>
+			</xsl:when>
+			<xsl:when test="$this = 'frontmatter'">
+				<func:result>
 					<xsl:apply-templates select="(preface|chapter|appendix)
 						[position() = 1]" mode="page-filename"/>
-				</xsl:when>
-				<xsl:when test="following-sibling::preface
-					|following-sibling::chapter
-					|following-sibling::appendix">
+				</func:result>
+			</xsl:when>
+			<xsl:when test="following-sibling::preface
+				|following-sibling::chapter
+				|following-sibling::appendix">
+				<func:result>
 					<xsl:apply-templates select="(following-sibling::preface
 						|following-sibling::chapter
 						|following-sibling::appendix)[position() = 1]" mode="page-filename"/>
-				</xsl:when>
-				<xsl:otherwise/>
-			</xsl:choose>
-		</func:result>
+				</func:result>
+			</xsl:when>
+			<xsl:otherwise/>
+		</xsl:choose>
 	</func:function>
 
 	<xsl:template name="navigation">
