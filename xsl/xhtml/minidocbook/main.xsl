@@ -43,6 +43,10 @@
 		<meta name="refmeta-productrole" content="{.}"/>
 	</xsl:template>
 
+	<xsl:template match="refnamediv/refpurpose" mode="refmeta">
+		<meta name="refmeta-refpurpose" content="{.}"/>
+	</xsl:template>
+
 	<xsl:template match="refnamediv" mode="refmeta">
 		<meta name="refmeta-refname">
 			<xsl:attribute name="content">
@@ -72,6 +76,7 @@
 				<xsl:apply-templates select="refentryinfo/productname/@role" mode="refmeta"/>
 				<xsl:apply-templates select="refentryinfo/title"             mode="refmeta"/>
 				<xsl:apply-templates select="refmeta/manvolnum"              mode="refmeta"/>
+				<xsl:apply-templates select="refnamediv/refpurpose"          mode="refmeta"/>
 				<xsl:apply-templates select="refnamediv"                     mode="refmeta"/>
 
 				<xsl:if test="refsection[title = 'Description']">
