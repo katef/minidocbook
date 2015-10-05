@@ -76,7 +76,6 @@
 				<xsl:apply-templates select="refentryinfo/productname/@role" mode="refmeta"/>
 				<xsl:apply-templates select="refentryinfo/title"             mode="refmeta"/>
 				<xsl:apply-templates select="refmeta/manvolnum"              mode="refmeta"/>
-				<xsl:apply-templates select="refmeta/refentrytitle"          mode="refmeta"/>
 				<xsl:apply-templates select="refnamediv/refpurpose"          mode="refmeta"/>
 				<xsl:apply-templates select="refnamediv"                     mode="refmeta"/>
 
