@@ -5,12 +5,13 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:str="http://exslt.org/strings"
+	xmlns:set="http://exslt.org/sets"
 	xmlns:common="http://exslt.org/common"
 	xmlns:mi="http://xml.elide.org/docindex"
 
-	extension-element-prefixes="str common"
+	extension-element-prefixes="str set common"
 
-	exclude-result-prefixes="str common mi h">
+	exclude-result-prefixes="str set common mi h">
 
 	<xsl:import href="../minidocbook/refentry.xsl"/>
 	<xsl:import href="../minidocbook/links.xsl"/>
@@ -39,12 +40,7 @@
 	</xsl:variable>
 
 	<xsl:template match="h:head" mode="doc">
-		<xsl:variable name="productname" select="h:meta[@name = 'refmeta-productname']/@content"/>
-
 		<tr>
-			<td>
-				<xsl:value-of select="$productname"/>
-			</td>
 			<td>
 				<a class="single" href="{@data-path}">
 					<xsl:value-of select="@data-path"/>
@@ -67,16 +63,12 @@
 	</xsl:template>
 
 	<xsl:template match="h:head" mode="refentry">
-		<xsl:variable name="productname" select="h:meta[@name = 'refmeta-productname']/@content"/>
 		<xsl:variable name="manvolnum"   select="h:meta[@name = 'refmeta-manvolnum'  ]/@content"/>
 		<xsl:variable name="refname"     select="h:meta[@name = 'refmeta-refname'    ]/@content"/>
 		<xsl:variable name="refpurpose"  select="h:meta[@name = 'refmeta-refpurpose' ]/@content"/>
 		<!-- TODO: also h:meta[@name = 'refmeta-title']" -->
 
 		<tr>
-			<td>
-				<xsl:value-of select="$productname"/>
-			</td>
 			<td>
 				<a href="{@data-path}">
 					<span class="command donthyphenate" data-manvolnum="{$manvolnum}">
@@ -108,6 +100,25 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<xsl:template name="section">
+		<xsl:param name="productname"/>
+
+		<tbody>
+			<tr>
+				<td colspan="2">
+					<xsl:if test="$productname">
+						<xsl:value-of select="$productname"/>
+					</xsl:if>
+				</td>
+			</tr>
+
+			<xsl:apply-templates select="common:node-set($root)/h:head
+				[h:meta[@name = 'refmeta-productname']/@content = $productname]">
+				<xsl:sort select="h:meta[@name = 'refmeta-manvolnum'  ]/@content"/>
+			</xsl:apply-templates>
+		</tbody>
+	</xsl:template>
+
 	<xsl:template match="/">
 		<xsl:call-template name="output">
 			<xsl:with-param name="class"  select="'minidocbook docindex'"/>
@@ -120,12 +131,18 @@
 
 			<xsl:with-param name="body">
 				<table>
-					<tbody>
-						<xsl:apply-templates select="common:node-set($root)/h:head">
-							<xsl:sort select="h:meta[@name = 'refmeta-productname']/@content"/>
-							<xsl:sort select="h:meta[@name = 'refmeta-manvolnum'  ]/@content"/>
-						</xsl:apply-templates>
-					</tbody>
+					<xsl:call-template name="section">
+						<xsl:with-param name="productname" select="false()"/>
+					</xsl:call-template>
+
+					<xsl:for-each select="set:distinct(common:node-set($root)/h:head
+						/h:meta[@name = 'refmeta-productname']/@content)">
+						<xsl:sort select="."/>
+
+						<xsl:call-template name="section">
+							<xsl:with-param name="productname" select="."/>
+						</xsl:call-template>
+					</xsl:for-each>
 				</table>
 			</xsl:with-param>
 		</xsl:call-template>
