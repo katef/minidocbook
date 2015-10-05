@@ -45,10 +45,13 @@
 			<td>
 				<xsl:value-of select="$productname"/>
 			</td>
-			<td colspan="2">
+			<td>
 				<a href="{@data-path}">
-					<xsl:value-of select="h:title"/> <!-- TODO: apply-templates -->
+					<xsl:value-of select="@data-path"/>
 				</a>
+			</td>
+			<td>
+				<xsl:value-of select="h:title"/> <!-- TODO: apply-templates -->
 			</td>
 			<td>
 				<!-- cheesy way to identify chunked documents -->
