@@ -119,7 +119,7 @@
 				<table>
 					<tbody>
 						<xsl:apply-templates select="common:node-set($root)/h:head">
-							<xsl:sort select="h:meta[@name = 'refmeta-productname']"/>
+							<xsl:sort select="h:meta[@name = 'refmeta-productname']/@content"/>
 						</xsl:apply-templates>
 					</tbody>
 				</table>
