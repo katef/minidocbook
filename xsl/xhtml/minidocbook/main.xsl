@@ -39,7 +39,7 @@
 		<meta name="refmeta-{name()}" content="{.}"/>
 	</xsl:template>
 
-	<xsl:template match="refentryinfo/productname/@role" mode="refmeta">
+	<xsl:template match="productname/@role" mode="refmeta">
 		<meta name="refmeta-productrole" content="{.}"/>
 	</xsl:template>
 
@@ -119,6 +119,11 @@
 			<xsl:with-param name="filename"  select="$file-index"/>
 			<xsl:with-param name="chunklink" select="false()"/>
 			<xsl:with-param name="class"     select="'article'"/>
+
+			<xsl:with-param name="head">
+				<xsl:apply-templates select="articleinfo/productname"       mode="refmeta"/>
+				<xsl:apply-templates select="articleinfo/productname/@role" mode="refmeta"/>
+			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -132,16 +137,31 @@
 			<xsl:with-param name="filename"  select="$file-single"/>
 			<xsl:with-param name="chunklink" select="true()"/>
 			<xsl:with-param name="class"     select="'book'"/>
+
+			<xsl:with-param name="head">
+				<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
+				<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
+			</xsl:with-param>
 		</xsl:call-template>
 
 		<xsl:call-template name="page-toc">
 			<xsl:with-param name="title" select="$title"/>
 			<xsl:with-param name="class" select="'book'"/>
+
+			<xsl:with-param name="head">
+				<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
+				<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
+			</xsl:with-param>
 		</xsl:call-template>
 
 		<xsl:call-template name="page-frontmatter">
 			<xsl:with-param name="title" select="$title"/>
 			<xsl:with-param name="class" select="'book'"/>
+
+			<xsl:with-param name="head">
+				<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
+				<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
+			</xsl:with-param>
 		</xsl:call-template>
 
 		<xsl:for-each select="preface|chapter|appendix">
@@ -150,6 +170,11 @@
 				<xsl:with-param name="class" select="'book'"/>
 				<xsl:with-param name="filename">
 					<xsl:apply-templates select="." mode="page-filename"/>
+				</xsl:with-param>
+
+				<xsl:with-param name="head">
+					<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
+					<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
 				</xsl:with-param>
 			</xsl:call-template>
 		</xsl:for-each>
