@@ -78,6 +78,7 @@
 	<xsl:template name="section">
 		<xsl:param name="productname"/>
 
+		<!-- TODO: or (3), when (1) is not available -->
 		<xsl:variable name="refpurpose" select="common:node-set($root)/h:head
 				[h:meta[@name = 'refmeta-productname']/@content = $productname]
 				[h:meta[@name = 'refmeta-manvolnum'  ]/@content = 1]
@@ -85,27 +86,32 @@
 
 		<tbody>
 			<xsl:if test="$refpurpose">
-				<tr>
-					<th rowspan="2">
-						<xsl:if test="$productname">
-							<xsl:value-of select="$productname"/>
-						</xsl:if>
-					</th>
-
-					<td colspan="2">
-						<xsl:value-of select="$refpurpose"/>
-					</td>
-				</tr>
-			</xsl:if>
-
-			<tr>
-				<xsl:if test="not($refpurpose)">
+				<tr class="purpose">
 					<th>
 						<xsl:if test="$productname">
 							<xsl:value-of select="$productname"/>
 						</xsl:if>
 					</th>
-				</xsl:if>
+
+					<td colspan="2"/>
+				</tr>
+			</xsl:if>
+
+			<tr class="details">
+				<xsl:choose>
+					<xsl:when test="not($refpurpose)">
+						<th>
+							<xsl:if test="$productname">
+								<xsl:value-of select="$productname"/>
+							</xsl:if>
+						</th>
+					</xsl:when>
+					<xsl:otherwise>
+						<td>
+							<xsl:value-of select="$refpurpose"/>
+						</td>
+					</xsl:otherwise>
+				</xsl:choose>
 				<td>
 					<xsl:apply-templates select="common:node-set($root)/h:head
 						[h:meta[@name = 'refmeta-productname']/@content = $productname]
