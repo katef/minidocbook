@@ -46,21 +46,22 @@
 				<xsl:value-of select="$productname"/>
 			</td>
 			<td>
-				<a href="{@data-path}">
+				<a class="single" href="{@data-path}">
 					<xsl:value-of select="@data-path"/>
 				</a>
-			</td>
-			<td>
-				<xsl:value-of select="h:title"/> <!-- TODO: apply-templates -->
-			</td>
-			<td>
+
 				<!-- cheesy way to identify chunked documents -->
 				<xsl:if test="h:link[@rel = 'next']">
-					<a href="{@data-path}/index">
+					<xsl:text> </xsl:text>
+					<a class="multiple" href="{@data-path}/index">
 						<xsl:text>Multiple pages</xsl:text>
 					</a>
 				</xsl:if>
+
 				<!-- TODO: links to other formats -->
+			</td>
+			<td>
+				<xsl:value-of select="h:title"/> <!-- TODO: apply-templates -->
 			</td>
 		</tr>
 	</xsl:template>
@@ -87,12 +88,11 @@
 						</xsl:for-each>
 					</span>
 				</a>
+
+				<!-- TODO: links to other formats -->
 			</td>
 			<td>
 				<xsl:value-of select="$refpurpose"/>
-			</td>
-			<td>
-				<!-- TODO: links to other formats -->
 			</td>
 		</tr>
 	</xsl:template>
