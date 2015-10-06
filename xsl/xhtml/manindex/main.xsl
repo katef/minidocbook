@@ -28,6 +28,11 @@
 		</xsl:for-each>
 	</xsl:variable>
 
+	<!-- XXX: I don't see why the template from refentry.xsl isn't matching for this -->
+	<xsl:template match="refpurpose">
+		<xsl:apply-templates/>
+	</xsl:template>
+
 	<xsl:template match="refentry">
 		<xsl:variable name="productname" select="refentryinfo/productname"/>
 
