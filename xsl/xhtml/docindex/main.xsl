@@ -40,26 +40,13 @@
 	</xsl:variable>
 
 	<xsl:template match="h:head" mode="doc">
-		<tr>
-			<td>
-				<a class="single" href="{@data-path}">
-					<xsl:value-of select="@data-path"/>
-				</a>
-
-				<!-- cheesy way to identify chunked documents -->
-				<xsl:if test="h:link[@rel = 'next']">
-					<xsl:text> </xsl:text>
-					<a class="multiple" href="{@data-path}/index">
-						<xsl:text>Multiple pages</xsl:text>
-					</a>
-				</xsl:if>
-
-				<!-- TODO: links to other formats -->
-			</td>
-			<td>
+		<li>
+			<a class="single" href="{@data-path}">
 				<xsl:value-of select="h:title"/> <!-- TODO: apply-templates -->
-			</td>
-		</tr>
+			</a>
+
+			<!-- TODO: links to other formats -->
+		</li>
 	</xsl:template>
 
 	<xsl:template match="h:head" mode="refentry">
@@ -68,55 +55,54 @@
 		<xsl:variable name="refpurpose"  select="h:meta[@name = 'refmeta-refpurpose' ]/@content"/>
 		<!-- TODO: also h:meta[@name = 'refmeta-title']" -->
 
-		<tr>
-			<td>
-				<a href="{@data-path}">
-					<span class="command donthyphenate" data-manvolnum="{$manvolnum}">
-						<xsl:for-each select="str:tokenize($refname, ' ')">
-							<xsl:value-of select="."/>
-							<xsl:if test="position() != last()">
-								<xsl:text>/</xsl:text>
-							</xsl:if>
-						</xsl:for-each>
-					</span>
-				</a>
+		<li>
+			<a href="{@data-path}">
+				<span class="command donthyphenate" data-manvolnum="{$manvolnum}">
+					<xsl:for-each select="str:tokenize($refname, ' ')">
+						<xsl:value-of select="."/>
+						<xsl:if test="position() != last()">
+							<xsl:text>/</xsl:text>
+						</xsl:if>
+					</xsl:for-each>
+				</span>
+			</a>
 
-				<!-- TODO: links to other formats -->
-			</td>
-			<td>
-				<xsl:value-of select="$refpurpose"/>
-			</td>
-		</tr>
+			<xsl:value-of select="$refpurpose"/>
+
+			<!-- TODO: links to other formats -->
+		</li>
 	</xsl:template>
 
 	<xsl:template match="h:head">
-		<xsl:choose>
-			<xsl:when test="h:meta[@name = 'refmeta-manvolnum']">
-				<xsl:apply-templates select="." mode="refentry"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:apply-templates select="." mode="doc"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<ul>
+			<xsl:choose>
+				<xsl:when test="h:meta[@name = 'refmeta-manvolnum']">
+					<xsl:apply-templates select="." mode="refentry"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates select="." mode="doc"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</ul>
 	</xsl:template>
 
 	<xsl:template name="section">
 		<xsl:param name="productname"/>
 
-		<tbody>
-			<tr>
-				<td colspan="2">
-					<xsl:if test="$productname">
-						<xsl:value-of select="$productname"/>
-					</xsl:if>
-				</td>
-			</tr>
+		<dl>
+			<xsl:if test="$productname">
+				<dt>
+					<xsl:value-of select="$productname"/>
+				</dt>
+			</xsl:if>
 
-			<xsl:apply-templates select="common:node-set($root)/h:head
-				[h:meta[@name = 'refmeta-productname']/@content = $productname]">
-				<xsl:sort select="h:meta[@name = 'refmeta-manvolnum'  ]/@content"/>
-			</xsl:apply-templates>
-		</tbody>
+			<dd>
+				<xsl:apply-templates select="common:node-set($root)/h:head
+					[h:meta[@name = 'refmeta-productname']/@content = $productname]">
+					<xsl:sort select="h:meta[@name = 'refmeta-manvolnum'  ]/@content"/>
+				</xsl:apply-templates>
+			</dd>
+		</dl>
 	</xsl:template>
 
 	<xsl:template match="/">
@@ -130,20 +116,24 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
-				<table>
+				<xsl:if test="$title">
+					<h1>
+						<xsl:value-of select="$title"/>
+					</h1>
+				</xsl:if>
+
+				<xsl:call-template name="section">
+					<xsl:with-param name="productname" select="false()"/>
+				</xsl:call-template>
+
+				<xsl:for-each select="set:distinct(common:node-set($root)/h:head
+					/h:meta[@name = 'refmeta-productname']/@content)">
+					<xsl:sort select="."/>
+
 					<xsl:call-template name="section">
-						<xsl:with-param name="productname" select="false()"/>
+						<xsl:with-param name="productname" select="."/>
 					</xsl:call-template>
-
-					<xsl:for-each select="set:distinct(common:node-set($root)/h:head
-						/h:meta[@name = 'refmeta-productname']/@content)">
-						<xsl:sort select="."/>
-
-						<xsl:call-template name="section">
-							<xsl:with-param name="productname" select="."/>
-						</xsl:call-template>
-					</xsl:for-each>
-				</table>
+				</xsl:for-each>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
