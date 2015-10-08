@@ -74,6 +74,12 @@
 					</xsl:if>
 				</xsl:attribute>
 
+				<xsl:attribute name="rel">
+					<xsl:apply-templates select="ancestor-or-self::preface
+						|ancestor-or-self::chapter
+						|ancestor-or-self::appendix" mode="page-relname"/>
+				</xsl:attribute>
+
 				<xsl:value-of select="mdb:sectionnumber()"/>
 				<xsl:text>.&#160;</xsl:text>
 

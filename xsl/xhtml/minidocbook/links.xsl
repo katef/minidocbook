@@ -99,7 +99,7 @@
 	</xsl:template>
 
 	<xsl:template match="ulink">
-		<a href="{@url}">
+		<a rel="external" href="{@url}">
 			<xsl:apply-templates/>
 		</a>
 	</xsl:template>

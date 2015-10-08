@@ -17,6 +17,11 @@
 		TODO: when the dust settles, fold this all into output.xsl
 	-->
 
+	<xsl:template match="preface|chapter|appendix" mode="page-relname">
+		<!-- relies on these element names being valid rel="" names -->
+		<xsl:value-of select="name()"/>
+	</xsl:template>
+
 	<xsl:template match="preface|chapter|appendix" mode="page-filename">
 		<xsl:value-of select="name()"/>
 		<xsl:value-of select="count(preceding-sibling::*[name() = name(current())]) + 1"/>
@@ -25,6 +30,7 @@
 	<xsl:template name="navlink">
 		<xsl:param name="filename"/>
 		<xsl:param name="name"/>
+		<xsl:param name="rel"/>
 
 		<xsl:param name="predicate" select="$filename != ''"/>
 
@@ -32,6 +38,12 @@
 			<xsl:when test="$predicate">
 				<!-- TODO: @title. same for all <a> links. centralise that? -->
 				<a href="{mdb:fileext($filename, $www-ext)}">
+					<xsl:if test="$rel">
+						<xsl:attribute name="rel">
+							<xsl:value-of select="$rel"/>
+						</xsl:attribute>
+					</xsl:if>
+
 					<xsl:value-of select="$name"/>
 				</a>
 			</xsl:when>
@@ -109,6 +121,7 @@
 				<xsl:call-template name="navlink">
 					<xsl:with-param name="filename"  select="mdb:prev($this)"/>
 					<xsl:with-param name="name"      select="'Prev'"/>
+					<xsl:with-param name="rel"       select="'prev'"/>
 				</xsl:call-template>
 			</li>
 			<li>
@@ -116,12 +129,14 @@
 					<xsl:with-param name="filename"  select="$www-toc"/>
 					<xsl:with-param name="name"      select="'Home'"/>
 					<xsl:with-param name="predicate" select="$this != 'toc'"/>
+					<xsl:with-param name="rel"       select="'contents'"/>
 				</xsl:call-template>
 			</li>
 			<li>
 				<xsl:call-template name="navlink">
 					<xsl:with-param name="filename"  select="mdb:next($this)"/>
 					<xsl:with-param name="name"      select="'Next'"/>
+					<xsl:with-param name="rel"       select="'next'"/>
 				</xsl:call-template>
 			</li>
 		</ul>
@@ -144,7 +159,8 @@
 			<xsl:with-param name="body">
 				<xsl:if test="$chunklink">
 					<div class="navigation">
-						<a href="{mdb:fileext($www-toc, $www-ext)}">
+						<!-- TODO: call navlink instead -->
+						<a href="{mdb:fileext($www-toc, $www-ext)}" rel="contents">
 							<xsl:text>Multiple pages</xsl:text>
 						</a>
 					</div>
@@ -199,7 +215,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext($www-single, $www-ext)}">
+					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -244,7 +260,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext($www-single, $www-ext)}">
+					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -285,7 +301,7 @@
 
 			<xsl:with-param name="body">
 				<div class="navigation">
-					<a href="{mdb:fileext($www-single, $www-ext)}">
+					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
