@@ -105,13 +105,13 @@
 	</xsl:template>
 
 	<xsl:template match="abstract">
-		<div class="abstract">
+		<section class="abstract">
 			<h3>
 				<xsl:text>Abstract</xsl:text>
 			</h3>
 
 			<xsl:apply-templates/>
-		</div>
+		</section>
 	</xsl:template>
 
 	<xsl:template match="revdescription/para[1]">
