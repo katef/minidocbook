@@ -79,10 +79,25 @@
 				<xsl:apply-templates select="refnamediv/refpurpose"          mode="refmeta"/>
 				<xsl:apply-templates select="refnamediv"                     mode="refmeta"/>
 
-				<xsl:if test="refsection[title = 'Description']">
-					<meta name="description"
-						content="{normalize-space(refsection[title = 'Description']/para[1])}"/>
-				</xsl:if>
+				<meta name="description">
+					<xsl:attribute name="content">
+						<!-- TODO: this loop appears in a couple of places; centralise it with $delim as a param -->
+						<xsl:for-each select="refnamediv/refname">
+							<xsl:if test="position() != 1">
+								<xsl:text>/</xsl:text>
+							</xsl:if>
+							<xsl:value-of select="."/>
+						</xsl:for-each>
+						<xsl:value-of select="concat('(', refmeta/manvolnum, ')')"/>
+						<xsl:text> &#x2014; </xsl:text>
+						<xsl:value-of select="normalize-space(refnamediv/refpurpose)"/>
+						<xsl:text>.</xsl:text>
+						<xsl:if test="refsection[title = 'Description']">
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="normalize-space(refsection[title = 'Description']/para[1])"/>
+						</xsl:if>
+					</xsl:attribute>
+				</meta>
 
 				<meta name="keywords">
 					<xsl:attribute name="content">
