@@ -82,8 +82,6 @@
 
 				<meta name="description">
 					<xsl:attribute name="content">
-						<xsl:value-of select="concat('(', refmeta/manvolnum, ')')"/>
-						<xsl:text> &#x2014; </xsl:text>
 						<xsl:value-of select="normalize-space(refnamediv/refpurpose)"/>
 						<xsl:text>.</xsl:text>
 						<xsl:if test="refsection[title = 'Description']">
