@@ -50,6 +50,7 @@
 	<xsl:template match="refnamediv" mode="refmeta">
 		<meta name="refmeta-refname">
 			<xsl:attribute name="content">
+				<!-- TODO: this loop appears in a couple of places; centralise it with $delim as a param -->
 				<xsl:for-each select="refname">
 					<xsl:if test="position() != 1">
 						<xsl:text> </xsl:text>
@@ -81,13 +82,6 @@
 
 				<meta name="description">
 					<xsl:attribute name="content">
-						<!-- TODO: this loop appears in a couple of places; centralise it with $delim as a param -->
-						<xsl:for-each select="refnamediv/refname">
-							<xsl:if test="position() != 1">
-								<xsl:text>/</xsl:text>
-							</xsl:if>
-							<xsl:value-of select="."/>
-						</xsl:for-each>
 						<xsl:value-of select="concat('(', refmeta/manvolnum, ')')"/>
 						<xsl:text> &#x2014; </xsl:text>
 						<xsl:value-of select="normalize-space(refnamediv/refpurpose)"/>
