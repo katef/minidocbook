@@ -158,12 +158,12 @@
 
 			<xsl:with-param name="body">
 				<xsl:if test="$chunklink">
-					<div class="navigation">
+					<nav>
 						<!-- TODO: call navlink instead -->
 						<a href="{mdb:fileext($www-toc, $www-ext)}" rel="contents">
 							<xsl:text>Multiple pages</xsl:text>
 						</a>
-					</div>
+					</nav>
 				</xsl:if>
 
 				<xsl:if test="name() != 'refentry'">
@@ -214,7 +214,7 @@
 			<xsl:with-param name="next" select="mdb:next('toc')"/>
 
 			<xsl:with-param name="body">
-				<div class="navigation">
+				<nav>
 					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
@@ -222,7 +222,7 @@
 					<xsl:call-template name="navigation">
 						<xsl:with-param name="this" select="'toc'"/>
 					</xsl:call-template>
-				</div>
+				</nav>
 
 				<h1>
 					<xsl:copy-of select="$title"/>
@@ -234,11 +234,11 @@
 					<xsl:with-param name="single" select="false()"/>
 				</xsl:call-template>
 
-				<div class="navigation bottom">
+				<nav>
 					<xsl:call-template name="navigation">
 						<xsl:with-param name="this" select="'toc'"/>
 					</xsl:call-template>
-				</div>
+				</nav>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
@@ -259,7 +259,7 @@
 			<xsl:with-param name="next" select="mdb:next('frontmatter')"/>
 
 			<xsl:with-param name="body">
-				<div class="navigation">
+				<nav>
 					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
@@ -267,15 +267,15 @@
 					<xsl:call-template name="navigation">
 						<xsl:with-param name="this" select="'frontmatter'"/>
 					</xsl:call-template>
-				</div>
+				</nav>
 
 				<xsl:call-template name="frontmatter"/>
 
-				<div class="navigation bottom">
+				<nav>
 					<xsl:call-template name="navigation">
 						<xsl:with-param name="this" select="'frontmatter'"/>
 					</xsl:call-template>
-				</div>
+				</nav>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
@@ -300,7 +300,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
-				<div class="navigation">
+				<nav>
 					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
@@ -308,15 +308,15 @@
 					<xsl:call-template name="navigation">
 						<xsl:with-param name="this" select="'chunk'"/>
 					</xsl:call-template>
-				</div>
+				</nav>
 
 				<xsl:apply-templates select="."/>
 
-				<div class="navigation bottom">
+				<nav>
 					<xsl:call-template name="navigation">
 						<xsl:with-param name="this" select="'chunk'"/>
 					</xsl:call-template>
-				</div>
+				</nav>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
