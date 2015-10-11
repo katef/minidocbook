@@ -73,6 +73,7 @@
 			<xsl:with-param name="class"     select="'refentry'"/>
 
 			<xsl:with-param name="head">
+				<xsl:apply-templates select="refentryinfo/edition"           mode="refmeta"/>
 				<xsl:apply-templates select="refentryinfo/productname"       mode="refmeta"/>
 				<xsl:apply-templates select="refentryinfo/productname/@role" mode="refmeta"/>
 				<xsl:apply-templates select="refentryinfo/title"             mode="refmeta"/>
@@ -128,6 +129,7 @@
 			<xsl:with-param name="class"     select="'article'"/>
 
 			<xsl:with-param name="head">
+				<xsl:apply-templates select="articleinfo/edition"           mode="refmeta"/>
 				<xsl:apply-templates select="articleinfo/productname"       mode="refmeta"/>
 				<xsl:apply-templates select="articleinfo/productname/@role" mode="refmeta"/>
 			</xsl:with-param>
@@ -146,6 +148,7 @@
 			<xsl:with-param name="class"     select="'book'"/>
 
 			<xsl:with-param name="head">
+				<xsl:apply-templates select="bookinfo/edition"           mode="refmeta"/>
 				<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
 				<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
 			</xsl:with-param>
@@ -156,6 +159,7 @@
 			<xsl:with-param name="class" select="'book'"/>
 
 			<xsl:with-param name="head">
+				<xsl:apply-templates select="bookinfo/edition"           mode="refmeta"/>
 				<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
 				<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
 			</xsl:with-param>
@@ -166,6 +170,7 @@
 			<xsl:with-param name="class" select="'book'"/>
 
 			<xsl:with-param name="head">
+				<xsl:apply-templates select="bookinfo/edition"           mode="refmeta"/>
 				<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
 				<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
 			</xsl:with-param>
@@ -180,6 +185,7 @@
 				</xsl:with-param>
 
 				<xsl:with-param name="head">
+					<xsl:apply-templates select="bookinfo/edition"           mode="refmeta"/>
 					<xsl:apply-templates select="bookinfo/productname"       mode="refmeta"/>
 					<xsl:apply-templates select="bookinfo/productname/@role" mode="refmeta"/>
 				</xsl:with-param>
