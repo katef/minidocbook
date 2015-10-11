@@ -40,9 +40,15 @@
 	</xsl:variable>
 
 	<xsl:template match="h:head" mode="doc">
+		<xsl:variable name="edition" select="h:meta[@name = 'refmeta-edition']/@content"/>
+
 		<li>
 			<a class="single" href="{@data-path}">
 				<xsl:value-of select="h:title"/> <!-- TODO: apply-templates -->
+				<xsl:if test="$edition">
+					<xsl:text> &#x2014;&#xA0;</xsl:text>
+					<xsl:value-of select="$edition"/>
+				</xsl:if>
 			</a>
 
 			<!-- TODO: links to other formats -->
@@ -50,6 +56,7 @@
 	</xsl:template>
 
 	<xsl:template match="h:head" mode="refentry">
+		<xsl:variable name="edition"     select="h:meta[@name = 'refmeta-edition'    ]/@content"/>
 		<xsl:variable name="manvolnum"   select="h:meta[@name = 'refmeta-manvolnum'  ]/@content"/>
 		<xsl:variable name="refname"     select="h:meta[@name = 'refmeta-refname'    ]/@content"/>
 		<xsl:variable name="refpurpose"  select="h:meta[@name = 'refmeta-refpurpose' ]/@content"/>
@@ -65,6 +72,10 @@
 						</xsl:if>
 					</xsl:for-each>
 				</span>
+				<xsl:if test="$edition">
+					<xsl:text> &#x2014;&#xA0;</xsl:text>
+					<xsl:value-of select="$edition"/>
+				</xsl:if>
 			</a>
 
 			<xsl:value-of select="$refpurpose"/>
