@@ -25,10 +25,6 @@
 		<func:result select="substring($str, string-length($str) - string-length($suffix) + 1) = $suffix"/>
 	</func:function>
 
-	<xsl:template match="refentrytitle" mode="text">
-		<xsl:apply-templates mode="text"/>
-	</xsl:template>
-
 	<xsl:template match="manvolnum" mode="text">
 		<xsl:text>(</xsl:text>
 		<xsl:apply-templates mode="text"/>
@@ -40,7 +36,7 @@
 		<xsl:apply-templates select="manvolnum"     mode="text"/>
 	</xsl:template>
 
-	<xsl:template match="para" mode="text">
+	<xsl:template match="node()" mode="text">
 		<xsl:apply-templates mode="text"/>
 	</xsl:template>
 
