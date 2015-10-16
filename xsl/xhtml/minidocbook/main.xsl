@@ -193,8 +193,8 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template match="text()">
-		<!-- TODO: normalise spaces without trimming -->
+	<!-- to preserve whitespace -->
+	<xsl:template match="programlisting/text()">
 		<xsl:copy-of select="."/>
 	</xsl:template>
 

@@ -29,7 +29,7 @@
 <!-- TODO: i'd rather link to the footnotes block, not the indivual footnote, anyway -->
 		<func:result>
 			<sup class="footnote-number">
-				<a name="{$name}{$n}" href="#{$href}{$n}">
+				<a id="{$name}{$n}" href="#{$href}{$n}">
 					<xsl:text>[</xsl:text>
 					<xsl:value-of select="$n"/>
 					<xsl:text>]</xsl:text>

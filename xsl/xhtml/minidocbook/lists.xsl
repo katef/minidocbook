@@ -45,7 +45,9 @@
 			</xsl:if>
 
 			<xsl:if test="option">
-				<a name="arg{option}"/>
+				<xsl:attribute name="id">
+					<xsl:value-of select="concat('arg', option)"/>
+				</xsl:attribute>
 			</xsl:if>
 
 			<xsl:apply-templates/>

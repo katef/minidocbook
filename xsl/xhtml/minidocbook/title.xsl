@@ -17,7 +17,7 @@
 		<a>
 			<!-- TODO: merge with sectionnumber-link etc; switch on T/F/S prefix (pass it in?) -->
 			<!-- TODO: centralise this somewhere, for arguments' "#arg-*", too, and all @names -->
-			<xsl:attribute name="name">
+			<xsl:attribute name="id">
 				<xsl:value-of select="translate(substring(name(..), 1, 1), 'tf', 'TF')"/>	<!-- TODO: silly... -->
 				<xsl:number count="*[name() = name(current()/..)][title]" level="any" format="1"/>
 			</xsl:attribute>
@@ -41,8 +41,9 @@
 		<xsl:param name="title"/>
 
 		<xsl:element name="h{$level + 1}">
-			<!-- TODO: find where @id comes from! -->
-			<a name="{mdb:sectionnumber-link()}"/>
+			<xsl:attribute name="id">
+				<xsl:value-of select="mdb:sectionnumber-link()"/>
+			</xsl:attribute>
 
 			<xsl:if test="$number">
 				<xsl:value-of select="mdb:sectionnumber()"/>
