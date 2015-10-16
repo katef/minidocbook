@@ -194,7 +194,7 @@
 	</xsl:template>
 
 	<!-- to preserve whitespace -->
-	<xsl:template match="programlisting/text()">
+	<xsl:template match="programlisting/text()|synopsis/text()">
 		<xsl:copy-of select="."/>
 	</xsl:template>
 
