@@ -13,15 +13,13 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<xsl:template match="table/title|figure/title" mode="link">
-		<a>
-			<!-- TODO: merge with sectionnumber-link etc; switch on T/F/S prefix (pass it in?) -->
-			<!-- TODO: centralise this somewhere, for arguments' "#arg-*", too, and all @names -->
-			<xsl:attribute name="id">
-				<xsl:value-of select="translate(substring(name(..), 1, 1), 'tf', 'TF')"/>	<!-- TODO: silly... -->
-				<xsl:number count="*[name() = name(current()/..)][title]" level="any" format="1"/>
-			</xsl:attribute>
-		</a>
+	<xsl:template match="table/title|figure/title" mode="id">
+		<!-- TODO: merge with sectionnumber-link etc; switch on T/F/S prefix (pass it in?) -->
+		<!-- TODO: centralise this somewhere, for arguments' "#arg-*", too, and all @names -->
+		<xsl:attribute name="id">
+			<xsl:value-of select="translate(substring(name(..), 1, 1), 'tf', 'TF')"/>	<!-- TODO: silly... -->
+			<xsl:number count="*[name() = name(current()/..)][title]" level="any" format="1"/>
+		</xsl:attribute>
 	</xsl:template>
 
 	<xsl:template match="table/title|figure/title">

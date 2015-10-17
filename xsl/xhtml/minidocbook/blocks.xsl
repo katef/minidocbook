@@ -34,7 +34,7 @@
 
 	<xsl:template match="figure">
 		<figure>
-			<xsl:apply-templates select="title" mode="link"/>
+			<xsl:apply-templates select="title" mode="id"/>
 
 			<xsl:apply-templates select="graphic|literallayout"/>
 

@@ -8,7 +8,7 @@
 
 	<xsl:template match="table">
 		<figure class="table">
-			<xsl:apply-templates select="title" mode="link"/>
+			<xsl:apply-templates select="title" mode="id"/>
 
 			<table>
 				<xsl:apply-templates select="col"/>
