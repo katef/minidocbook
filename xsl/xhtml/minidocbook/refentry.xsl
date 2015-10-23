@@ -144,9 +144,11 @@
 			<xsl:with-param name="content">
 				<!-- TODO: only link if the ancestor axis contains refsynopsisdiv -->
 				<!-- TODO: this is a bit hacky; make it more unique somehow -->
-				<a href="#arg{option}">
-					<xsl:apply-templates/>
-				</a>
+				<xsl:if test="node()">
+					<a href="#arg{option}">
+						<xsl:apply-templates/>
+					</a>
+				</xsl:if>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
