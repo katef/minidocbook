@@ -1,0 +1,37 @@
+
+\starttypescriptcollection[crimson]
+
+  \starttypescript [\s!serif] [crimson,crimson-bold,crimson-semibold]
+    \definefontsynonym [Crimson-Roman]          [\s!file:Crimson-Roman]          [\s!features=\s!default]
+    \definefontsynonym [Crimson-Italic]         [\s!file:Crimson-Italic]         [\s!features=\s!default]
+    \definefontsynonym [Crimson-Semibold]       [\s!file:Crimson-Semibold]       [\s!features=\s!default]
+    \definefontsynonym [Crimson-SemiboldItalic] [\s!file:Crimson-SemiboldItalic] [\s!features=\s!default]
+    \definefontsynonym [Crimson-Bold]           [\s!file:Crimson-Bold]           [\s!features=\s!default]
+    \definefontsynonym [Crimson-BoldItalic]     [\s!file:Crimson-BoldItalic]     [\s!features=\s!default]
+  \stoptypescript
+
+  % regular: from normal bold weight
+  \starttypescript [\s!serif] [crimson] [\s!name]
+    \setups[\s!font:\s!fallback:\s!serif]
+    \definefontsynonym [\s!Serif]           [Crimson-Roman]
+    \definefontsynonym [\s!SerifBold]       [Crimson-Bold]
+    \definefontsynonym [\s!SerifItalic]     [Crimson-Italic]
+    \definefontsynonym [\s!SerifBoldItalic] [Crimson-BoldItalic]
+  \stoptypescript
+
+  % crimson-semibold: bold is semibold
+  \starttypescript [\s!serif] [crimson-semibold] [\s!name]
+    \setups[\s!font:\s!fallback:\s!serif]
+    \definefontsynonym [\s!Serif]           [Crimson-Roman]
+    \definefontsynonym [\s!SerifBold]       [Crimson-Semibold]
+    \definefontsynonym [\s!SerifItalic]     [Crimson-Italic]
+    \definefontsynonym [\s!SerifBoldItalic] [Crimson-SemiboldItalic]
+  \stoptypescript
+
+  \starttypescript [crimson,crimson-bold,crimson-semibold]
+    \definetypeface [crimson]      [\s!rm] [\s!serif] [crimson]      [\s!default]
+    \quittypescriptscanning
+  \stoptypescript
+
+\stoptypescriptcollection
+

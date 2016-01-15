@@ -1,0 +1,57 @@
+
+\starttypescriptcollection[libertine]
+
+  \starttypescript [\s!serif] [libertine,libertine-bold,libertine-semibold,libertine-display]
+    \definefontsynonym [Libertine-Regular]        [\s!file:Libertine-Regular]        [\s!features=\s!default]
+    \definefontsynonym [Libertine-Italic]         [\s!file:Libertine-Italic]         [\s!features=\s!default]
+    \definefontsynonym [Libertine-Semibold]       [\s!file:Libertine-Semibold]       [\s!features=\s!default]
+    \definefontsynonym [Libertine-SemiboldItalic] [\s!file:Libertine-SemiboldItalic] [\s!features=\s!default]
+    \definefontsynonym [Libertine-Bold]           [\s!file:Libertine-Bold]           [\s!features=\s!default]
+    \definefontsynonym [Libertine-BoldItalic]     [\s!file:Libertine-BoldItalic]     [\s!features=\s!default]
+    \definefontsynonym [Libertine-Display]        [\s!file:Libertine-Display]        [\s!features=\s!default]
+    \definefontsynonym [Libertine-Initials]       [\s!file:Libertine-Initials]       [\s!features=\s!default]
+  \stoptypescript
+
+  \starttypescript [\s!mono] [libertine]
+    \definefontsynonym [Libertine-Mono]           [\s!file:Libertine-Mono]        [\s!features=\s!default]
+  \stoptypescript
+
+  % regular: from normal bold weight
+  \starttypescript [\s!serif] [libertine] [\s!name]
+    \setups[\s!font:\s!fallback:\s!serif]
+    \definefontsynonym [\s!Serif]           [Libertine-Regular]
+    \definefontsynonym [\s!SerifBold]       [Libertine-Bold]
+    \definefontsynonym [\s!SerifItalic]     [Libertine-Italic]
+    \definefontsynonym [\s!SerifBoldItalic] [Libertine-BoldItalic]
+  \stoptypescript
+  \starttypescript [\s!mono] [libertine] [\s!name]
+%    \setups[\s!font:\s!fallback:\s!mono]
+    \definefontsynonym [\s!Mono]            [Libertine-Mono]
+  \stoptypescript
+
+  % libertine-semibold: bold is semibold
+  \starttypescript [\s!serif] [libertine-semibold] [\s!name]
+    \setups[\s!font:\s!fallback:\s!serif]
+    \definefontsynonym [\s!Serif]           [Libertine-Regular]
+    \definefontsynonym [\s!SerifBold]       [Libertine-Semibold]
+    \definefontsynonym [\s!SerifItalic]     [Libertine-Italic]
+    \definefontsynonym [\s!SerifBoldItalic] [Libertine-SemiboldItalic]
+  \stoptypescript
+
+  % libertine-display: regular is display, bold is regular
+  \starttypescript [\s!serif] [libertine-display] [\s!name]
+    \setups[\s!font:\s!fallback:\s!serif]
+    \definefontsynonym [\s!Serif]           [Libertine-Display]
+    \definefontsynonym [\s!SerifBold]       [Libertine-Regular]
+  \stoptypescript
+
+  \starttypescript [libertine,libertine-bold,libertine-semibold,libertine-display]
+    \definetypeface [libertine]      [\s!rm] [\s!serif] [libertine]      [\s!default]
+  % \definetypeface [\typescriptone] [\s!ss] [\s!sans]  [\typescriptone] [\s!default]
+    \definetypeface [libertine]      [\s!tt] [\s!mono]  [default]        [\s!default]
+  % \definetypeface [\typescriptone] [\s!mm] [\s!math]  [modern]         [\s!default]
+    \quittypescriptscanning
+  \stoptypescript
+
+\stoptypescriptcollection
+
