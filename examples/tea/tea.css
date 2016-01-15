@@ -1,0 +1,152 @@
+
+@font-face {
+	font-family: 'Crimson';
+	font-weight: 400;
+	font-style: normal;
+
+	src: url("Crimson-Roman.eot");
+	src: url("Crimson-Roman.eot?#iefix")        format('embedded-opentype'),
+	     url("Crimson-Roman.woff")              format('woff'),
+	     url("Crimson-Roman.ttf")               format('truetype'),
+	     url("Crimson-Roman.svg#Crimson-Roman") format('svg');
+}
+
+html {
+	margin: 0 2em;
+
+	background-color: #234;
+}
+
+body {
+	font-family: Crimson, Libertine, Palatino, Georgia, serif;
+	font-size:   13pt;
+	line-height: 18pt;
+
+	max-width: 40em;
+	margin: 0 auto;
+
+	padding: 4em;
+	background-color: #fff;
+	color: #333;
+}
+
+@media screen and (max-width: 780px) {
+
+	html {
+		margin: 0;
+	}
+
+	body {
+		margin:  0;
+		padding: 2em;
+	}
+
+}
+
+@media screen and (min-width: 580px) {
+
+	/* this div exists only because not all browsers support column-span yet */
+	div.tea {
+		-webkit-column-count: 2;
+		   -moz-column-count: 2;
+				column-count: 2;
+
+		-webkit-column-gap: 1.5em;
+		   -moz-column-gap: 1.5em;
+				column-gap: 1.5em;
+	}
+
+	p {
+		display: inline-block; /* hack to avoid orphans */
+		margin-top: 0;
+	}
+
+}
+
+@media screen and (max-width: 420px) {
+
+	body {
+		padding: 1em;
+	}
+
+}
+
+h1 {
+	font-size: 36pt;
+	line-height: 1em;
+	margin-bottom: 0;
+	letter-spacing: -1px;
+}
+
+h2 {
+	font-size: 21pt;
+	line-height: 1em;
+	margin-top: 0;
+	margin-bottom: 2em;
+}
+
+h1, h2 {
+	font-weight: normal;
+}
+
+time {
+	white-space: nowrap;
+}
+
+p {
+	text-align: left;
+
+	-moz-font-feature-settings:    "onum" 1;
+	-moz-font-feature-settings:    'onum=1';
+	-ms-font-feature-settings:     "onum" 1;
+	-o-font-feature-settings:      "onum" 1;
+	-webkit-font-feature-settings: "onum" 1;
+	font-feature-settings:         "onum" 1;
+
+	line-height: 17pt;
+	margin-bottom: 8.5pt; /* half the line height */
+}
+
+p:last-child {
+	font-size:   12pt;
+	line-height: 15pt;
+}
+
+p cite {
+	font-style: normal;
+	font-weight: normal;
+}
+
+p cite.name,
+p em:first-child {
+	font-style: normal;
+	font-weight: normal;
+
+	-moz-font-feature-settings:    "smcp" 1, "liga" 0;
+	-moz-font-feature-settings:    'smcp=1', 'liga=0';
+	-ms-font-feature-settings:     "smcp" 1, "liga" 0;
+	-o-font-feature-settings:      "smcp" 1, "liga" 0;
+	-webkit-font-feature-settings: "smcp" 1, "liga" 0;
+	font-feature-settings:         "smcp" 1, "liga 0;
+}
+
+p abbr {
+	-moz-font-feature-settings:    "c2sc" 1;
+	-moz-font-feature-settings:    'c2sc=1';
+	-ms-font-feature-settings:     "c2sc" 1;
+	-o-font-feature-settings:      "c2sc" 1;
+	-webkit-font-feature-settings: "c2sc" 1;
+	font-feature-settings:         "c2sc" 1;
+
+	border-bottom: none;
+}
+
+p span.isbn {
+	-moz-font-feature-settings:    "lnum" 1, "smcp" 1;
+	-moz-font-feature-settings:    'lnum=1', 'smcp=1';
+	-ms-font-feature-settings:     "lnum" 1, "smcp" 1;
+	-o-font-feature-settings:      "lnum" 1, "smcp" 1;
+	-webkit-font-feature-settings: "lnum" 1, "smcp" 1;
+	font-feature-settings:         "lnum" 1, "smcp" 1;
+}
+
