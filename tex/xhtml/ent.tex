@@ -6,6 +6,13 @@
 % | uniq >> ent.tex
 
 \enabledirectives[lxml.escapedentities]
+
+% overrides for special TeX stuff
+\xmltexentity{thinsp}{\thinspace}
+\xmltexentity{nbsp}{~}
+\xmltexentity{mdash}{--}
+\xmltexentity{mdash}{---}
+
 \xmltexentity{Aacute}{\char"00C1}
 \xmltexentity{aacute}{\char"00E1}
 \xmltexentity{Abreve}{\char"0102}
@@ -970,7 +977,7 @@
 \xmltexentity{mcomma}{\char"2A29}
 \xmltexentity{Mcy}{\char"041C}
 \xmltexentity{mcy}{\char"043C}
-\xmltexentity{mdash}{\char"2014}
+%\xmltexentity{mdash}{\char"2014}
 \xmltexentity{mDDot}{\char"223A}
 \xmltexentity{measuredangle}{\char"2221}
 \xmltexentity{MediumSpace}{\char"205F}
@@ -1006,7 +1013,7 @@
 \xmltexentity{natural}{\char"266E}
 \xmltexentity{naturals}{\char"2115}
 \xmltexentity{natur}{\char"266E}
-\xmltexentity{nbsp}{\char"00A0}
+%\xmltexentity{nbsp}{\char"00A0}
 \xmltexentity{ncap}{\char"2A43}
 \xmltexentity{Ncaron}{\char"0147}
 \xmltexentity{ncaron}{\char"0148}
@@ -1016,7 +1023,7 @@
 \xmltexentity{ncup}{\char"2A42}
 \xmltexentity{Ncy}{\char"041D}
 \xmltexentity{ncy}{\char"043D}
-\xmltexentity{ndash}{\char"2013}
+%\xmltexentity{ndash}{\char"2013}
 \xmltexentity{nearhk}{\char"2924}
 \xmltexentity{nearr}{\char"2197}
 \xmltexentity{neArr}{\char"21D7}
@@ -1671,7 +1678,7 @@
 \xmltexentity{thickapprox}{\char"2248}
 \xmltexentity{thicksim}{\char"223C}
 \xmltexentity{ThinSpace}{\char"2009}
-\xmltexentity{thinsp}{\char"2009}
+%\xmltexentity{thinsp}{\char"2009}
 \xmltexentity{thkap}{\char"2248}
 \xmltexentity{thksim}{\char"223C}
 \xmltexentity{THORN}{\char"00DE}
