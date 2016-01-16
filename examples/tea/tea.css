@@ -149,5 +149,7 @@ p span.isbn {
 	-o-font-feature-settings:      "lnum" 1, "smcp" 1;
 	-webkit-font-feature-settings: "lnum" 1, "smcp" 1;
 	font-feature-settings:         "lnum" 1, "smcp" 1;
+
+	font-size: 90%; / * XXX: workaround in lieu of smallcaps figures */
 }
 
