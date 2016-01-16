@@ -107,9 +107,10 @@ p {
 	margin-bottom: 8.5pt; /* half the line height */
 }
 
-p:last-child {
+p.attribution {
 	font-size:   12pt;
 	line-height: 15pt;
+	text-align: left;
 }
 
 p cite {
