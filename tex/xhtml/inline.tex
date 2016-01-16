@@ -1,0 +1,23 @@
+
+\startxmlsetups xhtml:setup-inline
+	\xmlsetsetup{\xmldocument}{cite}{xhtml:cite}
+	\xmlsetsetup{\xmldocument}{time}{xhtml:time}
+	\xmlsetsetup{\xmldocument}{abbr}{xhtml:abbr}
+\stopxmlsetups
+
+\xmlregistersetup{xhtml:setup-inline}
+
+\startxmlsetups xhtml:cite
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xhtml:time
+	% TODO: do something with datetime=""
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xhtml:abbr
+	% TODO: do something with title=""
+	\xmlflush{#1}
+\stopxmlsetups
+
