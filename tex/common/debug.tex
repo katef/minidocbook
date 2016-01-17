@@ -3,25 +3,26 @@
 
 \startmode[debug]
 
+%	\enabletrackers[fonts.all]
 	\enabletrackers[fonts.missing]
-	\enabletrackers[resolvers.readfile]
-
+%	\enabletrackers[resolvers.readfile]
 
 	% TODO: debug conditional on some variable passed in
 	\showgrid
-	%\showjustification
+%	\showjustification
 	\showlayout
-	\showstruts
+%	\showstruts
+%	\showmakeup
 
-	%\showframe
-	%\showframe[text][text]
-	%\showframe[cut=true]
+	\showframe
+%	\showframe[text][text]
+%	\showframe[cut=true]
 
-	\definecolor[debughead][h=EEEEEE]
+%	\definecolor[debughead][h=EEEEEE]
 
-	%\setupframed[framecolor=kmkf-green]
+%	\setupframed[framecolor=kmkf-green]
 
-	\setupbackgrounds[header, footer][background=color, backgroundcolor=debughead]
+%	\setupbackgrounds[header, footer][background=color, backgroundcolor=debughead]
 
 \stopmode
 
