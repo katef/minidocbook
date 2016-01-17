@@ -43,6 +43,9 @@
 \definemarking[doc:product]  % MCT
 \definemarking[doc:author]   % Katherine Flavel
 \definemarking[doc:classify] % Unrestricted
+\definemarking[doc:keywords] % tea, fish, bricks % XXX: really comma separated?
+\definemarking[doc:date]     % TODO what format?
+% TODO: releaseinfo WIP
 
 % input DTD
 \startmode[minidocbook]
@@ -78,4 +81,18 @@
 \startmode[report]
 	\environment report
 \stopmode
+
+% XXX: doesn't expand out \getmarking due to not being in a header
+\setupinteraction[title={\getmarking[doc:title][current]}]
+\setupinteraction[author={\getmarking[doc:author][current]}]
+\setupinteraction[date={\getmarking[doc:date][current]}]
+\setupinteraction[subtitle={\getmarking[doc:product][current]}]
+\setupinteraction[keyword={\getmarking[doc:keywords]}] % note keyword= not keywords=
+% TODO: doc:company
+% TODO: doc:revision
+% TODO: doc:product
+% TODO: doc:classify
+% TODO: doc:releaseinfo
+% TODO: use doc:releaseinfo, doc:revision, doc:classify in subtitle perhaps
+% TODO: if doc:keywords is empty, populate it from doc:product
 
