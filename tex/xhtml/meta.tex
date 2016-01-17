@@ -1,0 +1,26 @@
+
+\startxmlsetups xhtml:setup-meta
+    \xmlsetsetup{\xmldocument}{title}{xhtml:title}
+    \xmlsetsetup{\xmldocument}{meta[@name = 'author'  ]}{xhtml:meta-author}
+    \xmlsetsetup{\xmldocument}{meta[@name = 'date'    ]}{xhtml:meta-date}
+    \xmlsetsetup{\xmldocument}{meta[@name = 'keywords']}{xhtml:meta-keywords}
+\stopxmlsetups
+
+\xmlregistersetup{xhtml:setup-meta}
+
+\startxmlsetups xhtml:title
+	\marking[doc:title]{\xmltext{#1}{.}}
+\stopxmlsetups
+
+\startxmlsetups xhtml:meta-author
+	\marking[doc:author]{\xmlatt{#1}{content}}
+\stopxmlsetups
+
+\startxmlsetups xhtml:meta-date
+	\marking[doc:date]{\xmlatt{#1}{content}}
+\stopxmlsetups
+
+\startxmlsetups xhtml:meta-keywords
+	\marking[doc:keywords]{\xmlatt{#1}{content}}
+\stopxmlsetups
+
