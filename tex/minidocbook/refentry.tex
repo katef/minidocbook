@@ -27,18 +27,25 @@
 
 \startxmlsetups mdb:reference
 
+	% TODO: flush just refentryinfo here, so doc:meta is applied before starttext
+
+	\starttext
 	\startReference[title=\xmltext{#1}{./title}]
 	\marking[man:reference]{\xmltext{#1}{./title}}
 
 	\xmlflush{#1}
 
 	\stopReference
+	\stoptext
 
 \stopxmlsetups
 
 % TODO: centralise refentry guts
 \startxmlsetups mdb:single-refentry
 
+	% TODO: flush just refentryinfo here, so doc:meta is applied before starttext
+
+	\starttext
 	\startbodymatter
 
 	\xmlflush{#1}
@@ -49,6 +56,7 @@
 %	\stopsection
 
 	\stopbodymatter
+	\stoptext
 
 \stopxmlsetups
 
@@ -69,11 +77,12 @@
 \stopxmlsetups
 
 \startxmlsetups mdb:refentryinfo
-%	\marking[doc:title]    {\xmlall{#1}{title}} % XXX: this is supposed to be the document title
-%	\marking[doc:revision] {}
-	\marking[doc:product]  {\xmlall{#1}{productname}}
-	\marking[doc:author]   {\xmlall{#1}{author}}
-%	\marking[doc:classify  {}
+%	\setvariables[environment][title=\xmlall{#1}{title}] % XXX: this is supposed to be the document title
+%	\setvariables[environment][revision={}]
+	\setvariables[environment][product=\xmlall{#1}{productname}]
+	\setvariables[environment][author=\xmlall{#1}{author}]
+%	\setvariables[environment][classify={}]
+	\setup[doc:meta]
 \stopxmlsetups
 
 \startxmlsetups mdb:refmeta

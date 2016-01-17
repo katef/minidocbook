@@ -1,10 +1,10 @@
 
 \startenvironment manpage
 
-	\definemarking[Reference]     % libmct
-	\definemarking[Refentrytitle] % mct_init/fini
-	\definemarking[Refname]       % mct_init,mct_fini
-	\definemarking[Manvolnum]     % 3
+	\definemarking[man:reference]     % libmct
+	\definemarking[man:refentrytitle] % mct_init/fini
+	\definemarking[man:refname]       % mct_init,mct_fini
+	\definemarking[man:volnum]        % 3
 
 	\setuphead[part][
 		placehead=yes,
@@ -32,27 +32,37 @@
 
 	\setupcombinedlist[content][list={part,Reference,Refentry}]
 
-	\startsetups[Manpage:header-left]
-		\doiftext{\getmarking[Product]}{\bf \getmarking[Product]}
-		\getmarking[Parttitle]%
-			\doiftext{\getmarking[Reference]}{: \getmarking[Reference]}
+	\startsetups[man:header-left]
+		\doiftext{\env{product}}{\bf \env{product}}
+		\getmarking[mdb:parttitle]%
+			\doiftext{\getmarking[man:reference]}{: \getmarking[man:reference]}
 	\stopsetups
 
-	\startsetups[Manpage:header-right]
+	\startsetups[man:header-right]
 		\feature[+][f:smcp]
-		\getmarking[Refentrytitle](\getmarking[Manvolnum])
+		\doiftext{\getmarking[man:refentrytitle]}{\getmarking[man:refentrytitle]}%
+		\doiftext{\getmarking[man:volnum]}{(\getmarking[man:volnum])}
 	\stopsetups
 
-	\startsetups[Manpage:footer]
-		\rlap{\getmarking[Company]}
+	\startsetups[man:footer-recto]
+		\rlap{\env{company}}
 		\hfill
 		\setup{doc:classify}
 		\hfill
 		\llap{\pagenumber}
 	\stopsetups
 
-	\setupheadertexts[\setups{Manpage:header-left}][\setups{Manpage:header-right}]
-	\setupfootertexts[\setups{Manpage:footer}][]
+	\startsetups[man:footer-verso]
+		\llap{\pagenumber}
+		\hfill
+		\setup{doc:classify}
+		\hfill
+		\rlap{\env{company}}
+	\stopsetups
+
+	\setupheadertexts[\setups{man:header-left}][\setups{man:header-right}]
+	\setupfootertexts[left] [\setups{man:footer-verso}][]
+	\setupfootertexts[right][\setups{man:footer-recto}][]
 
 	\startsetups[Reference:before]
 		\ifconditional\libraryentries

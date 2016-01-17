@@ -9,18 +9,19 @@
 \xmlregistersetup{xhtml:setup-meta}
 
 \startxmlsetups xhtml:title
-	\marking[doc:title]{\xmltext{#1}{.}}
+	\setxvariables[environment][title=\xmltext{#1}{.}]
 \stopxmlsetups
 
 \startxmlsetups xhtml:meta-author
-	\marking[doc:author]{\xmlatt{#1}{content}}
+% TODO: only if not already set from command line?
+	\setvariables[environment][author=\xmlatt{#1}{content}]
 \stopxmlsetups
 
 \startxmlsetups xhtml:meta-date
-	\marking[doc:date]{\xmlatt{#1}{content}}
+	\setxvariables[environment][date=\xmlatt{#1}{content}]
 \stopxmlsetups
 
 \startxmlsetups xhtml:meta-keywords
-	\marking[doc:keywords]{\xmlatt{#1}{content}}
+	\setxvariables[environment][keywords=\xmlatt{#1}{content}]
 \stopxmlsetups
 

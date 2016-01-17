@@ -7,11 +7,11 @@
 \setuphead[Article] [page=yes]
 \setuphead[Hone,Htwo,Hthree,Hfour,Hfive,Hsix] [color=darkblue, style=\tfa\bf\doifmode{manpage}{\WORD}, page=no, number=no] % TODO: inherit from theme setups
 
-\setuphead[Hone,Article][placehead=empty] % XXX: eliding specific to os161
+%\setuphead[Hone,Article][placehead=empty] % XXX: eliding specific to os161
 
 \setuplist[part]   [margin=0em, style=\tfb\bf]
 \setuplist[part]   [after={\startcolumns[n=3,balance=yes]\placelist[Article]\stopcolumns}] % XXX: columns specific to os161
-\setuplist[Article][margin=2em, distance=5em]
+%\setuplist[Article][margin=2em, distance=5em]
 
 % XXX: title pages specific to generic theme
 \startsetups[parttitlepage]
@@ -29,6 +29,17 @@
 \xmlregistersetup{xhtml:setup-structural}
 
 \startxmlsetups xhtml:html
+	\xmlflush{#1}
+\stopxmlsetups
+
+\startxmlsetups xhtml:head
+	\xmlflush{#1}
+	\setup[doc:meta]
+\stopxmlsetups
+
+\startxmlsetups xhtml:body
+	\starttext
+
 	% TODO: conditional frontmatter, only if articles present
 	\startfrontmatter
 \start
@@ -39,18 +50,12 @@
 	\stopfrontmatter
 
 	\startbodymatter
-	\xmlflush{#1}
-	\stopbodymatter
-\stopxmlsetups
-
-\startxmlsetups xhtml:head
-%	\xmlflush{#1}
-\stopxmlsetups
-
-\startxmlsetups xhtml:body
 	\startBody
 	\xmlflush{#1}
 	\stopBody
+	\stopbodymatter
+
+	\stoptext
 \stopxmlsetups
 
 \startxmlsetups xhtml:section

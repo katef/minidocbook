@@ -37,16 +37,6 @@
 \input common/fallback.tex
 \input common/primitive.tex
 
-\definemarking[doc:company]  % Bubblephone Ltd.
-\definemarking[doc:title]    % SID Users' Guide
-\definemarking[doc:revision] % 4
-\definemarking[doc:product]  % MCT
-\definemarking[doc:author]   % Katherine Flavel
-\definemarking[doc:classify] % Unrestricted
-\definemarking[doc:keywords] % tea, fish, bricks % XXX: really comma separated?
-\definemarking[doc:date]     % TODO what format?
-% TODO: releaseinfo WIP
-
 % input DTD
 \startmode[minidocbook]
 	\input minidocbook/structural
@@ -83,17 +73,44 @@
 	\environment report
 \stopmode
 
-% XXX: doesn't expand out \getmarking due to not being in a header
-\setupinteraction[title={\getmarking[doc:title][current]}]
-\setupinteraction[author={\getmarking[doc:author][current]}]
-\setupinteraction[date={\getmarking[doc:date][current]}]
-\setupinteraction[subtitle={\getmarking[doc:product][current]}]
-\setupinteraction[keyword={\getmarking[doc:keywords]}] % note keyword= not keywords=
-% TODO: doc:company
-% TODO: doc:revision
-% TODO: doc:product
-% TODO: doc:classify
-% TODO: doc:releaseinfo
-% TODO: use doc:releaseinfo, doc:revision, doc:classify in subtitle perhaps
-% TODO: if doc:keywords is empty, populate it from doc:product
+% Precedence for document metadata variables:
+%
+%  1. Specified within the document (hooked on by XML handling)
+%  2. Set explicitly from within a theme environment
+%  3. Defaults hardcoded here
+%  4. Specified at the command line:
+%     context --arguments=author='Kate',title='Something'
+%
+% TODO: 3 and 4 should be the other way around; only set here if \empty
+\setvariables[environment][company=\empty]  % Bubblephone Ltd.
+\setvariables[environment][title=\jobname]  % SID Users' Guide
+\setvariables[environment][revision=\empty] % 4
+\setvariables[environment][product=\empty]  % MCT
+\setvariables[environment][author=\empty]   % Katherine Flavel
+\setvariables[environment][classify=\empty]  % Unrestricted
+\setvariables[environment][keywords=\env{product}] % tea, fish, bricks % XXX: really comma separated?
+\setvariables[environment][date=\empty] % TODO what format?
+% TODO: releaseinfo WIP
+\startsetups doc:meta
+	\writestatus{mdb}{doc:meta company:  \env{company}}
+	\writestatus{mdb}{doc:meta title:    \env{title}}
+	\writestatus{mdb}{doc:meta revision: \env{revision}}
+	\writestatus{mdb}{doc:meta product:  \env{product}}
+	\writestatus{mdb}{doc:meta author:   \env{author}}
+	\writestatus{mdb}{doc:meta classify: \env{classify}}
+	\writestatus{mdb}{doc:meta keywords: \env{keywords}}
+	\writestatus{mdb}{doc:meta date:     \env{date}}
+
+	\setupinteraction[title=\env{title}]
+	\setupinteraction[author=\env{author}]
+	\setupinteraction[date=\env{date}]
+	\setupinteraction[subtitle=\env{product}]
+	\setupinteraction[keyword=\env{keywords}] % note keyword= not keywords=
+	% TODO: env:company
+	% TODO: env:revision
+	% TODO: env:product
+	% TODO: env:classify
+	% TODO: env:releaseinfo
+	% TODO: use env:releaseinfo, env:revision, env:classify in subtitle perhaps
+\stopsetups
 
