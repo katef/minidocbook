@@ -92,9 +92,43 @@
 	</xsl:template>
 
 	<xsl:template match="filename">
-		<tt class="{name()}">
-			<xsl:apply-templates/>
-		</tt>
+		<!-- TODO: simplify. maybe best to use a get-ext function -->
+		<xsl:choose>
+			<xsl:when test="not($mdb.url.ext) or substring-after(., '.') = ''">
+				<tt class="{name()}">
+					<xsl:apply-templates/>
+				</tt>
+			</xsl:when>
+
+			<xsl:when test="ancestor::refsection[title = 'Files']">
+				<a href="{$mdb.url.ext}#{substring-after(., '.')}">
+					<tt class="{name()}">
+						<xsl:apply-templates/>
+					</tt>
+				</a>
+			</xsl:when>
+
+			<xsl:when test="substring-before(., '.') and substring-before(., '.') != '*'">
+				<tt class="{name()}">
+					<xsl:apply-templates/>
+				</tt>
+			</xsl:when>
+
+			<!-- first occurance -->
+			<xsl:when test="not(preceding::filename[substring-after(., '.') = substring-after(current(), '.')])">
+				<a href="{$mdb.url.ext}#{substring-after(., '.')}">
+					<tt class="{name()}">
+						<xsl:apply-templates/>
+					</tt>
+				</a>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<tt class="{name()}">
+					<xsl:apply-templates/>
+				</tt>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="remark">

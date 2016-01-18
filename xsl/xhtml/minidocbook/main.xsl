@@ -36,6 +36,7 @@
 	<xsl:import href="footnotes.xsl"/>
 	<xsl:import href="refentry.xsl"/>
 
+	<xsl:param name="mdb.url.ext" select="false()"/> <!-- e.g. 'http://wki.example.com/FileTypes' -->
 
 	<xsl:template match="node()" mode="refmeta">
 		<meta name="refmeta-{name()}" content="{.}"/>
