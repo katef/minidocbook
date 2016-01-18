@@ -2,7 +2,8 @@
 \startxmlsetups xhtml:setup-table
 	\xmlsetsetup{\xmldocument}{table|tbody|thead}{xhtml:*}
 	\xmlsetsetup{\xmldocument}{td|th}{xhtml:*}
-	\xmlsetsetup{\xmldocument}{tbody/tr|thead/tr}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{tbody/tr}{xhtml:*}
+	\xmlsetsetup{\xmldocument}{thead/tr}{xhtml:*}
 \startnotmode[minidocbook]
 	\xmlsetsetup{\xmldocument}{table/tr}{xhtml:tr} % dissallowed in minidocbook's DTD
 \stopnotmode
