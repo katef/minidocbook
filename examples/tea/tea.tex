@@ -1,0 +1,79 @@
+
+\usetypescript[crimson]
+\setupbodyfont[crimson,10pt]
+\definebodyfontenvironment[10pt][interlinespace=12pt]
+
+\setupbodyfontenvironment[default][em=sc]
+
+\setuplayout[grid=no]
+\setuparranging[mirrored]
+\setuptolerance[strict]
+\setupspacing[fixed]
+\setupwhitespace[halfline]
+\setuphead[Hone,Htwo][grid=fit]
+\setupindenting[no]
+\setupalign[width]
+\setuppagenumbering[alternative=doublesided,state=stop]
+
+\setupstartstop[Header][
+	before={\blank[0*big]},
+	after={~\blank[2*big]}~]
+
+\definecolumnset[Tea][n=2,distance=1.5em]
+
+% theme overrides
+\startxmlsetups tea:setup-tea
+	\xmlsetsetup{\xmldocument}{cite[@class = 'name']}{tea:cite-name}
+	\xmlsetsetup{\xmldocument}{div[@class = 'tea']}{tea:div-colset}
+	\xmlsetsetup{\xmldocument}{p[@class = 'attribution']}{tea:p-attribution}
+	\xmlsetsetup{\xmldocument}{abbr}{tea:abbr}
+	\xmlsetsetup{\xmldocument}{span[@class = 'isbn']}{tea:span-isbn}
+\stopxmlsetups
+
+\xmlregistersetup{tea:setup-tea}
+
+\startxmlsetups tea:cite-name
+	{\feature[+][f:smcp] \xmlflush{#1}}
+\stopxmlsetups
+
+% overrides xhtml/block.tex
+% TODO: would be more convenient to provide div as a startstop:
+%\setupstartstop[Div][
+%	before={\startcolumnset[Tea]},
+%	after={\stopcolumnset}]
+\startxmlsetups tea:div-colset
+	\startcolumnset[Tea]
+	\xmlflush{#1}
+	\stopcolumnset
+\stopxmlsetups
+
+\startxmlsetups tea:p-attribution
+	{\setupalign[outer,wide,nothyphenated,stretch]
+	\small
+	\xmlflush{#1}
+	\par}
+\stopxmlsetups
+
+% TODO: span.isbn eventually smcp numbers; for now, lnum. or onum off
+% XXX: 8pt for span.isbn in lieu of smallcaps figures
+\startxmlsetups tea:span-isbn
+	\hbox{\feature[-][f:onum]\switchtobodyfont[7.5pt] \xmlflush{#1}}
+\stopxmlsetups
+
+% overrides xhtml/inline.tex
+% TODO: should setup a style for c2sc instead of overriding
+\startxmlsetups tea:abbr
+	{\feature[+][f:c2sc] \xmlflush{#1}}
+\stopxmlsetups
+
+% TODO: only for pragraphs
+% XXX: is it okay to set this here?
+\feature[+][f:onum]
+
+% TODO: move to "tea: theme
+\setuphead[Hone,Htwo] [color=inherit, style=\tfc,
+	page=no,
+	number=no]
+\setuphead[Hone] [style=\tfd,before=,after={\blank[-1ex]}] % XXX: hack!
+\setuphead[Htwo] [style=\tfa,before=,after=]
+
