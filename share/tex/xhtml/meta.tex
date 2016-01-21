@@ -1,9 +1,9 @@
 
 \startxmlsetups xhtml:setup-meta
-    \xmlsetsetup{\xmldocument}{title}{xhtml:title}
-    \xmlsetsetup{\xmldocument}{meta[@name = 'author'  ]}{xhtml:meta-author}
-    \xmlsetsetup{\xmldocument}{meta[@name = 'date'    ]}{xhtml:meta-date}
-    \xmlsetsetup{\xmldocument}{meta[@name = 'keywords']}{xhtml:meta-keywords}
+    \xmlsetsetup{\xmldocument}{head/title}{xhtml:title}
+    \xmlsetsetup{\xmldocument}{head/meta[@name = 'author'  ]}{xhtml:meta-author}
+    \xmlsetsetup{\xmldocument}{head/meta[@name = 'date'    ]}{xhtml:meta-date}
+    \xmlsetsetup{\xmldocument}{head/meta[@name = 'keywords']}{xhtml:meta-keywords}
 \stopxmlsetups
 
 \xmlregistersetup{xhtml:setup-meta}
