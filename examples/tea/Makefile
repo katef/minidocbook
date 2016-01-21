@@ -5,7 +5,7 @@ MODES+= A4
 MODES+= debug
 .endif
 
-MDB?= ../..
+MDB?= ../../share
 
 PATHS+= .
 PATHS+= ${MDB}/tex
