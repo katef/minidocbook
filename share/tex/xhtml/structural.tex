@@ -33,7 +33,11 @@
 \stopxmlsetups
 
 \startxmlsetups xhtml:head
-	\xmlflush{#1}
+	% XXX: repetition of information from meta.tex
+	\xmlall{#1}{title}
+	\xmlall{#1}{meta[@name = 'author'  ]}
+	\xmlall{#1}{meta[@name = 'date'    ]}
+	\xmlall{#1}{meta[@name = 'keywords']}
 	\setup[doc:meta]
 \stopxmlsetups
 
