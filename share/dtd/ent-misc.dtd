@@ -11,10 +11,13 @@
 <!ENTITY cross  "&#x2717;">
 <!ENTITY check  "&#x2713;">
 <!ENTITY mnplus "&#x2213;">
-<!ENTITY ldquo  "&#x201C;">
-<!ENTITY rdquo  "&#x201D;">
 <!ENTITY times  "&#215;">
 <!ENTITY reg    "&#174;">
+
+<!ENTITY lsquo  "&#x2018;">
+<!ENTITY rsquo  "&#x2019;">
+<!ENTITY ldquo  "&#x201C;">
+<!ENTITY rdquo  "&#x201D;">
 
 <!ENTITY ccedil "&#231;">
 <!ENTITY egrave "&#232;">
