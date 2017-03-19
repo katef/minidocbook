@@ -1,7 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 
-<!-- $Id: main.xsl 576 2015-10-11 13:53:25Z kate $ -->
-
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
