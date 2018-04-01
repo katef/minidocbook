@@ -1,6 +1,8 @@
 
+PAPER+= A4
+PAPER+= letter
+
 MODES+= xhtml
-MODES+= A4
 .if defined(DEBUG)
 MODES+= debug
 .endif
@@ -17,12 +19,19 @@ ENVS+= secret
 ENVS+= common/main
 ENVS+= tea
 
-tea.pdf: tea.tex
+.for paper in ${PAPER}
+
+all:: tea-${paper}.pdf
+
+tea-${paper}.pdf: tea.tex
 	OSOFONTDIR=. \
 	context --batchmode --nonstopmode \
+		--result=${.TARGET} \
 		--file-line-error --halt-on-error \
 		--path=${PATHS:ts,} \
 		--environment=${ENVS:ts,} \
-		--mode=${MODES:ts,} \
+		--mode=${paper},${MODES:ts,} \
 	--forcexml tea.xhtml
+
+.endfor
 
