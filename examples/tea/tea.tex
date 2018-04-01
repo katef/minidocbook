@@ -22,7 +22,7 @@
 
 \setupstartstop[Header][
 	before={\blank[0*big]},
-	after={~\blank[2*big]}~]
+	after={~\blank[3*big]}~]
 
 \definecolumnset[Tea][n=2,distance=1.5em]
 
@@ -33,6 +33,11 @@
 	\xmlsetsetup{\xmldocument}{p[@class = 'attribution']}{tea:p-attribution}
 	\xmlsetsetup{\xmldocument}{abbr}{tea:abbr}
 	\xmlsetsetup{\xmldocument}{span[@class = 'isbn']}{tea:span-isbn}
+
+	% manual tweaks for layout details
+	\xmlsetsetup{\xmldocument}{p[6]}{tea:p-forcebreak}
+	\xmlsetsetup{\xmldocument}{p[11]}{tea:p-forcebreak}
+	\xmlsetsetup{\xmldocument}{p[15]}{tea:p-forcebreak}
 \stopxmlsetups
 
 \xmlregistersetup{tea:setup-tea}
@@ -50,6 +55,15 @@
 	\startcolumnset[Tea]
 	\xmlflush{#1}
 	\stopcolumnset
+\stopxmlsetups
+
+% could also try \testcolumn[3]
+\startxmlsetups tea:p-forcebreak
+	\startmode[debug]
+		\inright{col~break}
+	\stopmode
+	\column
+	\xmlflush{#1}
 \stopxmlsetups
 
 \startxmlsetups tea:p-attribution
