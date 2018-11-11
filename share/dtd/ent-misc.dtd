@@ -12,6 +12,9 @@
 <!ENTITY times  "&#215;">
 <!ENTITY reg    "&#174;">
 
+<!ENTITY ge     "&#8805;">
+<!ENTITY le     "&#8804;">
+
 <!ENTITY lsquo  "&#x2018;">
 <!ENTITY rsquo  "&#x2019;">
 <!ENTITY ldquo  "&#x201C;">
