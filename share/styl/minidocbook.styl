@@ -1,0 +1,185 @@
+/* $Id$ */
+
+html.minidocbook {
+
+	@media print {
+
+		nav {
+			display: none;
+		}
+
+		main > ol.toc {
+			page-break-after: always;
+			column-count: 2; /* not sure if this is a good idea */
+		}
+
+		&.single main > section {
+			page-break-before: always;
+		}
+
+		// TODO: centralise for printing any kind of page
+		figure, table, pre {
+			page-break-inside: avoid;
+		}
+
+	}
+
+	&.refentry main h1 {
+		float: right;
+	}
+
+	nav {
+		color: #aaa;
+
+		clearfix();
+
+		&.bottom {
+			margin-top: 3em;
+		}
+
+		ul.pages {
+			margin: 0;
+			float: right;
+			pipelist();
+		}
+	}
+
+	ol.toc {
+		margin-left: 1em;
+
+		li {
+			list-style-type: none;
+			margin-bottom: 0;
+		}
+	}
+
+	table.informal,
+	table.informal td {
+		border: none;
+	}
+
+	figure, table {
+		margin: 2em;
+	}
+
+	table.informal {
+		margin: 0;
+	}
+
+	table.revhistory {
+		td.date,
+		td.revnumber {
+			white-space: nowrap;
+		}
+
+		td.date time {
+			font-feature-settings: "onum" 1;
+			font-feature-settings: "tnum" 1;
+		}
+	}
+
+	figure {
+		img {
+			display: block;
+		}
+
+		figcaption {
+			margin-top: 1em;
+			display: block;
+		}
+
+		&.table ol.footnotes {
+			margin-top: 2em;
+		}
+	}
+
+	blockquote.literallayout {
+		white-space: pre-line;
+		tab-size: $tabsize;
+	}
+
+	div.warning:before {
+		content: "Warning";
+		font-weight: bold;
+		display: inline-block;
+		margin-bottom: 1ex;
+	}
+
+	blockquote, div.warning {
+		margin: 2em 1em;
+		padding: 0;
+	}
+
+	pre.screen {
+		padding: 1ex 1em;
+
+		div.lines {
+			display: none;
+		}
+	}
+
+	section.synopsis {
+		clearfix();
+
+		p {
+			clear: left;
+			margin-bottom: 1ex;
+		}
+
+		p.cmdsynopsis {
+			float: left;
+		}
+
+		div.args {
+			display: block;
+			float: left;
+
+			color: #444;
+
+			a {
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	section.options dl {
+		dt.narrow {
+			float: left;
+			clear: left;
+		}
+
+		dt {
+			font-weight: bold;
+		}
+
+		dd {
+			margin-bottom: 1em;
+		}
+	}
+
+	ul.authorgroup {
+		list-style-type: none;
+
+		margin-left: 0;
+
+		li {
+			margin-left:   0;
+			margin-bottom: 0;
+
+			&:after {
+				content: "; ";
+			}
+
+			/* TODO: " and " for penultimate */
+
+			&:last-child:after {
+				content: ".";
+			}
+		}
+	}
+}
+
