@@ -9,12 +9,13 @@
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:mdb="http://xml.elide.org/minidocbook"
+	xmlns:w="http://xml.elide.org/widgets"
 	xmlns:func="http://exslt.org/functions"
 	xmlns="http://www.w3.org/1999/xhtml"
 
 	extension-element-prefixes="func"
 
-	exclude-result-prefixes="mdb">
+	exclude-result-prefixes="mdb w">
 
 	<!--
 		TODO: possibly merge with title.xsl
@@ -68,7 +69,7 @@
 						<xsl:apply-templates select="ancestor-or-self::preface
 							|ancestor-or-self::chapter
 							|ancestor-or-self::appendix" mode="page-filename"/>
-						<xsl:value-of select="mdb:fileext('', $www-ext)"/>
+						<xsl:value-of select="w:fileext('', $www-ext)"/>
 					</xsl:if>
 
 					<xsl:if test="$single

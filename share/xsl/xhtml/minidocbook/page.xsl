@@ -9,17 +9,14 @@
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:mdb="http://xml.elide.org/minidocbook"
+	xmlns:w="http://xml.elide.org/widgets"
 	xmlns="http://www.w3.org/1999/xhtml"
 
 	xmlns:func="http://exslt.org/functions"
 
 	extension-element-prefixes="func"
 
-	exclude-result-prefixes="mdb">
-
-	<!--
-		TODO: when the dust settles, fold this all into output.xsl
-	-->
+	exclude-result-prefixes="mdb w">
 
 	<xsl:template match="preface|chapter|appendix" mode="page-relname">
 		<!-- relies on these element names being valid rel="" names -->
@@ -41,7 +38,7 @@
 		<xsl:choose>
 			<xsl:when test="$predicate">
 				<!-- TODO: @title. same for all <a> links. centralise that? -->
-				<a href="{mdb:fileext($filename, $www-ext)}">
+				<a href="{w:fileext($filename, $www-ext)}">
 					<xsl:if test="$rel">
 						<xsl:attribute name="rel">
 							<xsl:value-of select="$rel"/>
@@ -164,7 +161,7 @@
 				<xsl:if test="$chunklink">
 					<nav class="top">
 						<!-- TODO: call navlink instead -->
-						<a href="{mdb:fileext($www-toc, $www-ext)}" rel="contents">
+						<a href="{w:fileext($www-toc, $www-ext)}" rel="contents">
 							<xsl:text>Multiple pages</xsl:text>
 						</a>
 					</nav>
@@ -219,7 +216,7 @@
 
 			<xsl:with-param name="body">
 				<nav class="top">
-					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
+					<a href="{w:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -264,7 +261,7 @@
 
 			<xsl:with-param name="body">
 				<nav class="top">
-					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
+					<a href="{w:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
@@ -305,7 +302,7 @@
 
 			<xsl:with-param name="body">
 				<nav class="top">
-					<a href="{mdb:fileext($www-single, $www-ext)}" rel="canonical">
+					<a href="{w:fileext($www-single, $www-ext)}" rel="canonical">
 						<xsl:text>Single page</xsl:text>
 					</a>
 
